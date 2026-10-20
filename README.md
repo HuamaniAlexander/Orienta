@@ -89,7 +89,7 @@ No entrena durante solicitudes HTTP. Para nuevas ofertas, actualiza también
 Reinicia la API después de versionar un nuevo modelo.
 
 El clasificador distingue áreas académicas, no aptitudes ni carrera ideal. La evaluación
-actual no supera una referencia mayoritaria; métricas y limitaciones se muestran en
+actual no alcanza el objetivo del 90%; métricas y limitaciones se muestran en
 la interfaz. Las alternativas relacionadas usan TF-IDF y similitud de contenido.
 El resumen y los siguientes pasos son deterministas; no se simula un LLM generativo.
 No se usan servicios IA externos ni claves. Consulta [el informe del modelo](docs/modelo-ia.md).

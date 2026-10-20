@@ -1,5 +1,6 @@
 from app.application.catalog import CareerNotFound, Catalog
 from app.application.compare import CompareCareers
+from app.domain.criterion_analysis import analyze_criteria
 from app.ports.analysis import AnalysisService
 
 
@@ -20,4 +21,10 @@ class AnalyzeComparison:
                     break
             except CareerNotFound:
                 continue
-        return result | {"recommendations": related[:3]}
+        criteria = analyze_criteria(comparison.left, comparison.right)
+        return result | {
+            "recommendations": related[:3],
+            "criteria_analysis": criteria,
+            "next_steps": [item["recommendation"] for item in criteria],
+            "explanation_kind": "structured",
+        }

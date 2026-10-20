@@ -58,6 +58,10 @@ def test_analysis_http_and_unavailable_keeps_comparison(tmp_path):
         assert len(body["recommendations"]) == 3
         assert not {"C01", "C02"} & {c["id"] for c in body["recommendations"]}
         assert len(body["area_sources"]) == 2
+        assert len(body["criteria_analysis"]) == 6
+        assert len(body["next_steps"]) == 6
+        assert len(body["model_evaluations"]) == 3
+        assert body["quality_target"] == 0.90
         app.state.analysis_service = TrainedAnalysis(tmp_path)
         assert (
             client.post(

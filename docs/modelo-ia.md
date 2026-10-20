@@ -1,5 +1,10 @@
 # Contraste académico y alternativas relacionadas
 
+Este documento describe la versión inicial 1.0.0. La versión actual 1.1.0 y su nuevo
+criterio de selección se documentan en `analisis-seis-criterios.md`; sus métricas se
+obtienen de `backend/models/metrics.json`. Las cifras históricas siguientes no son
+la evaluación de la versión actual.
+
 Se entrenaron Árbol de decisión, Random Forest y Regresión logística usando las 19
 ofertas y sus áreas/grupos documentados en el Excel suministrado. La etiqueta indica
 misma área o áreas distintas. No mide afinidad vocacional ni empleabilidad.

@@ -48,7 +48,23 @@ class ComparisonResponse(BaseModel):
     monthly_cost_difference_pen: Decimal | None
 
 
+class CriterionAnalysisResponse(BaseModel):
+    key: str
+    label: str
+    left_value: str
+    right_value: str
+    relationship: str
+    explanation: str
+    recommendation: str
+    caveats: list[str]
+
+
 class AnalysisResponse(BaseModel):
+    criteria_analysis: list[CriterionAnalysisResponse]
+    explanation_kind: str
+    quality_target: float
+    quality_approved: bool
+    model_evaluations: list[dict[str, str | float | None]]
     prediction: str
     catalog_contrast: str
     areas: list[str]

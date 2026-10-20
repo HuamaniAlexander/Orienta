@@ -71,6 +71,19 @@ class TrainedAnalysis:
             ) from error
         selected = report["models"][report["selected_model"]]
         return {
+            "quality_target": report.get("quality_target", 0.90),
+            "quality_approved": report.get("quality_approved", False),
+            "model_evaluations": [
+                dict(
+                    name=name,
+                    **{
+                        key: values[key]
+                        for key in ("accuracy", "precision_macro", "recall_macro", "f1_macro")
+                    },
+                    validation_distance_to_ideal=values.get("validation_distance_to_ideal"),
+                )
+                for name, values in report["models"].items()
+            ],
             "prediction": "Áreas distintas" if label else "Misma área",
             "catalog_contrast": "Áreas distintas" if actual else "Misma área",
             "areas": [report["metadata"][c.id]["area"] for c in (left, right)],
