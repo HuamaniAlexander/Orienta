@@ -13,7 +13,7 @@ function Status({ source }: { source?: Source }) {
   const verified = /^verificado/i.test(status)
   const estimated = /^estimado/i.test(status)
   return <span className={`data-status ${verified ? 'verified' : estimated ? 'estimated' : ''}`}>
-    <Icon name={verified ? 'check' : 'info'} />{verified ? 'Verificado en la PoC' : estimated ? 'Estimado' : 'Según PoC; sin verificar'}
+    <Icon name={verified ? 'check' : 'info'} />{verified ? 'Verificado según registro' : estimated ? 'Estimado' : 'Sin verificación registrada'}
   </span>
 }
 
@@ -49,7 +49,7 @@ export function CareerPage() {
       <section className="panel" aria-labelledby="academic-title"><h2 id="academic-title">Información académica</h2>
         <dl className="detail-facts">
           <Fact title="Duración" icon="clock" value={c.duration_months === null ? 'Dato no disponible' : `${c.duration_months} meses`}
-            note={c.duration_months === null ? 'Pendiente de registrar.' : 'Duración informada en el archivo de la PoC.'} source={source('Duración')} />
+            note={c.duration_months === null ? 'Pendiente de registrar.' : 'Duración informada por la fuente registrada.'} source={source('Duración')} />
           <Fact title="Modalidad" icon="screen" value={c.modality || 'Dato no disponible'} source={source('Modalidad')} />
           <Fact title="Ubicación / sede" icon="pin" value={c.location || 'Dato no disponible'}
             note="Confirma la sede y disponibilidad con la institución." />
@@ -61,13 +61,13 @@ export function CareerPage() {
           <p className="secondary-note">Confirma el proceso vigente con la institución.</p></div></section>
       <section className="panel text-panel"><span className="fact-icon"><Icon name="briefcase" /></span>
         <div><h2>Campo laboral</h2><p>{c.employment || 'Dato no disponible'}</p>
-          <p className="secondary-note">Descripción de la PoC; no garantiza empleo ni ingresos.</p></div></section>
+          <p className="secondary-note">Consulta los ámbitos de trabajo y la información vigente con la institución.</p></div></section>
       <div className="detail-disclaimer"><Icon name="info" /><p>Una ficha es un punto de partida.
         Revisa las fuentes y consulta la información vigente antes de tomar una decisión.</p></div>
     </div><aside className="detail-sidebar" aria-label="Fuentes y revisión">
       <section className="panel sources-panel"><div className="panel-title"><span className="fact-icon"><Icon name="book" /></span><h2>Fuentes y revisión</h2></div>
-        <div className="review-date"><small>Última revisión registrada en la PoC</small><strong>{reviewLabel(c.reviewed_on)}</strong></div>
-        <p className="source-intro">La condición del dato procede del archivo entregado. No implica una nueva validación institucional.</p>
+        <div className="review-date"><small>Última revisión registrada</small><strong>{reviewLabel(c.reviewed_on)}</strong></div>
+        <p className="source-intro">Consulta la procedencia y la condición de cada dato antes de decidir.</p>
         <ul className="source-list">{c.sources.map(s => {
           const url = safeSourceUrl(s.reference)
           return <li key={s.field}><strong>{s.field}</strong><Status source={s} />
