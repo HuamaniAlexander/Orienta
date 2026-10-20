@@ -1,4 +1,4 @@
-NAMES = {
+NOMBRES = {
     "UTP": "Universidad Tecnológica del Perú",
     "UNMSM": "Universidad Nacional Mayor de San Marcos",
     "UNI": "Universidad Nacional de Ingeniería",
@@ -7,5 +7,5 @@ NAMES = {
 }
 
 
-def career_label(career):
-    return f"{career.name} · {NAMES.get(career.institution, career.institution)}"
+def etiqueta_carrera(carrera):
+    return f"{carrera.nombre} · {NOMBRES.get(carrera.institucion, carrera.institucion)}"

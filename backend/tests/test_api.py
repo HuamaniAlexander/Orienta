@@ -3,29 +3,29 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 from sqlalchemy.exc import OperationalError
 
-from app.adapters.input.http import catalog_dependency
-from app.adapters.output.repositories import JsonCareerRepository
-from app.infrastructure.main import create_app
-from app.infrastructure.settings import Settings
-from app.ports.careers import CatalogQuery
+from app.adapters.input.http import obtener_catalogo
+from app.adapters.output.repositorios_carreras import RepositorioCarrerasJson
+from app.infrastructure.configuracion import Configuracion
+from app.infrastructure.principal import crear_aplicacion
+from app.ports.repositorio_carreras import ConsultaCatalogo
 
 
-def client():
-    return TestClient(create_app(Settings(data_mode="demo")))
+def cliente():
+    return TestClient(crear_aplicacion(Configuracion(modo_datos="demo")))
 
 
-def test_catalog_search_pagination_filters_detail():
-    with client() as c:
-        data = c.get("/api/carreras").json()
-        assert data["total"] == 35 and len(data["items"]) == 12
-        assert data["data_mode"] == "demo"
+def test_catalogo_busqueda_paginacion_filtros_ficha():
+    with cliente() as c:
+        datos = c.get("/api/carreras").json()
+        assert datos["total"] == 35 and len(datos["items"]) == 12
+        assert datos["data_mode"] == "demo"
         second = c.get("/api/carreras?pagina=2").json()
         assert len(second["items"]) == 12
         assert len(c.get("/api/carreras?pagina=3").json()["items"]) == 11
         assert c.get("/api/carreras/C20").json()["institution"] == "PUCP"
         assert c.get("/api/carreras/C24").json()["monthly_cost_pen"] is None
-        assert not {r["id"] for r in data["items"]} & {r["id"] for r in second["items"]}
-        result = c.get(
+        assert not {r["id"] for r in datos["items"]} & {r["id"] for r in second["items"]}
+        resultado = c.get(
             "/api/carreras",
             params={
                 "q": "ingenieria",
@@ -34,8 +34,8 @@ def test_catalog_search_pagination_filters_detail():
                 "tipo": "Universitaria",
             },
         )
-        assert result.json()["total"] == 1
-        assert result.json()["items"][0]["id"] == "C16"
+        assert resultado.json()["total"] == 1
+        assert resultado.json()["items"][0]["id"] == "C16"
         assert c.get("/api/carreras?q=sin-coincidencias").json()["total"] == 0
         assert c.get("/api/carreras/C05").json()["monthly_cost_pen"] == "0"
         assert len(c.get("/api/carreras/C01").json()["sources"]) == 6
@@ -45,32 +45,32 @@ def test_catalog_search_pagination_filters_detail():
         assert "Virtual" in c.get("/api/filtros").json()["modalidad"]
 
 
-def test_retired_and_sql_failure_are_not_fallbacks():
-    repo = JsonCareerRepository(Path("data/catalog.json"))
+def test_retiradas_y_fallo_sql_sin_sustitucion():
+    repo = RepositorioCarrerasJson(Path("data/catalogo.json"))
     from dataclasses import replace
 
-    repo.careers = [replace(repo.careers[0], active=False)]
-    assert repo.list(CatalogQuery())[1] == 0
-    assert repo.get("C01") is None
-    app = create_app(Settings(data_mode="demo"))
+    repo.carreras = [replace(repo.carreras[0], activa=False)]
+    assert repo.listar(ConsultaCatalogo())[1] == 0
+    assert repo.obtener("C01") is None
+    app = crear_aplicacion(Configuracion(modo_datos="demo"))
 
-    def broken():
+    def averiado():
         raise OperationalError("SECRET", {}, Exception("SECRET"))
 
-    app.dependency_overrides[catalog_dependency] = broken
+    app.dependency_overrides[obtener_catalogo] = averiado
     with TestClient(app) as c:
-        response = c.get("/api/carreras")
-        assert response.status_code == 503
-        assert "SECRET" not in response.text
+        respuesta = c.get("/api/carreras")
+        assert respuesta.status_code == 503
+        assert "SECRET" not in respuesta.text
 
 
 def test_cors():
-    with client() as c:
-        ok = c.options(
+    with cliente() as c:
+        correcto = c.options(
             "/api/carreras",
             headers={"Origin": "http://localhost:5173", "Access-Control-Request-Method": "GET"},
         )
-        assert ok.headers["access-control-allow-origin"] == "http://localhost:5173"
+        assert correcto.headers["access-control-allow-origin"] == "http://localhost:5173"
         denied = c.options(
             "/api/carreras",
             headers={"Origin": "https://unknown.example", "Access-Control-Request-Method": "GET"},

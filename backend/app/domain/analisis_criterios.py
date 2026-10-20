@@ -1,98 +1,101 @@
-"""Grounded six-criterion contrast, independent of probabilistic model performance."""
+"""Contraste documentado de seis criterios, independiente del rendimiento del modelo."""
 
 from dataclasses import asdict, dataclass
 
-from app.domain.career import Career, normalize
-from app.domain.institution import career_label
+from app.domain.carrera import Carrera, normalizar
+from app.domain.institucion import etiqueta_carrera
 
 
 @dataclass(frozen=True)
-class CriterionAnalysis:
-    key: str
-    label: str
-    left_label: str
-    right_label: str
-    left_value: str
-    right_value: str
-    relationship: str
-    explanation: str
-    recommendation: str
-    reason: str
-    caveats: tuple[str, ...]
+class AnalisisCriterio:
+    clave: str
+    etiqueta: str
+    etiqueta_izquierda: str
+    etiqueta_derecha: str
+    valor_izquierda: str
+    valor_derecha: str
+    relacion: str
+    explicacion: str
+    recomendacion: str
+    motivo: str
+    advertencias: tuple[str, ...]
 
 
-def analyze_criteria(left: Career, right: Career) -> list[dict]:
-    left_label, right_label = career_label(left), career_label(right)
+def analizar_criterios(izquierda: Carrera, derecha: Carrera) -> list[dict]:
+    etiqueta_izquierda, etiqueta_derecha = etiqueta_carrera(izquierda), etiqueta_carrera(derecha)
 
-    def present(value):
+    def presentar(valor):
         return (
-            str(value).strip() if value is not None and str(value).strip() else "Dato no disponible"
+            str(valor).strip() if valor is not None and str(valor).strip() else "Dato no disponible"
         )
 
-    def criterion(key, label, a, b, recommendation, unit="", extra=()):
-        missing = a is None or b is None or not present(a).strip() or not present(b).strip()
-        missing = (
-            missing or present(a) == "Dato no disponible" or present(b) == "Dato no disponible"
+    def criterio(clave, etiqueta, a, b, recomendacion, unidad="", adicionales=()):
+        faltante = a is None or b is None or not presentar(a).strip() or not presentar(b).strip()
+        faltante = (
+            faltante or presentar(a) == "Dato no disponible" or presentar(b) == "Dato no disponible"
         )
-        same = not missing and normalize(str(a)) == normalize(str(b))
-        av, bv = present(a), present(b)
-        numeric = key in ("duration", "cost")
-        if numeric:
+        iguales = not faltante and normalizar(str(a)) == normalizar(str(b))
+        av, bv = presentar(a), presentar(b)
+        numerico = clave in ("duration", "cost")
+        if numerico:
             av = (
                 "Dato no disponible"
                 if a is None
-                else f"{a:,.2f} {unit}"
-                if key == "cost"
-                else f"{a} {unit}"
+                else f"{a:,.2f} {unidad}"
+                if clave == "cost"
+                else f"{a} {unidad}"
             )
             bv = (
                 "Dato no disponible"
                 if b is None
-                else f"{b:,.2f} {unit}"
-                if key == "cost"
-                else f"{b} {unit}"
+                else f"{b:,.2f} {unidad}"
+                if clave == "cost"
+                else f"{b} {unidad}"
             )
-        if missing:
-            explanation = (
-                f"No se puede completar el contraste de {label.lower()}: "
+        if faltante:
+            explicacion = (
+                f"No se puede completar el contraste de {etiqueta.lower()}: "
                 "falta información en una o ambas alternativas."
             )
-        elif same:
-            explanation = f"Ambas alternativas registran el mismo dato de {label.lower()}: {av}."
-        elif numeric:
-            delta = b - a
-            difference = f"{abs(delta):,.2f}" if key == "cost" else str(abs(delta))
-            explanation = (
-                f"{left_label} registra {av}; {right_label} registra {bv}. "
-                f"{right_label} tiene {difference} {unit} {'más' if delta > 0 else 'menos'} "
-                f"que {left_label}."
+        elif iguales:
+            explicacion = f"Ambas alternativas registran el mismo dato de {etiqueta.lower()}: {av}."
+        elif numerico:
+            diferencia = b - a
+            diferencia_absoluta = (
+                f"{abs(diferencia):,.2f}" if clave == "cost" else str(abs(diferencia))
+            )
+            explicacion = (
+                f"{etiqueta_izquierda} registra {av}; {etiqueta_derecha} registra {bv}. "
+                f"{etiqueta_derecha} tiene {diferencia_absoluta} {unidad} "
+                f"{'más' if diferencia > 0 else 'menos'} "
+                f"que {etiqueta_izquierda}."
             )
         else:
-            explanation = f"{left_label} indica «{av}»; {right_label} indica «{bv}»."
-        caveats = list(extra)
-        for prefix, career in [(left_label, left), (right_label, right)]:
-            field = {
+            explicacion = f"{etiqueta_izquierda} indica «{av}»; {etiqueta_derecha} indica «{bv}»."
+        advertencias = list(adicionales)
+        for prefijo, carrera in [(etiqueta_izquierda, izquierda), (etiqueta_derecha, derecha)]:
+            campo = {
                 "duration": "Duración",
                 "modality": "Modalidad",
                 "location": "Ubicación",
                 "cost": "Costo",
                 "requirements": "Requisitos",
                 "employment": "Campo laboral",
-            }[key]
-            source = next((s for s in career.sources if s.field == field), None)
-            if source:
-                caveats.append(f"{prefix}: {source.status}")
+            }[clave]
+            fuente = next((s for s in carrera.fuentes if s.campo == campo), None)
+            if fuente:
+                advertencias.append(f"{prefijo}: {fuente.estado}")
         return asdict(
-            CriterionAnalysis(
-                key,
-                label,
-                left_label,
-                right_label,
+            AnalisisCriterio(
+                clave,
+                etiqueta,
+                etiqueta_izquierda,
+                etiqueta_derecha,
                 av,
                 bv,
-                "missing" if missing else "same" if same else "different",
-                explanation,
-                recommendation,
+                "missing" if faltante else "same" if iguales else "different",
+                explicacion,
+                recomendacion,
                 {
                     "duration": "La duración afecta el tiempo de formación; la carga semanal "
                     "y los requisitos de egreso pueden cambiar la fecha real de finalización.",
@@ -106,72 +109,76 @@ def analyze_criteria(left: Career, right: Career) -> list[dict]:
                     "postular; una descripción resumida no confirma elegibilidad.",
                     "employment": "Las actividades profesionales permiten contrastar tus "
                     "intereses; estas fichas no demuestran demanda laboral ni salarios.",
-                }[key],
-                tuple(caveats),
+                }[clave],
+                tuple(advertencias),
             )
         )
 
-    duration_tip = (
+    consejo_duracion = (
         "Si necesitas terminar antes, revisa la opción de menor duración "
         "junto con su carga semanal y requisitos de egreso."
     )
-    if left.duration_months == right.duration_months:
-        duration_tip = (
+    if izquierda.duracion_meses == derecha.duracion_meses:
+        consejo_duracion = (
             "Con duración informada igual, compara horarios, carga semanal, "
             "prácticas y requisitos de egreso."
         )
-    cost_tip = (
+    consejo_costo = (
         "Confirma matrícula, número de cuotas, materiales y gastos de "
         "traslado antes de calcular tu presupuesto total."
     )
-    if left.monthly_cost_pen is None or right.monthly_cost_pen is None:
-        cost_tip = (
+    if izquierda.costo_mensual_soles is None or derecha.costo_mensual_soles is None:
+        consejo_costo = (
             "Solicita el costo mensual de enseñanza que falta y su periodo; "
             "todavía no puedes comparar el presupuesto con este dato."
         )
-    elif left.monthly_cost_pen != right.monthly_cost_pen:
-        cheaper = left_label if left.monthly_cost_pen < right.monthly_cost_pen else right_label
-        cost_tip = (
-            f"Si priorizas el presupuesto, {cheaper} registra menor enseñanza mensual. "
+    elif izquierda.costo_mensual_soles != derecha.costo_mensual_soles:
+        menor_costo = (
+            etiqueta_izquierda
+            if izquierda.costo_mensual_soles < derecha.costo_mensual_soles
+            else etiqueta_derecha
+        )
+        consejo_costo = (
+            f"Si priorizas el presupuesto, {menor_costo} registra menor enseñanza mensual. "
             "Confirma condiciones, matrícula y gastos adicionales; "
             "menor importe no determina calidad."
         )
     return [
-        criterion(
+        criterio(
             "duration",
             "Duración",
-            left.duration_months,
-            right.duration_months,
-            duration_tip,
+            izquierda.duracion_meses,
+            derecha.duracion_meses,
+            consejo_duracion,
             "meses",
         ),
-        criterion(
+        criterio(
             "modality",
             "Modalidad",
-            left.modality,
-            right.modality,
+            izquierda.modalidad,
+            derecha.modalidad,
             (
                 "Contrasta asistencia obligatoria, horarios y acceso a equipos e "
                 "internet con tu disponibilidad."
             ),
         ),
-        criterion(
+        criterio(
             "location",
             "Ubicación / sede",
-            left.location,
-            right.location,
+            izquierda.ubicacion,
+            derecha.ubicacion,
             (
                 "Para una sede física, estima tiempo y gasto de traslado; para una"
                 " oferta virtual, confirma actividades presenciales y recursos "
                 "necesarios."
             ),
         ),
-        criterion(
+        criterio(
             "cost",
             "Costo mensual de enseñanza",
-            left.monthly_cost_pen,
-            right.monthly_cost_pen,
-            cost_tip,
+            izquierda.costo_mensual_soles,
+            derecha.costo_mensual_soles,
+            consejo_costo,
             "PEN por mes",
             (
                 (
@@ -180,33 +187,33 @@ def analyze_criteria(left: Career, right: Career) -> list[dict]:
                 ),
             ),
         ),
-        criterion(
+        criterio(
             "requirements",
             "Requisitos de ingreso",
-            left.requirements,
-            right.requirements,
+            izquierda.requisitos,
+            derecha.requisitos,
             (
                 "Haz una lista de documentos, fechas y proceso de admisión de cada"
                 " institución; identifica qué requisitos ya cumples."
             ),
-            extra=(
+            adicionales=(
                 (
                     "Se contrasta el texto registrado; una redacción distinta no "
                     "demuestra requisitos incompatibles."
                 ),
             ),
         ),
-        criterion(
+        criterio(
             "employment",
             "Campo laboral",
-            left.employment,
-            right.employment,
+            izquierda.campo_laboral,
+            derecha.campo_laboral,
             (
                 "Revisa la malla y las prácticas relacionadas con las actividades "
                 "que te interesan; consulta egresados y evidencia de inserción "
                 "laboral."
             ),
-            extra=(
+            adicionales=(
                 (
                     "Las descripciones no permiten inferir salarios, demanda laboral "
                     "ni una garantía de empleo."

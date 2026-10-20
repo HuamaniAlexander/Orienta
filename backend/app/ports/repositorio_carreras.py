@@ -3,11 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from app.domain.career import Career
+from app.domain.carrera import Carrera
 
 
 @dataclass(frozen=True)
-class CatalogQuery:
+class ConsultaCatalogo:
     q: str = ""
     tipo: str = ""
     modalidad: str = ""
@@ -20,7 +20,7 @@ class CatalogQuery:
             raise ValueError("Paginación fuera de rango")
 
 
-class CareerRepository(Protocol):
-    def list(self, query: CatalogQuery) -> tuple[list[Career], int]: ...
-    def get(self, id: str) -> Career | None: ...
-    def facets(self) -> dict[str, list[str]]: ...
+class RepositorioCarreras(Protocol):
+    def listar(self, consulta: ConsultaCatalogo) -> tuple[list[Carrera], int]: ...
+    def obtener(self, id: str) -> Carrera | None: ...
+    def facetas(self) -> dict[str, list[str]]: ...
