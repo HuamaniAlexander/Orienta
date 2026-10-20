@@ -35,7 +35,7 @@ describe('Comparación HU04', () => {
     sessionStorage.setItem('orienta-comparison', '["C01"]')
     show('/comparar')
     expect(screen.getByRole('heading', { name: 'Falta una alternativa' })).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: 'Quitar alternativa A' }))
+    await userEvent.click(screen.getByRole('button', { name: /^Quitar / }))
     expect(screen.getByRole('heading', { name: 'Elige dos alternativas para empezar' })).toBeInTheDocument()
   })
   it('sustituye una alternativa conservando la otra', async () => {

@@ -1,3 +1,5 @@
+import { InstitutionLogo } from './InstitutionLogo'
+import { institutionName } from '../domain/institutions'
 import { Link } from 'react-router-dom'
 import type { Career } from '../domain/career'
 import { Icon } from './Icon'
@@ -5,9 +7,8 @@ import { SelectCareer } from './SelectCareer'
 
 export function CareerCard({ career, search = '' }: { career: Career; search?: string }) {
   return <article className="career-card">
-    <div className="card-top"><span className={`institution-mark ${career.institution === 'UTP' ? 'utp' : 'sanmarcos'}`}>
-      {career.institution.slice(0, 3)}</span>
-      <div><p className="institution-name">{career.institution}</p>
+    <div className="card-top"><InstitutionLogo code={career.institution} />
+      <div><p className="institution-name">{institutionName(career.institution)}</p>
         <span className="tag">{career.training_type || 'Tipo no disponible'}</span></div>
     </div>
     <SelectCareer id={career.id} />

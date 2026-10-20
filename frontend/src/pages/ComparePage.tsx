@@ -1,3 +1,5 @@
+import { InstitutionLogo } from '../components/InstitutionLogo'
+import { institutionName, careerLabel } from '../domain/institutions'
 import { Link } from 'react-router-dom'
 import { useComparison } from '../application/selection'
 import { useResource } from '../application/useResource'
@@ -27,22 +29,22 @@ function ComparisonContent({ ids }: { ids: string[] }) {
   ]
   return <>
     <div className="comparison-headings"><div className="criterion-spacer" />{[left, right].map((c, index) =>
-      <article key={c.id} className="comparison-option"><span className="option-letter">{index ? 'B' : 'A'}</span>
-        <p>{c.institution} <span className="tag">{c.training_type || 'Sin tipo'}</span></p><h2>{c.name}</h2>
+      <article key={c.id} className="comparison-option"><InstitutionLogo code={c.institution} />
+        <p>{institutionName(c.institution)} <span className="tag">{c.training_type || 'Sin tipo'}</span></p><h2>{c.name}</h2>
         <div><Link to={`/carreras/${c.id}`}>Ver ficha <Icon name="external" /></Link>
           <Link to={`/?sustituir=${index}`}>Sustituir</Link></div></article>)}</div>
     <section className="comparison-data" aria-label="Comparación de los seis criterios">{rows.map(([label, a, b]) =>
-      <div className="comparison-row" key={label}><h3>{label}</h3><p><small>Alternativa A</small>{a || 'Dato no disponible'}</p>
-        <p><small>Alternativa B</small>{b || 'Dato no disponible'}</p></div>)}</section>
+      <div className="comparison-row" key={label}><h3>{label}</h3><p><small>{careerLabel(left)}</small>{a || 'Dato no disponible'}</p>
+        <p><small>{careerLabel(right)}</small>{b || 'Dato no disponible'}</p></div>)}</section>
     <div className="comparison-notes"><div><Icon name="clock" /><p><strong>Diferencia de duración</strong>
-      {duration === null ? 'No disponible: falta información.' : duration === 0 ? 'Ambas alternativas tienen la misma duración informada.' : `La alternativa B tiene ${Math.abs(duration)} meses ${duration > 0 ? 'más' : 'menos'} que A.`}</p></div>
+      {duration === null ? 'No disponible: falta información.' : duration === 0 ? 'Ambas alternativas tienen la misma duración informada.' : `${careerLabel(right)} tiene ${Math.abs(duration)} meses ${duration > 0 ? 'más' : 'menos'} que ${careerLabel(left)}.`}</p></div>
       <div><Icon name="coins" /><p><strong>Diferencia de importes mensuales</strong>
-        {cost === null ? 'No disponible: falta información.' : Number(cost) === 0 ? 'Los importes mensuales informados son iguales.' : `La alternativa B tiene S/ ${Math.abs(Number(cost)).toLocaleString('es-PE')} ${Number(cost) > 0 ? 'más' : 'menos'} que A por mes.`}
+        {cost === null ? 'No disponible: falta información.' : Number(cost) === 0 ? 'Los importes mensuales informados son iguales.' : `${careerLabel(right)} tiene S/ ${Math.abs(Number(cost)).toLocaleString('es-PE')} ${Number(cost) > 0 ? 'más' : 'menos'} que ${careerLabel(left)} por mes.`}
       </p></div></div>
     <div className="cost-conditions"><Icon name="info" /><div><strong>Condiciones de los costos</strong>
-      {[left, right].map((c, i) => <p key={c.id}>{i ? 'B' : 'A'} · {c.sources.find(s => s.field === 'Costo')?.status || 'Condiciones pendientes de verificar'}</p>)}
+      {[left, right].map(c => <p key={c.id}>{careerLabel(c)} · {c.sources.find(s => s.field === 'Costo')?.status || 'Condiciones pendientes de verificar'}</p>)}
       <p>Se contrastan importes de enseñanza en soles por mes. No representan el costo total de estudiar.</p></div></div>
-    <AnalysisPanel ids={ids} />
+    <AnalysisPanel ids={ids} names={[careerLabel(left), careerLabel(right)]} />
   </>
 }
 

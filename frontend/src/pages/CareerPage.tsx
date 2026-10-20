@@ -1,3 +1,5 @@
+import { InstitutionLogo } from '../components/InstitutionLogo'
+import { institutionName } from '../domain/institutions'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { useResource } from '../application/useResource'
 import { ApiError } from '../adapters/api'
@@ -43,7 +45,7 @@ export function CareerPage() {
     <div className="breadcrumb"><Link to={back}>Explorar</Link><span>/</span><span>{c.name}</span></div>
     <Link to={back} className="back-link"><span aria-hidden="true">←</span> Volver a resultados</Link>
     <section className="detail-heading"><SelectCareer id={c.id} /><p className="eyebrow">CONOCE TU ALTERNATIVA</p>
-      <h1>{c.name}</h1><div className="detail-subtitle"><span>{c.institution}</span>
+      <h1>{c.name}</h1><div className="detail-subtitle"><InstitutionLogo code={c.institution} /><span>{institutionName(c.institution)}</span>
         <span className="tag">{c.training_type || 'Tipo no disponible'}</span></div></section>
     <div className="detail-layout"><div className="detail-main">
       <section className="panel" aria-labelledby="academic-title"><h2 id="academic-title">Información académica</h2>

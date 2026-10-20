@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { useResource } from '../application/useResource'
 import { CareerCard } from './CareerCard'
 import { Icon } from './Icon'
@@ -7,10 +8,11 @@ import type { Career } from '../domain/career'
 import { safeSourceUrl } from '../domain/presentation'
 
 interface Analysis {
+  recommendation_training?: { status: string; message: string }
   criteria_analysis: {
-    key: string; label: string; left_value: string; right_value: string
+    key: string; label: string; left_value: string; right_value: string; left_label: string; right_label: string
     relationship: 'same' | 'different' | 'missing'; explanation: string
-    recommendation: string; caveats: string[]
+    recommendation: string; reason: string; caveats: string[]
   }[]
   explanation_kind: string
   quality_target: number
@@ -32,8 +34,8 @@ interface Analysis {
   next_steps: string[]
   recommendations: Career[]
 }
-function AnalysisResult({ ids }: { ids: string[] }) {
-  const { result, retry } = useResource<Analysis>('/comparaciones/analisis', { career_ids: ids })
+function AnalysisResult({ ids, names, preferences }: { ids: string[]; names: string[]; preferences: Record<string, string | number> }) {
+  const { result, retry } = useResource<Analysis>('/comparaciones/analisis', { career_ids: ids, preferences })
   if (result.status === 'loading') return <div className="analysis-loading" role="status"><span className="spinner" />
     <h3>Analizando las alternativas…</h3><p>El modelo está procesando sus características académicas.</p></div>
   if (result.status === 'error') return <div className="analysis-error" role="alert"><Icon name="info" />
@@ -47,15 +49,17 @@ function AnalysisResult({ ids }: { ids: string[] }) {
       <div className="analysis-introduction"><p className="eyebrow">LAS DIFERENCIAS QUE IMPORTAN</p>
         <h3 id="six-criteria-title">Seis criterios para tomar una decisión informada</h3>
         <p>Explicación estructurada a partir de las fichas: qué cambia, qué implica y qué conviene confirmar.</p></div>
+      {data.recommendation_training && <p className="model-limitation" role="status">{data.recommendation_training.message}</p>}
       <div className="criterion-analysis-grid">{data.criteria_analysis.map(item =>
         <article key={item.key} className={`criterion-analysis criterion-${item.relationship}`}>
           <header><span className="fact-icon"><Icon name={icons[item.key] || 'info'} /></span>
             <h4>{item.label}</h4><span className="criterion-status">{item.relationship === 'same'
               ? 'Mismo dato' : item.relationship === 'missing' ? 'Falta información' : 'Hay diferencias'}</span></header>
-          <dl className="criterion-values"><div><dt>Alternativa A</dt><dd>{item.left_value}</dd></div>
-            <div><dt>Alternativa B</dt><dd>{item.right_value}</dd></div></dl>
+          <dl className="criterion-values"><div><dt>{item.left_label || names[0]}</dt><dd>{item.left_value}</dd></div>
+            <div><dt>{item.right_label || names[1]}</dt><dd>{item.right_value}</dd></div></dl>
           <p className="criterion-explanation">{item.explanation}</p>
           <div className="criterion-advice"><Icon name="compass" /><p><strong>Para decidir</strong>{item.recommendation}</p></div>
+          <p className="criterion-reason"><strong>Por qué: </strong>{item.reason}</p>
           {item.caveats.length > 0 && <details className="criterion-caveats"><summary>Condiciones de estos datos</summary>
             <ul>{item.caveats.map((text, index) => <li key={index}>{text}</li>)}</ul></details>}
         </article>)}</div>
@@ -66,7 +70,7 @@ function AnalysisResult({ ids }: { ids: string[] }) {
       <h3>{data.catalog_contrast}</h3><p>{data.areas.join(' · ')}</p>
       <div className="analysis-sources">{data.area_sources.map((value, i) => {
         const url = safeSourceUrl(value)
-        return url ? <a key={i} href={url} target="_blank" rel="noopener noreferrer">Fuente {i ? 'B' : 'A'} <Icon name="external" /></a> : <span key={i}>Fuente no registrada</span>
+        return url ? <a key={i} href={url} target="_blank" rel="noopener noreferrer">Fuente: {names[i]} <Icon name="external" /></a> : <span key={i}>Fuente no registrada</span>
       })}</div></article>
       <article><p className="eyebrow">ESTADO DEL CLASIFICADOR</p><h3>{data.quality_approved ? data.prediction : 'No habilitado para orientar decisiones'}</h3>
         <p>{data.model_name} · v{data.model_version}</p><span className="tag">Clasificador experimental</span></article></div>
@@ -98,12 +102,36 @@ function AnalysisResult({ ids }: { ids: string[] }) {
       <div className="career-grid">{data.recommendations.map(c => <CareerCard key={c.id} career={c} />)}</div></section>}
   </div>
 }
-export function AnalysisPanel({ ids }: { ids: string[] }) {
+export function AnalysisPanel({ ids, names = [] }: { ids: string[]; names?: string[] }) {
   const [active, setActive] = useState(false)
+  const [preferences, setPreferences] = useState<Record<string, string | number>>({})
+  function analyze(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const values: Record<string, string | number> = {}
+    for (const [key, value] of new FormData(event.currentTarget)) {
+      if (typeof value === 'string' && value.trim()) {
+        values[key] = ['budget_pen', 'max_duration_months'].includes(key) ? Number(value) : value.trim()
+      }
+    }
+    setPreferences(values)
+    setActive(true)
+  }
   return <section className="analysis-panel" aria-labelledby="analysis-title"><div className="analysis-header">
     <span className="fact-icon"><Icon name="sparkles" /></span><div><h2 id="analysis-title">Analiza las dos carreras en detalle</h2>
       <p>Contrasta seis criterios, comprende sus diferencias y revisa recomendaciones concretas para decidir.</p></div>
-    {!active && <button className="button primary" onClick={() => setActive(true)}>Analizar con IA <Icon name="arrow" /></button>}</div>
-    {active && <AnalysisResult ids={ids} />}
+    </div>
+    <form className="analysis-preferences" onSubmit={analyze}>
+      <p>Preferencias opcionales para valorar las diferencias. Los modelos aprendidos requieren evaluación aprobada.</p>
+      <div className="preferences-grid">
+        <label>Presupuesto mensual (S/)<input name="budget_pen" type="number" min="0" step="0.01" /></label>
+        <label>Duración máxima (meses)<input name="max_duration_months" type="number" min="1" max="240" step="1" /></label>
+        <label>Modalidad preferida<select name="modality"><option value="">Sin preferencia</option><option>Presencial</option><option>Virtual</option><option>Semipresencial</option><option>A distancia</option></select></label>
+        <label>Sede o zona preferida<input name="location" maxLength={200} /></label>
+        <label>Requisitos que cumples<input name="requirements_met" maxLength={500} /></label>
+        <label>Actividades laborales de interés<input name="employment_interests" maxLength={500} /></label>
+      </div>
+      <button className="button primary" type="submit">{active ? 'Actualizar análisis' : 'Analizar con IA'} <Icon name="arrow" /></button>
+    </form>
+    {active && <AnalysisResult key={JSON.stringify(preferences)} ids={ids} names={names} preferences={preferences} />}
   </section>
 }

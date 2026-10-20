@@ -29,6 +29,18 @@ function show(fail = false) {
   render(<MemoryRouter><ComparisonProvider><ComparePage /></ComparisonProvider></MemoryRouter>)
 }
 describe('Análisis HU-IA01', () => {
+  it('envía las preferencias declaradas sin inventar las restantes', async () => {
+    show()
+    const budget = await screen.findByLabelText('Presupuesto mensual (S/)')
+    await userEvent.type(budget, '950')
+    await userEvent.selectOptions(screen.getByLabelText('Modalidad preferida'), 'Virtual')
+    await userEvent.click(screen.getByRole('button', { name: /Analizar con IA/ }))
+    await screen.findByRole('heading', { name: 'Seis criterios para tomar una decisión informada' })
+    const call = vi.mocked(fetch).mock.calls.find(([url]) => String(url).endsWith('/analisis'))
+    expect(JSON.parse(String(call?.[1]?.body))).toEqual({ career_ids: ['C01', 'C02'],
+      preferences: { budget_pen: 950, modality: 'Virtual' } })
+    expect(screen.queryByText('Alternativa A')).not.toBeInTheDocument()
+  })
   it('explica seis criterios y separa la evaluación del modelo no habilitado', async () => {
     show()
     await userEvent.click(await screen.findByRole('button', { name: /Analizar con IA/ }))
