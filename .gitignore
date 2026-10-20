@@ -11,3 +11,6 @@ __pycache__/
 coverage/
 .coverage
 *.egg-info/
+.references/
+*.tsbuildinfo
+test-results/
