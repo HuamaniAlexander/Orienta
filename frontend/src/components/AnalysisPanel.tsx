@@ -101,7 +101,7 @@ function AnalysisResult({ ids }: { ids: string[] }) {
 export function AnalysisPanel({ ids }: { ids: string[] }) {
   const [active, setActive] = useState(false)
   return <section className="analysis-panel" aria-labelledby="analysis-title"><div className="analysis-header">
-    <span className="fact-icon"><Icon name="compass" /></span><div><h2 id="analysis-title">Analiza las dos carreras en detalle</h2>
+    <span className="fact-icon"><Icon name="sparkles" /></span><div><h2 id="analysis-title">Analiza las dos carreras en detalle</h2>
       <p>Contrasta seis criterios, comprende sus diferencias y revisa recomendaciones concretas para decidir.</p></div>
     {!active && <button className="button primary" onClick={() => setActive(true)}>Analizar con IA <Icon name="arrow" /></button>}</div>
     {active && <AnalysisResult ids={ids} />}

@@ -22,7 +22,7 @@ function Layout() {
     <header className="site-header"><div className="header-inner">
       <Link to="/" className="brand" aria-label="ORIENTA, inicio"><span className="brand-symbol"><Icon name="compass" /></span>ORIENTA<span className="brand-dot">.</span></Link>
       <nav aria-label="Navegación principal"><NavLink to="/" end><Icon name="compass" />Explorar carreras</NavLink>
-        <NavLink to="/comparar"><Icon name="screen" />Comparador <span className="nav-count">{ids.length}</span></NavLink></nav>
+        <NavLink to="/comparar"><Icon name="compare" />Comparador <span className="nav-count">{ids.length}</span></NavLink></nav>
       <div className="visitor"><span className="visitor-icon"><Icon name="user" /></span><span>Modo visitante<small>Sin cuenta, sin barreras</small></span></div>
     </div></header>
     <main id="contenido" ref={main} tabIndex={-1} className="page-shell"><Routes>

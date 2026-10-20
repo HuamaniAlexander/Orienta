@@ -18,6 +18,8 @@ export function ComparisonTray() {
     {ids.length > 0 && <section className="comparison-tray" aria-label="Tu comparación">
       <div className="tray-title"><Icon name="compass" /><div><strong>Tu comparación</strong><small>{ids.length} de 2 seleccionadas</small></div></div>
       <div className="tray-items">{ids.map((id, index) => <Selected key={id} id={id} index={index} />)}</div>
-      <Link className="button primary" to="/comparar">{ids.length === 2 ? 'Comparar alternativas' : 'Ver selección'} <Icon name="arrow" /></Link>
+      <Link className="button primary" to="/comparar" aria-label={ids.length === 2 ? 'Comparar alternativas' : 'Ver selección'}>
+        <span className="tray-action-long">{ids.length === 2 ? 'Comparar alternativas' : 'Ver selección'}</span>
+        <span className="tray-action-short" aria-hidden="true">{ids.length === 2 ? 'Comparar' : 'Selección'}</span><Icon name="arrow" /></Link>
     </section>}</>
 }
