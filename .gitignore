@@ -16,3 +16,4 @@ coverage/
 test-results/
 .pytest_tmp/
 .pytest_tmp_external/
+.local/
