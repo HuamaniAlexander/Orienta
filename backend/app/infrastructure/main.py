@@ -9,10 +9,12 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.adapters.input.http import router
+from app.adapters.output.ml_analysis import TrainedAnalysis
 from app.application.catalog import CareerNotFound
 from app.domain.comparison import InvalidComparison
 from app.infrastructure.database import session_factory
 from app.infrastructure.settings import Settings
+from app.ports.analysis import AnalysisUnavailable
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +30,7 @@ def create_app(settings: Settings | None = None):
 
     app = FastAPI(title="ORIENTA API", version="0.5.0", lifespan=lifespan)
     app.state.settings = settings
+    app.state.analysis_service = TrainedAnalysis(settings.model_directory)
     app.state.sessions = session_factory(settings) if settings.data_mode == "postgres" else None
     app.add_middleware(
         CORSMiddleware,
@@ -39,6 +42,10 @@ def create_app(settings: Settings | None = None):
     @app.exception_handler(InvalidComparison)
     async def invalid_comparison(request: Request, error: InvalidComparison):
         return JSONResponse(status_code=422, content={"detail": str(error)})
+
+    @app.exception_handler(AnalysisUnavailable)
+    async def analysis_unavailable(request: Request, error: AnalysisUnavailable):
+        return JSONResponse(status_code=503, content={"detail": str(error)})
 
     @app.exception_handler(CareerNotFound)
     async def not_found(request: Request, error: CareerNotFound):

@@ -4,6 +4,7 @@ import './index.css'
 import './catalog.css'
 import './detail.css'
 import './comparison.css'
+import './analysis.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(

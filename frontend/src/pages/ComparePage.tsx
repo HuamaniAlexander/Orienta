@@ -5,6 +5,7 @@ import { ErrorState, Loading } from '../components/Feedback'
 import { Icon } from '../components/Icon'
 import type { Career } from '../domain/career'
 import { costLabel } from '../domain/presentation'
+import { AnalysisPanel } from '../components/AnalysisPanel'
 
 export interface ComparisonResult {
   left: Career
@@ -41,6 +42,7 @@ function ComparisonContent({ ids }: { ids: string[] }) {
     <div className="cost-conditions"><Icon name="info" /><div><strong>Condiciones de los costos</strong>
       {[left, right].map((c, i) => <p key={c.id}>{i ? 'B' : 'A'} · {c.sources.find(s => s.field === 'Costo')?.status || 'Condiciones pendientes de verificar'}</p>)}
       <p>Se contrastan importes de enseñanza en soles por mes. No representan el costo total de estudiar.</p></div></div>
+    <AnalysisPanel ids={ids} />
   </>
 }
 

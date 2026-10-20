@@ -1,0 +1,116 @@
+{
+  "C01": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+    "reviewed_on": "2026-10-13"
+  },
+  "C02": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+    "reviewed_on": "2026-10-13"
+  },
+  "C03": {
+    "area": "Ingeniería",
+    "group": "industrial",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+    "reviewed_on": "2026-10-13"
+  },
+  "C04": {
+    "area": "Ingeniería",
+    "group": "software",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+    "reviewed_on": "2026-10-13"
+  },
+  "C05": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+    "reviewed_on": "2026-10-13"
+  },
+  "C06": {
+    "area": "Ingeniería",
+    "group": "software",
+    "source": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+    "reviewed_on": "2026-10-13"
+  },
+  "C07": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+    "reviewed_on": "2026-10-13"
+  },
+  "C08": {
+    "area": "Psicología",
+    "group": "psicologia",
+    "source": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+    "reviewed_on": "2026-10-13"
+  },
+  "C09": {
+    "area": "Psicología",
+    "group": "psicologia_organizacional",
+    "source": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+    "reviewed_on": "2026-10-13"
+  },
+  "C10": {
+    "area": "Salud",
+    "group": "medicina",
+    "source": "https://medicina.unmsm.edu.pe/escuelas-profesionales/medicina-humana/",
+    "reviewed_on": "2026-10-13"
+  },
+  "C11": {
+    "area": "Negocios",
+    "group": "contabilidad",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+    "reviewed_on": "2026-10-13"
+  },
+  "C12": {
+    "area": "Psicología",
+    "group": "psicologia",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+    "reviewed_on": "2026-10-13"
+  },
+  "C13": {
+    "area": "Derecho",
+    "group": "derecho",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+    "reviewed_on": "2026-10-13"
+  },
+  "C14": {
+    "area": "Arquitectura",
+    "group": "arquitectura",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+    "reviewed_on": "2026-10-13"
+  },
+  "C15": {
+    "area": "Salud",
+    "group": "enfermeria",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+    "reviewed_on": "2026-10-13"
+  },
+  "C16": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+    "reviewed_on": "2026-10-13"
+  },
+  "C17": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+    "reviewed_on": "2026-10-13"
+  },
+  "C18": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+    "reviewed_on": "2026-10-13"
+  },
+  "C19": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+    "reviewed_on": "2026-10-13"
+  }
+}

@@ -46,3 +46,20 @@ class ComparisonResponse(BaseModel):
     right: CareerResponse
     duration_difference_months: int | None
     monthly_cost_difference_pen: Decimal | None
+
+
+class AnalysisResponse(BaseModel):
+    prediction: str
+    catalog_contrast: str
+    areas: list[str]
+    area_sources: list[str | None]
+    agrees_with_catalog: bool
+    model_name: str
+    model_version: str
+    metrics: dict[str, float]
+    baseline_accuracy: float
+    training_pairs: int
+    test_pairs: int
+    limitations: list[str]
+    next_steps: list[str]
+    recommendations: list[CareerResponse]

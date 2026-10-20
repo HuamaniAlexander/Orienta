@@ -9,4 +9,5 @@ class Settings(BaseSettings):
     database_url: str = "postgresql+psycopg://orienta:change-me-local@localhost:5432/orienta"
     data_mode: Literal["postgres", "demo"] = "postgres"
     demo_path: Path = Path(__file__).resolve().parents[2] / "data" / "catalog.json"
+    model_directory: Path = Path(__file__).resolve().parents[2] / "models"
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
