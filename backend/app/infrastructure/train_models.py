@@ -50,6 +50,18 @@ def metrics(y, predicted):
     )
 
 
+SCORES = ("accuracy", "precision_macro", "recall_macro", "f1_macro")
+
+
+def distance_to_ideal(scores):
+    """Equal-weight RMS distance to perfect validation scores; smaller is better."""
+    return float(np.sqrt(np.mean([(1 - scores[key]) ** 2 for key in SCORES])))
+
+
+def meets_quality_target(scores, target=0.90):
+    return all(scores[key] >= target for key in SCORES)
+
+
 def train(catalog: Path, metadata_path: Path, output: Path):
     careers = JsonCareerRepository(catalog).careers
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
@@ -80,11 +92,23 @@ def train(catalog: Path, metadata_path: Path, output: Path):
         ]
     )
     models = {
-        "Árbol de decisión": DecisionTreeClassifier(max_depth=4, random_state=42),
-        "Random Forest": RandomForestClassifier(
-            n_estimators=100, max_depth=4, random_state=42, n_jobs=1
-        ),
-        "Regresión logística": LogisticRegression(max_iter=2000, random_state=42),
+        "Árbol de decisión": [
+            DecisionTreeClassifier(max_depth=d, class_weight=w, random_state=42)
+            for d in (2, 4, None)
+            for w in (None, "balanced")
+        ],
+        "Random Forest": [
+            RandomForestClassifier(
+                n_estimators=100, max_depth=d, class_weight=w, random_state=42, n_jobs=1
+            )
+            for d in (2, 4, None)
+            for w in (None, "balanced")
+        ],
+        "Regresión logística": [
+            LogisticRegression(C=c, class_weight=w, max_iter=2000, random_state=42)
+            for c in (0.1, 1, 10)
+            for w in (None, "balanced")
+        ],
     }
     inner_groups = [metadata[c.id]["group"] for c in train_careers]
     splits, split_info = [], []
@@ -109,17 +133,27 @@ def train(catalog: Path, metadata_path: Path, output: Path):
     if len(splits) < 2:
         raise ValueError("No hay grupos suficientes para validación sin contaminación")
     fitted, results = {}, {}
-    for name, model in models.items():
-        pipeline = Pipeline([("preprocess", preprocess), ("model", model)])
-        scores = []
-        for xf, yf, xv, yv in splits:
-            fold = clone(pipeline).fit(xf, yf)
-            scores.append(metrics(yv, fold.predict(xv))["f1_macro"])
-        fitted[name] = clone(pipeline).fit(x_train, y_train)
+    for name, candidates in models.items():
+        candidate_scores = []
+        for model in candidates:
+            pipeline = Pipeline([("preprocess", preprocess), ("model", model)])
+            fold_scores = [
+                metrics(yv, clone(pipeline).fit(xf, yf).predict(xv)) for xf, yf, xv, yv in splits
+            ]
+            validation = {key: float(np.mean([s[key] for s in fold_scores])) for key in SCORES}
+            candidate_scores.append((distance_to_ideal(validation), validation, model))
+        distance, validation, model = min(candidate_scores, key=lambda candidate: candidate[0])
+        fitted[name] = Pipeline([("preprocess", clone(preprocess)), ("model", clone(model))]).fit(
+            x_train, y_train
+        )
         results[name] = metrics(y_test, fitted[name].predict(x_test)) | {
-            "validation_f1_macro": float(np.mean(scores))
+            "validation_scores": validation,
+            "validation_distance_to_ideal": distance,
+            "validation_f1_macro": validation["f1_macro"],
+            "selected_parameters": model.get_params(),
+            "candidates_evaluated": len(candidates),
         }
-    selected = max(results, key=lambda name: results[name]["validation_f1_macro"])
+    selected = min(results, key=lambda name: results[name]["validation_distance_to_ideal"])
     baseline = DummyClassifier(strategy="most_frequent").fit(x_train, y_train)
     vectorizer = TfidfVectorizer(strip_accents="unicode", ngram_range=(1, 2), min_df=1)
     texts = [f"{c.name} {c.employment or ''} {c.requirements or ''}" for c in careers]
@@ -137,13 +171,15 @@ def train(catalog: Path, metadata_path: Path, output: Path):
         compress=3,
     )
     report = {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "seed": 42,
         "sklearn_version": sklearn.__version__,
         "catalog_sha256": sha256(catalog.read_bytes()).hexdigest(),
         "artifact_sha256": sha256(artifact.read_bytes()).hexdigest(),
         "selected_model": selected,
-        "selection_criterion": "validation_f1_macro",
+        "selection_criterion": "minimum_validation_distance_to_ideal",
+        "quality_target": 0.90,
+        "quality_approved": meets_quality_target(results[selected]),
         "training_offers": len(train_careers),
         "test_offers": len(test_careers),
         "training_pairs": len(y_train),
