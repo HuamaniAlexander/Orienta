@@ -19,12 +19,14 @@ from sklearn.metrics import accuracy_score, confusion_matrix, precision_recall_f
 from sklearn.pipeline import make_pipeline
 from sklearn.tree import DecisionTreeClassifier
 
-CRITERIA = ("duration", "modality", "location", "cost", "requirements", "employment")
-LABELS = ("favor_left", "favor_right", "equivalent", "needs_preference", "insufficient_data")
+from app.domain.recommendation import CRITERIA, LABELS, approved, features
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
 def prepare(catalog, output):
+    if output.exists():
+        raise ValueError("La salida ya existe; elige otra ruta para conservar las anotaciones")
     offers = json.loads(catalog.read_text(encoding="utf8"))
     # Partition OFFERS before forming pairs: no shared offer across any split.
     rng = np.random.default_rng(42)
@@ -125,26 +127,6 @@ def validate(rows):
                 raise ValueError(f"{criterion}/{split}: mínimo 5 ejemplos por clase")
 
 
-def features(row):
-    # Identity, evidence, rationale and reviewer decisions are NOT predictors.
-    result = {}
-    for side in ("left", "right"):
-        value = row[f"{side}_value"]
-        result[f"{side}_missing"] = int(value is None or value == "")
-        if value is not None:
-            if row["criterion"] in ("duration", "cost"):
-                result[f"{side}_number"] = float(value)
-            else:
-                for token in str(value).casefold().split():
-                    result[f"{side}_token={token}"] = 1
-    for key, value in sorted(row.get("preferences", {}).items()):
-        if isinstance(value, (int, float)) and not isinstance(value, bool):
-            result[f"preference_{key}"] = float(value)
-        elif isinstance(value, str):
-            result[f"preference_{key}={value.casefold()}"] = 1
-    return result
-
-
 def measure(actual, predicted):
     p, r, f, _ = precision_recall_fscore_support(
         actual, predicted, labels=LABELS, average="macro", zero_division=0
@@ -155,12 +137,6 @@ def measure(actual, predicted):
         recall_macro=float(r),
         f1_macro=float(f),
         confusion_matrix=confusion_matrix(actual, predicted, labels=LABELS).tolist(),
-    )
-
-
-def approved(scores):
-    return all(
-        scores[k] > 0.90 for k in ("accuracy", "precision_macro", "recall_macro", "f1_macro")
     )
 
 

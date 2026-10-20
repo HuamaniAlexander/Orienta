@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.adapters.input.http import router
+from app.adapters.output.criterion_recommendations import ReviewedRecommendations
 from app.adapters.output.ml_analysis import TrainedAnalysis
 from app.application.catalog import CareerNotFound
 from app.domain.comparison import InvalidComparison
@@ -31,6 +32,9 @@ def create_app(settings: Settings | None = None):
     app = FastAPI(title="ORIENTA API", version="0.5.0", lifespan=lifespan)
     app.state.settings = settings
     app.state.analysis_service = TrainedAnalysis(settings.model_directory)
+    app.state.recommendation_service = ReviewedRecommendations(
+        settings.model_directory / "recommendations"
+    )
     app.state.sessions = session_factory(settings) if settings.data_mode == "postgres" else None
     app.add_middleware(
         CORSMiddleware,

@@ -23,7 +23,7 @@ def test_six_criteria_differences_and_actionable_recommendations(workbook):
     assert all(item["relationship"] == "different" for item in result.values())
     assert "12 meses menos" in result["duration"]["explanation"]
     assert "775.00 PEN por mes menos" in result["cost"]["explanation"]
-    assert "B registra menor" in result["cost"]["recommendation"]
+    assert right.name in result["cost"]["recommendation"]
     assert result["cost"]["right_value"] == "0.00 PEN por mes"
     assert "Docencia" in result["employment"]["explanation"]
     assert "salarios" in result["employment"]["caveats"][0]

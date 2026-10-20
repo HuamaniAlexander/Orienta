@@ -3,21 +3,27 @@
 from dataclasses import asdict, dataclass
 
 from app.domain.career import Career, normalize
+from app.domain.institution import career_label
 
 
 @dataclass(frozen=True)
 class CriterionAnalysis:
     key: str
     label: str
+    left_label: str
+    right_label: str
     left_value: str
     right_value: str
     relationship: str
     explanation: str
     recommendation: str
+    reason: str
     caveats: tuple[str, ...]
 
 
 def analyze_criteria(left: Career, right: Career) -> list[dict]:
+    left_label, right_label = career_label(left), career_label(right)
+
     def present(value):
         return (
             str(value).strip() if value is not None and str(value).strip() else "Dato no disponible"
@@ -57,13 +63,14 @@ def analyze_criteria(left: Career, right: Career) -> list[dict]:
             delta = b - a
             difference = f"{abs(delta):,.2f}" if key == "cost" else str(abs(delta))
             explanation = (
-                f"A registra {av} y B registra {bv}. "
-                f"B tiene {difference} {unit} {'más' if delta > 0 else 'menos'} que A."
+                f"{left_label} registra {av}; {right_label} registra {bv}. "
+                f"{right_label} tiene {difference} {unit} {'más' if delta > 0 else 'menos'} "
+                f"que {left_label}."
             )
         else:
-            explanation = f"Los datos registrados difieren: A indica «{av}» y B indica «{bv}»."
+            explanation = f"{left_label} indica «{av}»; {right_label} indica «{bv}»."
         caveats = list(extra)
-        for prefix, career in [("A", left), ("B", right)]:
+        for prefix, career in [(left_label, left), (right_label, right)]:
             field = {
                 "duration": "Duración",
                 "modality": "Modalidad",
@@ -79,11 +86,27 @@ def analyze_criteria(left: Career, right: Career) -> list[dict]:
             CriterionAnalysis(
                 key,
                 label,
+                left_label,
+                right_label,
                 av,
                 bv,
                 "missing" if missing else "same" if same else "different",
                 explanation,
                 recommendation,
+                {
+                    "duration": "La duración afecta el tiempo de formación; la carga semanal "
+                    "y los requisitos de egreso pueden cambiar la fecha real de finalización.",
+                    "modality": "La modalidad determina condiciones de asistencia y recursos "
+                    "que deben ser compatibles con tu disponibilidad.",
+                    "location": "Los traslados consumen tiempo y presupuesto; la sede debe "
+                    "confirmarse para la modalidad y carrera elegidas.",
+                    "cost": "El importe mensual condiciona tu presupuesto, pero no incluye "
+                    "necesariamente matrícula, materiales ni otros gastos.",
+                    "requirements": "Los documentos y plazos de admisión determinan si puedes "
+                    "postular; una descripción resumida no confirma elegibilidad.",
+                    "employment": "Las actividades profesionales permiten contrastar tus "
+                    "intereses; estas fichas no demuestran demanda laboral ni salarios.",
+                }[key],
                 tuple(caveats),
             )
         )
@@ -107,7 +130,7 @@ def analyze_criteria(left: Career, right: Career) -> list[dict]:
             "todavía no puedes comparar el presupuesto con este dato."
         )
     elif left.monthly_cost_pen != right.monthly_cost_pen:
-        cheaper = "A" if left.monthly_cost_pen < right.monthly_cost_pen else "B"
+        cheaper = left_label if left.monthly_cost_pen < right.monthly_cost_pen else right_label
         cost_tip = (
             f"Si priorizas el presupuesto, {cheaper} registra menor enseñanza mensual. "
             "Confirma condiciones, matrícula y gastos adicionales; "

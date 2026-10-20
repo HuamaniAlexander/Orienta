@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Query, Request
 
 from app.adapters.input.schemas import (
+    AnalysisRequest,
     AnalysisResponse,
     CareerResponse,
     CatalogResponse,
@@ -18,9 +19,11 @@ router = APIRouter(prefix="/api")
 
 @router.post("/comparaciones/analisis", response_model=AnalysisResponse)
 def analysis(
-    body: ComparisonRequest, request: Request, catalog: Catalog = Depends(catalog_dependency)
+    body: AnalysisRequest, request: Request, catalog: Catalog = Depends(catalog_dependency)
 ):
-    result = AnalyzeComparison(catalog, request.app.state.analysis_service).execute(body.career_ids)
+    result = AnalyzeComparison(
+        catalog, request.app.state.analysis_service, request.app.state.recommendation_service
+    ).execute(body.career_ids, body.preferences.model_dump(exclude_none=True))
     result["recommendations"] = [
         CareerResponse.model_validate(c) for c in result["recommendations"]
     ]

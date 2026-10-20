@@ -62,6 +62,18 @@ def test_analysis_http_and_unavailable_keeps_comparison(tmp_path):
         assert len(body["next_steps"]) == 6
         assert len(body["model_evaluations"]) == 3
         assert body["quality_target"] == 0.90
+        assert body["recommendation_training"]["status"] == "awaiting_reviewed_labels"
+        assert all(
+            item["reason"] and "Universidad" in item["left_label"]
+            for item in body["criteria_analysis"]
+        )
+        assert (
+            client.post(
+                "/api/comparaciones/analisis",
+                json={"career_ids": ["C01", "C02"], "preferences": {"budget_pen": -1}},
+            ).status_code
+            == 422
+        )
         app.state.analysis_service = TrainedAnalysis(tmp_path)
         assert (
             client.post(

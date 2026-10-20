@@ -48,7 +48,25 @@ class ComparisonResponse(BaseModel):
     monthly_cost_difference_pen: Decimal | None
 
 
+class RecommendationPreferences(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    budget_pen: float | None = Field(default=None, ge=0)
+    max_duration_months: int | None = Field(default=None, ge=1, le=240)
+    modality: str | None = Field(default=None, max_length=100)
+    location: str | None = Field(default=None, max_length=200)
+    employment_interests: str | None = Field(default=None, max_length=500)
+    requirements_met: str | None = Field(default=None, max_length=500)
+
+
+class AnalysisRequest(ComparisonRequest):
+    preferences: RecommendationPreferences = Field(default_factory=RecommendationPreferences)
+
+
 class CriterionAnalysisResponse(BaseModel):
+    learned_label: str | None = None
+    reason: str
+    left_label: str
+    right_label: str
     key: str
     label: str
     left_value: str
@@ -60,6 +78,7 @@ class CriterionAnalysisResponse(BaseModel):
 
 
 class AnalysisResponse(BaseModel):
+    recommendation_training: dict
     criteria_analysis: list[CriterionAnalysisResponse]
     explanation_kind: str
     quality_target: float

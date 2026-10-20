@@ -17,3 +17,4 @@ test-results/
 .pytest_tmp/
 .pytest_tmp_external/
 .local/
+backend/data/recommendations/pilot.json
