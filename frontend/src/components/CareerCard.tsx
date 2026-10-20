@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { Career } from '../domain/career'
 import { Icon } from './Icon'
+import { SelectCareer } from './SelectCareer'
 
 export function CareerCard({ career, search = '' }: { career: Career; search?: string }) {
   return <article className="career-card">
@@ -9,6 +10,7 @@ export function CareerCard({ career, search = '' }: { career: Career; search?: s
       <div><p className="institution-name">{career.institution}</p>
         <span className="tag">{career.training_type || 'Tipo no disponible'}</span></div>
     </div>
+    <SelectCareer id={career.id} />
     <h3>{career.name}</h3>
     <div className="card-facts"><div><Icon name="pin" /><span><small>Ubicación</small>
       {career.location || 'Dato no disponible'}</span></div>

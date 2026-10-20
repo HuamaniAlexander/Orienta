@@ -6,6 +6,7 @@ import { Icon } from '../components/Icon'
 import type { IconName } from '../components/Icon'
 import type { Career, Source } from '../domain/career'
 import { costLabel, reviewLabel, safeSourceUrl } from '../domain/presentation'
+import { SelectCareer } from '../components/SelectCareer'
 
 function Status({ source }: { source?: Source }) {
   const status = source?.status || 'Sin estado registrado'
@@ -41,7 +42,7 @@ export function CareerPage() {
   return <>
     <div className="breadcrumb"><Link to={back}>Explorar</Link><span>/</span><span>{c.name}</span></div>
     <Link to={back} className="back-link"><span aria-hidden="true">←</span> Volver a resultados</Link>
-    <section className="detail-heading"><p className="eyebrow">CONOCE TU ALTERNATIVA</p>
+    <section className="detail-heading"><SelectCareer id={c.id} /><p className="eyebrow">CONOCE TU ALTERNATIVA</p>
       <h1>{c.name}</h1><div className="detail-subtitle"><span>{c.institution}</span>
         <span className="tag">{c.training_type || 'Tipo no disponible'}</span></div></section>
     <div className="detail-layout"><div className="detail-main">

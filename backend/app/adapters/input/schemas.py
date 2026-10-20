@@ -1,7 +1,7 @@
 from datetime import date
 from decimal import Decimal
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class SourceResponse(BaseModel):
@@ -33,3 +33,16 @@ class CatalogResponse(BaseModel):
     pagina: int
     limite: int
     data_mode: str
+
+
+class ComparisonRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    career_ids: list[str] = Field(min_length=2, max_length=2)
+
+
+class ComparisonResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    left: CareerResponse
+    right: CareerResponse
+    duration_difference_months: int | None
+    monthly_cost_difference_pen: Decimal | None

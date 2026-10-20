@@ -10,6 +10,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.adapters.input.http import router
 from app.application.catalog import CareerNotFound
+from app.domain.comparison import InvalidComparison
 from app.infrastructure.database import session_factory
 from app.infrastructure.settings import Settings
 
@@ -31,9 +32,13 @@ def create_app(settings: Settings | None = None):
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,
-        allow_methods=["GET"],
+        allow_methods=["GET", "POST"],
         allow_headers=["Accept", "Content-Type"],
     )
+
+    @app.exception_handler(InvalidComparison)
+    async def invalid_comparison(request: Request, error: InvalidComparison):
+        return JSONResponse(status_code=422, content={"detail": str(error)})
 
     @app.exception_handler(CareerNotFound)
     async def not_found(request: Request, error: CareerNotFound):

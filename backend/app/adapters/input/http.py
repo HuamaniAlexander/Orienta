@@ -1,11 +1,22 @@
 from fastapi import APIRouter, Depends, Query, Request
 
-from app.adapters.input.schemas import CareerResponse, CatalogResponse
+from app.adapters.input.schemas import (
+    CareerResponse,
+    CatalogResponse,
+    ComparisonRequest,
+    ComparisonResponse,
+)
 from app.application.catalog import Catalog
+from app.application.compare import CompareCareers
 from app.infrastructure.dependencies import catalog_dependency
 from app.ports.careers import CatalogQuery
 
 router = APIRouter(prefix="/api")
+
+
+@router.post("/comparaciones", response_model=ComparisonResponse)
+def comparison(body: ComparisonRequest, catalog: Catalog = Depends(catalog_dependency)):
+    return ComparisonResponse.model_validate(CompareCareers(catalog).execute(body.career_ids))
 
 
 @router.get("/salud")
