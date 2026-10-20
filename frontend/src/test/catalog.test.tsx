@@ -21,6 +21,24 @@ function mockApi(items: Career[] = [career]) {
 }
 
 describe('Catálogo HU01', () => {
+  it('conserva el modo de sustitución al limpiar filtros', async () => {
+    mockApi()
+    show('/?q=software&sustituir=0')
+    await screen.findByRole('heading', { name: career.name })
+    await userEvent.click(screen.getByRole('button', { name: /Limpiar filtros/ }))
+    const link = await screen.findByRole('link', { name: /Ver ficha/ })
+    expect(link.getAttribute('href')).toContain('sustituir=0')
+    expect(screen.getByRole('searchbox')).toHaveValue('')
+  })
+  it('permite regresar desde una página fuera de rango', async () => {
+    vi.stubGlobal('fetch', vi.fn((url: string) => Promise.resolve(url.endsWith('/filtros')
+      ? new Response(JSON.stringify(facets)) : new Response(JSON.stringify({
+        items: [], total: 19, pagina: 999, limite: 12, data_mode: 'postgres',
+      })))))
+    show('/?pagina=999')
+    expect(await screen.findByText('Esta página no tiene resultados')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Volver a la primera página' })).toBeInTheDocument()
+  })
   it('muestra tarjetas conectadas a la API y acceso a ficha', async () => {
     mockApi()
     show()

@@ -4,6 +4,7 @@ from decimal import Decimal
 
 import pytest
 from alembic.config import Config
+from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, func, select
 from sqlalchemy.orm import Session
 
@@ -11,6 +12,30 @@ from alembic import command
 from app.adapters.output.excel import read_careers
 from app.adapters.output.importer import import_workbook
 from app.adapters.output.models import CareerRow, ImportRow, SourceRow
+from app.adapters.output.repositories import SqlCareerRepository
+from app.infrastructure.main import create_app
+from app.infrastructure.settings import Settings
+from app.ports.careers import CatalogQuery
+
+
+def test_http_with_sql_persistence(database, workbook):
+    with Session(database) as session:
+        import_workbook(workbook([{}, {"id_carrera": "C02", "modalidad": "Virtual"}]), session)
+    if database.dialect.name != "postgresql":
+        pytest.skip("El recorrido SQL HTTP requiere TEST_DATABASE_URL de PostgreSQL")
+    settings = Settings(
+        data_mode="postgres", database_url=database.url.render_as_string(hide_password=False)
+    )
+    with TestClient(create_app(settings)) as client:
+        data = client.get(
+            "/api/carreras", params={"q": "ingenieria", "modalidad": "Virtual"}
+        ).json()
+        assert data["data_mode"] == "postgres"
+        assert data["total"] == 1 and data["items"][0]["id"] == "C02"
+        assert client.get("/api/carreras/C01").status_code == 200
+        result = client.post("/api/comparaciones", json={"career_ids": ["C01", "C02"]})
+        assert result.status_code == 200
+        assert result.json()["duration_difference_months"] == 0
 
 
 def test_missing_and_zero_are_different(workbook):
@@ -72,3 +97,24 @@ def test_migration_import_idempotence_and_transaction(database, workbook):
             import_workbook(path, session)
         assert session.get(CareerRow, "C02") is None
         assert session.scalar(select(func.count()).select_from(ImportRow)) == 1
+
+
+def test_sql_repository_filters_and_retired(database, workbook):
+    with Session(database) as session:
+        import_workbook(
+            workbook([{}, {"id_carrera": "C02", "modalidad": "Virtual", "ubicacion": "Virtual"}]),
+            session,
+        )
+        repo = SqlCareerRepository(session)
+        items, total = repo.list(
+            CatalogQuery(q="ingenieria", modalidad="Virtual", ubicacion="Virtual")
+        )
+        assert total == 1 and items[0].id == "C02"
+        assert len(items[0].sources) == 6
+        assert repo.list(CatalogQuery(q="%"))[1] == 0
+        assert repo.list(CatalogQuery(q="' OR 1=1 --"))[1] == 0
+        session.get(CareerRow, "C02").active = False
+        session.commit()
+        assert repo.get("C02") is None
+        assert repo.list(CatalogQuery())[1] == 1
+        assert "Virtual" not in repo.facets()["modalidad"]

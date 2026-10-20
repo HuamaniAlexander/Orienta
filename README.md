@@ -1,44 +1,126 @@
-# ORIENTA — MVP 1
+# ORIENTA Compara
 
-Base técnica de ORIENTA Compara. Todavía no incluye funcionalidades, datos, modelos entrenados ni proveedor de IA.
+Catálogo académico con búsqueda, filtros, fichas trazables, comparación de dos ofertas,
+clasificador de contraste académico entrenado y alternativas relacionadas por contenido.
+No requiere cuentas. React/TypeScript comunica con FastAPI mediante Fetch; PostgreSQL
+persiste las ofertas, sus fuentes y las importaciones. El núcleo aplica arquitectura hexagonal.
 
-## Requisitos
-Node.js 24 LTS, Python 3.12, Docker con Compose (para PostgreSQL y pgAdmin).
+## Inicio en este equipo Windows
 
-## Inicio local
-1. Copiar `.env.example` a `.env` y cambiar las contraseñas de ejemplo.
-2. Ejecutar `docker compose up -d`.
-3. Frontend: `cd frontend`, `npm ci`, copiar `.env.example` a `.env`, `npm run dev`.
-4. Backend: desde `backend`, `python -m venv .venv`, activar el entorno, `python -m pip install -r requirements-dev.txt`, copiar `.env.example` a `.env` y ajustar la contraseña.
-5. Desde `backend`: `uvicorn app.infrastructure.main:app --reload`.
+Las dependencias y PostgreSQL local ya se prepararon en este espacio. Desde la raíz:
 
-Frontend: http://localhost:5173. API/OpenAPI: http://localhost:8000/docs. pgAdmin: http://localhost:5050; registrar servidor con host `postgres`, puerto 5432 y credenciales de `.env`.
+```powershell
+.\scripts\Start-Orienta.ps1
+```
 
-## Estructura
-- `frontend/`: React, TypeScript, Vite, Tailwind, React Router y Vitest/Testing Library.
-- `backend/app/domain/`: entidades y reglas puras, independientes de frameworks.
-- `backend/app/application/`: futuros casos de uso.
-- `backend/app/ports/`: futuros contratos de entrada/salida.
-- `backend/app/adapters/input/` y `output/`: HTTP, persistencia, Excel y servicios externos.
-- `backend/app/infrastructure/`: composición y arranque FastAPI.
-- `backend/alembic/`: reservado para las migraciones; inicialización y esquema pendientes en feature/base-datos.
-- `docs/`: documentación por área.
+Abre http://127.0.0.1:5173. El script inicia servicios ocultos si están detenidos, aplica
+migraciones e importa de forma repetible el catálogo versionado. No instala software.
+Los logs quedan en `.local/`. El PostgreSQL descargado y sus credenciales son locales,
+no se versionan. No se configura un servicio de Windows ni inicio automático.
 
-Se usará Fetch API (nativa del navegador); no se necesita Axios para el alcance actual. pandas, NumPy, scikit-learn y openpyxl preparan la futura integración de la PoC. No se ha escogido proveedor de IA. Playwright se evaluará cuando existan recorridos funcionales.
+Para iniciar solo la API y la interfaz manualmente, en dos terminales:
 
-## Verificación
-Frontend: `npm run build`, `npm run lint`, `npm run test` (cuando existan pruebas).
-Backend: `python -m pip check`, `ruff check app`, `pytest` (cuando existan pruebas).
-No hay pruebas funcionales en esta base. No se incluyen tablas ni importación de datos.
+```powershell
+cd backend
+$env:DATA_MODE="postgres"
+.\.venv\Scripts\python.exe -m uvicorn app.infrastructure.main:app --reload
+```
 
-## Ramas
-`main` conserva su estado previo. `dev` es la rama de integración (equivalente a develop), por indicación del equipo. Las ramas feature parten del commit de preparación de dev y se integrarán mediante PR hacia dev. Actualizar cada feature con dev antes de empezar porque las ramas no se sincronizan automáticamente.
+```powershell
+cd frontend
+npm run dev
+```
 
-Ramas previstas: arquitectura-hexagonal, base-datos, backend-core, hu01-catalogo, hu02-busqueda-filtros, hu03-ficha-carrera, hu04-comparador, hu05-vista-ligera, hu-ia01-explicacion y pruebas-pdca, todas con prefijo `feature/`.
-La configuración inicial queda completada directamente en dev; release/* y hotfix/* se crearán cuando exista una entrega o corrección que preparar.
+## Instalación desde otro clon
 
-No subir `.env`, entornos virtuales ni node_modules. Las dependencias se reinstalan desde los archivos de versiones del repositorio.
+Requiere Node.js 24, Python 3.12 y PostgreSQL 17 (directo o con Docker Compose).
 
-## Validación de esta preparación
-Compilación y lint del frontend correctos. `pip check` correcto y consulta de OpenAPI mediante TestClient correcta. Docker no está disponible en el entorno de preparación, por lo que los contenedores no se arrancaron. Ruff quedó instalado pero su binario falló en este entorno (segmentation fault); su ejecución debe verificarse en local. Las pruebas funcionales se incorporarán con las funcionalidades.
-Los locks Python se generaron en Linux con Python 3.12; `uvloop` es opcional y se omite en Windows.
+1. Copia `.env.example` a `.env`, configura credenciales y ejecuta `docker compose up -d postgres`.
+2. Desde `backend`: crea un entorno con `python -m venv .venv`, actívalo e instala
+   `python -m pip install -r requirements-dev.txt`.
+3. Copia `backend/.env.example` a `backend/.env`; configura `DATABASE_URL` para tu PostgreSQL.
+   No publiques contraseñas. `DATA_MODE=postgres` es el modo normal.
+4. Desde `backend`: `python -m alembic upgrade head` y `python -m app.infrastructure.seed_catalog`.
+5. Desde `backend`: `python -m uvicorn app.infrastructure.main:app --reload`.
+6. Desde `frontend`: `npm ci` y `npm run dev`. El proxy `/api` apunta a 127.0.0.1:8000.
+   `VITE_API_URL` puede configurar una API diferente; CORS se configura en el backend.
+
+En Windows puedes usar directamente `.venv\Scripts\python.exe` sin activar el entorno.
+OpenAPI: http://127.0.0.1:8000/docs. pgAdmin es opcional: `docker compose up -d pgadmin`.
+Los contenedores Compose originales solo cubren PostgreSQL/pgAdmin; API y frontend se
+ejecutan con los comandos anteriores.
+
+## Datos y ampliación del catálogo
+
+Hay 19 ofertas de UTP y UNMSM extraídas del Excel suministrado. Se preservan sedes,
+modalidades, duración en meses, enseñanza mensual en soles, fuentes y fechas. Un cero
+explícito es diferente de un dato faltante. Los costos estimados no son tarifas oficiales;
+enseñanza gratuita no significa ausencia de otros gastos.
+
+Importa nuevos registros documentados desde un Excel con el mismo esquema:
+
+```powershell
+cd backend
+python -m app.infrastructure.import_excel "C:\ruta\ORIENTA_Datos_PoC.xlsx"
+```
+
+Valida todo el libro antes de escribir, evita duplicados por código e identidad académica
+y confirma una sola transacción. Repetir un archivo sin cambios no duplica registros.
+Las ofertas ausentes en una importación no se retiran automáticamente. `active=false`
+retira una oferta del catálogo y del comparador; la administración editorial no tiene
+un endpoint público de escritura.
+
+El adaptador JSON de solo lectura permanece para pruebas aisladas (`DATA_MODE=demo`);
+no reemplaza automáticamente a PostgreSQL cuando este falla. La página normal utiliza
+PostgreSQL. Los datos de entrenamiento no se amplían con carreras inventadas.
+
+## Entrenamiento y análisis IA
+
+El modelo ya está versionado. Para repetir el entrenamiento desde `backend`:
+
+```powershell
+python -m app.infrastructure.train_models
+```
+
+Entrena tres algoritmos, selecciona por validación con grupos de carreras separados y
+evalúa en grupos externos. Guarda `models/model.joblib` y `models/metrics.json`.
+No entrena durante solicitudes HTTP. Para nuevas ofertas, actualiza también
+`data/catalog.json` y `data/areas.json` con áreas, grupos y fuentes documentados.
+Reinicia la API después de versionar un nuevo modelo.
+
+El clasificador distingue áreas académicas, no aptitudes ni carrera ideal. La evaluación
+actual no supera una referencia mayoritaria; métricas y limitaciones se muestran en
+la interfaz. Las alternativas relacionadas usan TF-IDF y similitud de contenido.
+El resumen y los siguientes pasos son deterministas; no se simula un LLM generativo.
+No se usan servicios IA externos ni claves. Consulta [el informe del modelo](docs/modelo-ia.md).
+
+## Pruebas
+
+Frontend, desde `frontend`: `npm run build`, `npm run lint`, `npm run test`.
+
+Backend, desde `backend`: `python -m pip check`, `python -m ruff check app tests alembic`,
+`python -m pytest -q --basetemp=.pytest_tmp`, `python -m alembic check`.
+
+Para integración con PostgreSQL configura `TEST_DATABASE_URL` con una base exclusiva
+de pruebas: la suite aplica y revierte migraciones en esa base. Nunca uses una base
+con datos que quieras conservar. Si falta esa variable, las pruebas SQL locales usan
+SQLite temporal y no certifican PostgreSQL. GitHub Actions siempre suministra un
+PostgreSQL 17 dedicado.
+
+## API y estructura
+
+- `GET /api/carreras`: búsqueda, filtros combinados y paginación; solo ofertas activas.
+- `GET /api/filtros`, `GET /api/carreras/{id}`, `GET /api/salud`.
+- `POST /api/comparaciones`: `{ "career_ids": ["C01", "C02"] }`.
+- `POST /api/comparaciones/analisis`: mismo cuerpo; predicción, contraste documentado,
+  métricas y alternativas relacionadas. Fallos IA no eliminan la comparación.
+
+`backend/app/domain` contiene reglas puras; `application`, casos de uso; `ports`,
+contratos; `adapters/input`, HTTP; `adapters/output`, SQL/Excel/ML; `infrastructure`,
+composición y comandos. Los modelos ORM y esquemas HTTP no son entidades del dominio.
+Frontend separa tipos/reglas, acceso HTTP, estado de aplicación, componentes y páginas.
+
+`dev` es integración; las ramas feature se incorporan por PR. `main` se reserva para
+una entrega futura. No hay despliegue de producción ni release. La trazabilidad y
+las limitaciones académicas se documentan en `docs/`; las pruebas de usabilidad reales,
+matrices ponderadas y revisión institucional siguen pendientes del equipo.

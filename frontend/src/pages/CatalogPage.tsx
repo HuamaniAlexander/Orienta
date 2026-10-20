@@ -25,6 +25,7 @@ export function CatalogPage() {
     setParams(next)
   }
   const active = ['q', ...Object.keys(filterNames)].filter(key => params.get(key))
+  const clearFilters = () => setParams(params.has('sustituir') ? { sustituir: params.get('sustituir')! } : {})
   const returnSearch = params.toString() ? `?${params}` : ''
   return <>
     <div className="breadcrumb">Inicio <span>/</span> Explorar</div>
@@ -36,7 +37,7 @@ export function CatalogPage() {
     <SearchForm key={q} initial={q} onSearch={value => change('q', value)} />
     <div className="catalog-layout">
     <Filters values={params} facets={filters.result.status === 'success' ? filters.result.data : undefined}
-      onChange={change} clear={() => setParams({})} failed={filters.result.status === 'error'} retry={filters.retry} />
+      onChange={change} clear={clearFilters} failed={filters.result.status === 'error'} retry={filters.retry} />
     <section className="catalog-results" aria-labelledby="catalog-title"><div className="section-heading"><div>
       <h2 id="catalog-title">Explora alternativas</h2><p>Encuentra una opción para tu próximo paso.</p>
     </div>{result.status === 'success' && <span className="count" role="status">{result.data.total} {result.data.total === 1 ? 'alternativa' : 'alternativas'}</span>}</div>
@@ -51,9 +52,11 @@ export function CatalogPage() {
         {result.data.total === 0 ? <div className="empty-state"><span className="state-icon"><Icon name="search" /></span>
           <h2>{active.length ? 'No encontramos coincidencias' : 'El catálogo aún está vacío'}</h2>
           <p>{active.length ? 'Prueba con otro nombre o cambia los filtros de tu búsqueda.' : 'Las alternativas aparecerán cuando se importe información académica.'}</p>
-          {active.length > 0 && <button className="button primary" onClick={() => setParams({})}>Limpiar búsqueda y filtros</button>}
+          {active.length > 0 && <button className="button primary" onClick={clearFilters}>Limpiar búsqueda y filtros</button>}
         </div> : <>
-          <div className="career-grid">{result.data.items.map(c => <CareerCard key={c.id} career={c} search={returnSearch} />)}</div>
+          {result.data.items.length === 0 ? <div className="empty-state"><h2>Esta página no tiene resultados</h2>
+            <button className="button primary" onClick={() => change('pagina', '1')}>Volver a la primera página</button></div>
+            : <div className="career-grid">{result.data.items.map(c => <CareerCard key={c.id} career={c} search={returnSearch} />)}</div>}
           {result.data.total > 12 && <nav className="pagination" aria-label="Paginación del catálogo">
             <button className="button" disabled={page <= 1} onClick={() => setParams(prev => {
               const next = new URLSearchParams(prev); next.set('pagina', String(page - 1)); return next
