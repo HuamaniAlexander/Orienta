@@ -85,3 +85,15 @@ def test_analysis_http_and_unavailable_keeps_comparison(tmp_path):
             client.post("/api/comparaciones", json={"career_ids": ["C01", "C02"]}).status_code
             == 200
         )
+
+
+def test_expanded_catalog_is_analyzable_without_claiming_quality():
+    with TestClient(create_app(Settings(data_mode="demo"))) as client:
+        for code in range(20, 36):
+            response = client.post(
+                "/api/comparaciones/analisis",
+                json={"career_ids": ["C01", f"C{code}"], "preferences": {"budget_pen": 1000}},
+            )
+            assert response.status_code == 200, response.text
+            assert not response.json()["recommendation_training"]["quality_approved"]
+            assert len(response.json()["criteria_analysis"]) == 6

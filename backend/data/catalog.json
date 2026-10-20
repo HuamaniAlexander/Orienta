@@ -872,5 +872,821 @@
       }
     ],
     "active": true
+  },
+  {
+    "id": "C20",
+    "name": "Ingeniería Informática",
+    "institution": "PUCP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": null,
+    "duration_months": 60,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Desarrollo de software, análisis y auditoría de sistemas; gestión de proyectos informáticos.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026; 10 semestres equivalen a 60 meses académicos"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C21",
+    "name": "Ingeniería Civil",
+    "institution": "PUCP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": null,
+    "duration_months": 60,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Proyectos de infraestructura, construcción y consultoría.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026; 10 semestres equivalen a 60 meses académicos"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C22",
+    "name": "Ingeniería Industrial",
+    "institution": "PUCP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": null,
+    "duration_months": 60,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Operaciones, logística y gestión de organizaciones.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026; 10 semestres equivalen a 60 meses académicos"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C23",
+    "name": "Economía",
+    "institution": "PUCP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": null,
+    "duration_months": 60,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Políticas económicas, asesoría e investigación económica.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.pucp.edu.pe/carrera/economia/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.pucp.edu.pe/carrera/economia/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026; 10 semestres equivalen a 60 meses académicos"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.pucp.edu.pe/carrera/economia/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://www.pucp.edu.pe/carrera/economia/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://www.pucp.edu.pe/carrera/economia/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.pucp.edu.pe/carrera/economia/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.pucp.edu.pe/carrera/economia/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C24",
+    "name": "Ingeniería Civil",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Construcción y proyectos de estructuras, hidráulica, suelos y transporte.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C25",
+    "name": "Ingeniería Industrial",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Mejora de operaciones, procesos y logística empresarial.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C26",
+    "name": "Ingeniería de Sistemas",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Diseño de sistemas de información y soluciones para organizaciones.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C27",
+    "name": "Arquitectura",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Diseño arquitectónico, construcción y planificación urbana.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C28",
+    "name": "Ingeniería Química",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": null,
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C29",
+    "name": "Física",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": null,
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C30",
+    "name": "Matemática",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": null,
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C31",
+    "name": "Ciencia de la Computación",
+    "institution": "UNI",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": null,
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+        "status": "Pendiente de confirmar para esta oferta"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C32",
+    "name": "Medicina",
+    "institution": "UPC",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": null,
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+        "status": "Pendiente de confirmar para esta oferta"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C33",
+    "name": "Ingeniería Industrial",
+    "institution": "UPC",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": 60,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": null,
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026; 10 semestres equivalen a 60 meses académicos"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+        "status": "Pendiente de confirmar para esta oferta"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C34",
+    "name": "Ingeniería de Software (EPE)",
+    "institution": "UPC",
+    "training_type": "Universitaria",
+    "modality": "A distancia",
+    "location": null,
+    "duration_months": 60,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": null,
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026; 10 semestres equivalen a 60 meses académicos"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+        "status": "Pendiente de confirmar para esta oferta"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C35",
+    "name": "Hotelería y Administración",
+    "institution": "UPC",
+    "training_type": "Universitaria",
+    "modality": null,
+    "location": null,
+    "duration_months": null,
+    "monthly_cost_pen": null,
+    "requirements": null,
+    "employment": "Gestión de operaciones y servicios hoteleros.",
+    "reviewed_on": "2026-10-20",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Ubicación",
+        "reference": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+        "status": "Pendiente de confirmar para esta oferta"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+        "status": "Verificado: ficha oficial consultada el 20/10/2026"
+      }
+    ],
+    "active": true
   }
 ]

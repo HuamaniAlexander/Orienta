@@ -124,3 +124,9 @@ Frontend separa tipos/reglas, acceso HTTP, estado de aplicación, componentes y 
 una entrega futura. No hay despliegue de producción ni release. La trazabilidad y
 las limitaciones académicas se documentan en `docs/`; las pruebas de usabilidad reales,
 matrices ponderadas y revisión institucional siguen pendientes del equipo.
+# Actualización del catálogo y recomendaciones
+
+El catálogo contiene 35 ofertas de cinco universidades. Los logos y nombres completos aparecen en catálogo, fichas y comparación. La comparación acepta preferencias y explica sus seis criterios con motivos y fuentes.
+
+El entrenamiento supervisado por criterio y su protocolo están en [docs/entrenamiento-recomendaciones.md](docs/entrenamiento-recomendaciones.md). El piloto requiere revisión humana; no se han generado etiquetas ni porcentajes ficticios. La evaluación actual del clasificador de áreas está en [docs/evaluacion-catalogo-ampliado.md](docs/evaluacion-catalogo-ampliado.md). Las cifras de 19 ofertas que siguen en este documento corresponden al alcance histórico inicial.
+

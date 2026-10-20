@@ -17,10 +17,13 @@ def client():
 def test_catalog_search_pagination_filters_detail():
     with client() as c:
         data = c.get("/api/carreras").json()
-        assert data["total"] == 19 and len(data["items"]) == 12
+        assert data["total"] == 35 and len(data["items"]) == 12
         assert data["data_mode"] == "demo"
         second = c.get("/api/carreras?pagina=2").json()
-        assert len(second["items"]) == 7
+        assert len(second["items"]) == 12
+        assert len(c.get("/api/carreras?pagina=3").json()["items"]) == 11
+        assert c.get("/api/carreras/C20").json()["institution"] == "PUCP"
+        assert c.get("/api/carreras/C24").json()["monthly_cost_pen"] is None
         assert not {r["id"] for r in data["items"]} & {r["id"] for r in second["items"]}
         result = c.get(
             "/api/carreras",

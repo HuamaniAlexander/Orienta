@@ -171,7 +171,7 @@ def train(catalog: Path, metadata_path: Path, output: Path):
         compress=3,
     )
     report = {
-        "version": "1.1.0",
+        "version": "1.2.0",
         "seed": 42,
         "sklearn_version": sklearn.__version__,
         "catalog_sha256": sha256(catalog.read_bytes()).hexdigest(),
@@ -191,7 +191,8 @@ def train(catalog: Path, metadata_path: Path, output: Path):
         "baseline": metrics(y_test, baseline.predict(x_test)),
         "metadata": {c.id: metadata[c.id] | {"signature": signature(c)} for c in careers},
         "limitations": [
-            "19 ofertas de dos instituciones; muestra pequeña y sin validación vocacional.",
+            f"{len(careers)} ofertas de {len({c.institution for c in careers})} instituciones; "
+            "muestra pequeña y sin validación vocacional.",
             "Costo, duración y modalidad no describen suficientemente el área académica.",
             "Los costos estimados no son tarifas oficiales ni costos totales.",
             "La similitud de contenido no mide aptitudes, preferencias ni empleabilidad.",
