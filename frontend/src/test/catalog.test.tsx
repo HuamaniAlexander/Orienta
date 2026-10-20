@@ -26,7 +26,7 @@ describe('Catálogo HU01', () => {
     show()
     expect(await screen.findByRole('heading', { name: career.name })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Ver ficha/ })).toHaveAttribute('href', '/carreras/C01')
-    expect(screen.getByText(/Demostración con datos/)).toBeInTheDocument()
+    expect(screen.queryByText(/Demostración con datos/)).not.toBeInTheDocument()
   })
   it('muestra carga mientras espera', () => {
     vi.stubGlobal('fetch', vi.fn(() => new Promise(() => {})))

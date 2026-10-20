@@ -48,8 +48,6 @@ export function CatalogPage() {
       {result.status === 'loading' && <Loading />}
       {result.status === 'error' && <ErrorState retry={retry} />}
       {result.status === 'success' && <>
-        {result.data.data_mode === 'demo' && <div className="demo-notice"><Icon name="info" />
-          Demostración con datos de la PoC. Los estados de verificación corresponden al archivo fuente.</div>}
         {result.data.total === 0 ? <div className="empty-state"><span className="state-icon"><Icon name="search" /></span>
           <h2>{active.length ? 'No encontramos coincidencias' : 'El catálogo aún está vacío'}</h2>
           <p>{active.length ? 'Prueba con otro nombre o cambia los filtros de tu búsqueda.' : 'Las alternativas aparecerán cuando se importe información académica.'}</p>
