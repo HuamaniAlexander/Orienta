@@ -1,0 +1,876 @@
+[
+  {
+    "id": "C01",
+    "name": "Ingeniería de Sistemas e Informática",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Software, redes y gestión de datos",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Referencia del usuario del 13/10/2026",
+        "status": "Estimado: referencia S/ 775 aportada por el usuario; no tarifa institucional"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C02",
+    "name": "Administración de Empresas",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Gestión de empresas, operaciones y planificación",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Referencia del usuario del 13/10/2026",
+        "status": "Estimado: referencia S/ 775 aportada por el usuario; no tarifa institucional"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C03",
+    "name": "Ingeniería Industrial",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Producción, procesos y gestión de operaciones",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Referencia del usuario del 13/10/2026",
+        "status": "Estimado: referencia S/ 775 aportada por el usuario; no tarifa institucional"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C04",
+    "name": "Ingeniería de Software",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Desarrollo y mantenimiento de software",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Referencia del usuario del 13/10/2026",
+        "status": "Estimado: referencia S/ 775 aportada por el usuario; no tarifa institucional"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C05",
+    "name": "Ingeniería de Sistemas",
+    "institution": "UNMSM",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Lima",
+    "duration_months": 60,
+    "monthly_cost_pen": "0",
+    "requirements": "Secundaria completa; aprobar proceso de admisión y alcanzar vacante",
+    "employment": "Sistemas de información, gestión y tecnologías de información",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+        "status": "Estimado para esta ficha: presencial; confirmar modalidad en la escuela"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://sum.unmsm.edu.pe/assets/ReglamentoCompleto/reglamentoMatricula.pdf",
+        "status": "Verificado: enseñanza gratuita para una primera carrera; no incluye trámites ni manutención"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://viceacademico.unmsm.edu.pe/?page_id=5167",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C06",
+    "name": "Ingeniería de Software",
+    "institution": "UNMSM",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Lima",
+    "duration_months": 60,
+    "monthly_cost_pen": "0",
+    "requirements": "Secundaria completa; aprobar proceso de admisión y alcanzar vacante",
+    "employment": "Ingeniería y desarrollo de software",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+        "status": "Estimado para esta ficha: presencial; confirmar modalidad en la escuela"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://sum.unmsm.edu.pe/assets/ReglamentoCompleto/reglamentoMatricula.pdf",
+        "status": "Verificado: enseñanza gratuita para una primera carrera; no incluye trámites ni manutención"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://viceacademico.unmsm.edu.pe/?page_id=5167",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C07",
+    "name": "Administración",
+    "institution": "UNMSM",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Lima",
+    "duration_months": 60,
+    "monthly_cost_pen": "0",
+    "requirements": "Secundaria completa; aprobar proceso de admisión y alcanzar vacante",
+    "employment": "Planificación, dirección y control de organizaciones",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+        "status": "Estimado para esta ficha: presencial; confirmar modalidad en la escuela"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://sum.unmsm.edu.pe/assets/ReglamentoCompleto/reglamentoMatricula.pdf",
+        "status": "Verificado: enseñanza gratuita para una primera carrera; no incluye trámites ni manutención"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://viceacademico.unmsm.edu.pe/?page_id=5167",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C08",
+    "name": "Psicología",
+    "institution": "UNMSM",
+    "training_type": "Universitaria",
+    "modality": "Semipresencial",
+    "location": "Lima",
+    "duration_months": 60,
+    "monthly_cost_pen": "0",
+    "requirements": "Secundaria completa; aprobar proceso de admisión y alcanzar vacante",
+    "employment": "Evaluación, intervención psicológica y bienestar social",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://sum.unmsm.edu.pe/assets/ReglamentoCompleto/reglamentoMatricula.pdf",
+        "status": "Verificado: enseñanza gratuita para una primera carrera; no incluye trámites ni manutención"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://viceacademico.unmsm.edu.pe/?page_id=5167",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C09",
+    "name": "Psicología Organizacional y de la Gestión Humana",
+    "institution": "UNMSM",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Lima",
+    "duration_months": 60,
+    "monthly_cost_pen": "0",
+    "requirements": "Secundaria completa; aprobar proceso de admisión y alcanzar vacante",
+    "employment": "Gestión del talento, clima y desarrollo organizacional",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+        "status": "Estimado para esta ficha: presencial; confirmar modalidad en la escuela"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://sum.unmsm.edu.pe/assets/ReglamentoCompleto/reglamentoMatricula.pdf",
+        "status": "Verificado: enseñanza gratuita para una primera carrera; no incluye trámites ni manutención"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://viceacademico.unmsm.edu.pe/?page_id=5167",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C10",
+    "name": "Medicina Humana",
+    "institution": "UNMSM",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Lima",
+    "duration_months": 84,
+    "monthly_cost_pen": "0",
+    "requirements": "Secundaria completa; aprobar proceso de admisión y alcanzar vacante",
+    "employment": "Atención integral de salud, prevención y gestión de servicios",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://medicina.unmsm.edu.pe/escuelas-profesionales/medicina-humana/",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.gob.pe/institucion/unmsm/normas-legales/7922449-003766-2026-r-unmsm",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://medicina.unmsm.edu.pe/escuelas-profesionales/medicina-humana/",
+        "status": "Estimado para esta ficha: presencial; confirmar modalidad en la escuela"
+      },
+      {
+        "field": "Costo",
+        "reference": "https://sum.unmsm.edu.pe/assets/ReglamentoCompleto/reglamentoMatricula.pdf",
+        "status": "Verificado: enseñanza gratuita para una primera carrera; no incluye trámites ni manutención"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://viceacademico.unmsm.edu.pe/?page_id=5167",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://medicina.unmsm.edu.pe/escuelas-profesionales/medicina-humana/",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C11",
+    "name": "Contabilidad",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Contabilidad financiera, auditoría y tributación",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C12",
+    "name": "Psicología",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Evaluación, intervención psicológica y bienestar",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C13",
+    "name": "Derecho",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Asesoría jurídica, litigación y gestión legal",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C14",
+    "name": "Arquitectura",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Diseño arquitectónico y planificación de espacios",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C15",
+    "name": "Enfermería",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Presencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Cuidado de la salud, atención y promoción de la salud",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C16",
+    "name": "Ingeniería de Sistemas e Informática",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Virtual",
+    "location": "Virtual",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Software, redes y gestión de datos",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C17",
+    "name": "Ingeniería de Sistemas e Informática",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Semipresencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Software, redes y gestión de datos",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C18",
+    "name": "Administración de Empresas",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Virtual",
+    "location": "Virtual",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Gestión de empresas, operaciones y planificación",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "C19",
+    "name": "Administración de Empresas",
+    "institution": "UTP",
+    "training_type": "Universitaria",
+    "modality": "Semipresencial",
+    "location": "Campus Lima Norte",
+    "duration_months": 60,
+    "monthly_cost_pen": "775",
+    "requirements": "Secundaria completa; ficha de inscripción; DNI; pago de admisión; certificado de estudios; proceso de admisión",
+    "employment": "Gestión de empresas, operaciones y planificación",
+    "reviewed_on": "2026-10-13",
+    "sources": [
+      {
+        "field": "Carrera",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Duración",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Modalidad",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+        "status": "Verificado"
+      },
+      {
+        "field": "Costo",
+        "reference": "Estimación de trabajo a partir del importe referencial del usuario",
+        "status": "Estimado para la PoC: S/ 775 como referencia de trabajo; no tarifario oficial"
+      },
+      {
+        "field": "Requisitos",
+        "reference": "https://www.utp.edu.pe/web/egrese-del-colegio-deseo-postular",
+        "status": "Según PoC; sin verificar"
+      },
+      {
+        "field": "Campo laboral",
+        "reference": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+        "status": "Según PoC; sin verificar"
+      }
+    ],
+    "active": true
+  }
+]
