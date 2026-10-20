@@ -2,6 +2,7 @@ import { BrowserRouter, Link, NavLink, Route, Routes, useLocation } from 'react-
 import { useEffect, useRef } from 'react'
 import { Icon } from './components/Icon'
 import { CatalogPage } from './pages/CatalogPage'
+import { CareerPage } from './pages/CareerPage'
 
 function Layout() {
   const { pathname } = useLocation()
@@ -19,6 +20,7 @@ function Layout() {
     </div></header>
     <main id="contenido" ref={main} tabIndex={-1} className="page-shell"><Routes>
       <Route path="/" element={<CatalogPage />} />
+      <Route path="/carreras/:id" element={<CareerPage />} />
       <Route path="*" element={<section className="empty-state"><h1>Página no disponible</h1><Link to="/" className="button primary">Volver a explorar</Link></section>} />
     </Routes></main>
     <footer className="site-footer"><span className="footer-brand">ORIENTA</span><span>Información clara para tu próximo paso.</span><span>MVP 1 · Proyecto académico UTP</span></footer>

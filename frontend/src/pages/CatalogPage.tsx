@@ -39,7 +39,7 @@ export function CatalogPage() {
       onChange={change} clear={() => setParams({})} failed={filters.result.status === 'error'} retry={filters.retry} />
     <section className="catalog-results" aria-labelledby="catalog-title"><div className="section-heading"><div>
       <h2 id="catalog-title">Explora alternativas</h2><p>Encuentra una opción para tu próximo paso.</p>
-    </div>{result.status === 'success' && <span className="count" role="status">{result.data.total} alternativas</span>}</div>
+    </div>{result.status === 'success' && <span className="count" role="status">{result.data.total} {result.data.total === 1 ? 'alternativa' : 'alternativas'}</span>}</div>
       {active.length > 0 && <div className="active-filters" aria-label="Filtros activos">
         {active.map(key => <button key={key} onClick={() => change(key, '')}
           aria-label={`Quitar ${key === 'q' ? 'búsqueda' : filterNames[key as keyof typeof filterNames]}: ${params.get(key)}`}>
