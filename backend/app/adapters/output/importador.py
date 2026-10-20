@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
 from app.adapters.output.excel import leer_carreras
@@ -19,7 +19,12 @@ def importar_libro(ruta: Path, sesion: Session) -> dict[str, int | bool]:
 
 
 def importar_carreras(
-    carreras: list[Carrera], huella_contenido: str, nombre_archivo: str, sesion: Session
+    carreras: list[Carrera],
+    huella_contenido: str,
+    nombre_archivo: str,
+    sesion: Session,
+    *,
+    sustituir_catalogo: bool = False,
 ) -> dict[str, int | bool]:
     if (
         not carreras
@@ -46,6 +51,8 @@ def importar_carreras(
         )
         sesion.add(lote)
         sesion.flush()
+        if sustituir_catalogo:
+            sesion.execute(update(FilaCarrera).values(activa=False))
         for carrera in carreras:
             institucion = sesion.scalar(
                 select(FilaInstitucion).where(FilaInstitucion.nombre == carrera.institucion)
@@ -77,10 +84,20 @@ def importar_carreras(
                 "campo_laboral",
                 "fecha_revision",
                 "activa",
+                "detalles",
             ):
                 setattr(fila, clave, getattr(carrera, clave))
             fila.id_institucion = institucion.id
             fila.nombre_busqueda = normalizar(carrera.nombre)
+            fila.texto_busqueda = normalizar(
+                " ".join(
+                    [
+                        carrera.nombre,
+                        carrera.institucion,
+                        carrera.detalles.get("area_conocimiento", ""),
+                    ]
+                )
+            )
             fila.clave_identidad = clave_identidad
             fila.id_importacion = lote.id
             fila.fuentes = [

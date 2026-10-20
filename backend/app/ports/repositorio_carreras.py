@@ -14,6 +14,10 @@ class ConsultaCatalogo:
     ubicacion: str = ""
     pagina: int = 1
     limite: int = 12
+    gestion: str = ""
+    area: str = ""
+    institucion: str = ""
+    costo_maximo: float | None = None
 
     def __post_init__(self):
         if self.pagina < 1 or not 1 <= self.limite <= 100:

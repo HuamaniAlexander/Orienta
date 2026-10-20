@@ -2,6 +2,7 @@ from datetime import date, datetime
 from decimal import Decimal
 
 from sqlalchemy import (
+    JSON,
     Boolean,
     CheckConstraint,
     Date,
@@ -43,9 +44,10 @@ class FilaCarrera(Base):
         CheckConstraint("duracion_meses IS NULL OR duracion_meses > 0", name="ck_duration"),
         CheckConstraint("costo_mensual_soles IS NULL OR costo_mensual_soles >= 0", name="ck_cost"),
     )
-    id: Mapped[str] = mapped_column(String(30), primary_key=True)
+    id: Mapped[str] = mapped_column(String(150), primary_key=True)
     nombre: Mapped[str] = mapped_column(String(250))
-    nombre_busqueda: Mapped[str] = mapped_column(String(250))
+    nombre_busqueda: Mapped[str] = mapped_column(Text)
+    texto_busqueda: Mapped[str] = mapped_column(Text, default="", server_default="")
     clave_identidad: Mapped[str] = mapped_column(Text)
     id_institucion: Mapped[int] = mapped_column(ForeignKey("instituciones.id"))
     institucion: Mapped[FilaInstitucion] = relacion(lazy="joined")
@@ -59,6 +61,7 @@ class FilaCarrera(Base):
     fecha_revision: Mapped[date | None] = mapped_column(Date)
     activa: Mapped[bool] = mapped_column(Boolean, default=True)
     id_importacion: Mapped[int] = mapped_column(ForeignKey("importaciones.id"))
+    detalles: Mapped[dict] = mapped_column(JSON, default=dict, server_default="{}")
     fuentes: Mapped[list["FilaFuente"]] = relacion(
         cascade="all, delete-orphan", lazy="selectin", order_by="FilaFuente.id"
     )
@@ -67,7 +70,9 @@ class FilaCarrera(Base):
 class FilaFuente(Base):
     __tablename__ = "fuentes"
     id: Mapped[int] = mapped_column(primary_key=True)
-    id_oferta: Mapped[str] = mapped_column(ForeignKey("ofertas_academicas.id"), index=True)
+    id_oferta: Mapped[str] = mapped_column(
+        String(150), ForeignKey("ofertas_academicas.id"), index=True
+    )
     campo: Mapped[str] = mapped_column(String(80))
     referencia: Mapped[str | None] = mapped_column(Text)
     estado: Mapped[str] = mapped_column(Text)

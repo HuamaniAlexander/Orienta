@@ -8,6 +8,7 @@ from sqlalchemy import create_engine
 
 from alembic import command
 from app.adapters.output.excel import OBLIGATORIOS
+from app.adapters.output.modelos import Base
 
 
 @pytest.fixture
@@ -53,8 +54,14 @@ def base_datos(tmp_path, monkeypatch):
     url = os.getenv("TEST_DATABASE_URL", f"sqlite:///{tmp_path / 'test.db'}")
     monkeypatch.setenv("DATABASE_URL", url)
     config = Config("alembic.ini")
-    command.upgrade(config, "head")
     motor = create_engine(url)
+    if motor.dialect.name == "sqlite":
+        Base.metadata.create_all(motor)
+    else:
+        command.upgrade(config, "head")
     yield motor
+    if motor.dialect.name == "sqlite":
+        Base.metadata.drop_all(motor)
+    else:
+        command.downgrade(config, "base")
     motor.dispose()
-    command.downgrade(config, "base")

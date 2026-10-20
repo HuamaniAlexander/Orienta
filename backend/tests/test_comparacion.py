@@ -1,5 +1,6 @@
 from dataclasses import replace
 from decimal import Decimal
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -28,7 +29,11 @@ def test_dos_carreras_distintas_y_datos_faltantes(libro_datos):
 
 
 def test_contrato_comparacion():
-    with TestClient(crear_aplicacion(Configuracion(modo_datos="demo"))) as cliente:
+    with TestClient(
+        crear_aplicacion(
+            Configuracion(modo_datos="demo", ruta_catalogo_json=Path("data/catalogo.json"))
+        )
+    ) as cliente:
         for identificadores in [[], ["C01"], ["C01", "C01"], ["C01", "C02", "C03"]]:
             assert (
                 cliente.post("/api/comparaciones", json={"career_ids": identificadores}).status_code

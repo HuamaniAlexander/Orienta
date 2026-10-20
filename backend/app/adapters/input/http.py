@@ -62,7 +62,9 @@ def filtros(catalogo: Catalogo = Depends(obtener_catalogo)):
 
 
 @enrutador.get(
-    "/carreras", operation_id="careers_api_carreras_get", response_model=RespuestaCatalogo
+    "/carreras",
+    operation_id="careers_api_carreras_get",
+    response_model=RespuestaCatalogo,
 )
 def carreras(
     solicitud: Request,
@@ -70,12 +72,18 @@ def carreras(
     tipo: str = Query("", max_length=60),
     modalidad: str = Query("", max_length=100),
     ubicacion: str = Query("", max_length=200),
+    gestion: str = Query("", max_length=30),
+    area: str = Query("", max_length=200),
+    institucion: str = Query("", max_length=200),
+    costo_maximo: float | None = Query(None, ge=0, le=100000),
     pagina: int = Query(1, ge=1, le=10000),
     limite: int = Query(12, ge=1, le=100),
     catalogo: Catalogo = Depends(obtener_catalogo),
 ):
     elementos, total = catalogo.buscar(
-        ConsultaCatalogo(q, tipo, modalidad, ubicacion, pagina, limite)
+        ConsultaCatalogo(
+            q, tipo, modalidad, ubicacion, pagina, limite, gestion, area, institucion, costo_maximo
+        )
     )
     return RespuestaCatalogo(
         elementos=[RespuestaCarrera.model_validate(c) for c in elementos],
@@ -87,7 +95,14 @@ def carreras(
 
 
 @enrutador.get(
-    "/carreras/{id}", operation_id="detail_api_carreras__id__get", response_model=RespuestaCarrera
+    "/carreras/{id}",
+    operation_id="detail_api_carreras__id__get",
+    response_model=RespuestaCarrera,
 )
 def detalle(id: str, catalogo: Catalogo = Depends(obtener_catalogo)):
     return RespuestaCarrera.model_validate(catalogo.detalle(id))
+
+
+@enrutador.get("/instituciones")
+def instituciones(catalogo: Catalogo = Depends(obtener_catalogo)):
+    return catalogo.instituciones()

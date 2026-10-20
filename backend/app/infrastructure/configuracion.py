@@ -15,7 +15,7 @@ class Configuracion(BaseSettings):
         default="postgres", validation_alias=AliasChoices("modo_datos", "data_mode", "DATA_MODE")
     )
     ruta_catalogo_json: Path = Field(
-        default=Path(__file__).resolve().parents[2] / "data" / "catalogo.json",
+        default=Path(__file__).resolve().parents[2] / "data" / "catalogo_lima_norte_2026.json",
         validation_alias=AliasChoices("ruta_catalogo_json", "demo_path", "DEMO_PATH"),
     )
     directorio_modelos: Path = Field(

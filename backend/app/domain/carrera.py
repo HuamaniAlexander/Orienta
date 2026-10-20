@@ -1,7 +1,7 @@
 """Ofertas académicas sin dependencias de frameworks."""
 
 import unicodedata
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
 from decimal import Decimal
 
@@ -34,6 +34,7 @@ class Carrera:
     fecha_revision: date | None
     fuentes: tuple[Fuente, ...]
     activa: bool = True
+    detalles: dict = field(default_factory=dict)
 
     def __post_init__(self):
         if not all(v.strip() for v in (self.id, self.nombre, self.institucion)):

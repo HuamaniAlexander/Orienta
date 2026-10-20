@@ -16,6 +16,8 @@ from app.infrastructure.principal import crear_aplicacion
 
 
 def test_migracion_reversible_conserva_registros(base_datos, libro_datos):
+    if base_datos.dialect.name != "postgresql":
+        pytest.skip("Las migraciones de producción se verifican en PostgreSQL")
     with Session(base_datos) as sesion:
         importar_libro(libro_datos(), sesion)
         nombre = sesion.get(FilaCarrera, "C01").nombre
@@ -54,7 +56,11 @@ def test_respuestas_api_conservan_contrato_anterior(base_datos):
 
 
 def test_documentacion_y_errores_conservan_claves_externas():
-    with TestClient(crear_aplicacion(Configuracion(modo_datos="demo"))) as cliente:
+    with TestClient(
+        crear_aplicacion(
+            Configuracion(modo_datos="demo", ruta_catalogo_json=Path("data/catalogo.json"))
+        )
+    ) as cliente:
         esquema = cliente.get("/openapi.json").json()
         solicitud = esquema["components"]["schemas"]["SolicitudComparacion"]
         assert "career_ids" in solicitud["properties"]

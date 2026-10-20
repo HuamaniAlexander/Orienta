@@ -11,7 +11,11 @@ from app.ports.repositorio_carreras import ConsultaCatalogo
 
 
 def cliente():
-    return TestClient(crear_aplicacion(Configuracion(modo_datos="demo")))
+    return TestClient(
+        crear_aplicacion(
+            Configuracion(modo_datos="demo", ruta_catalogo_json=Path("data/catalogo.json"))
+        )
+    )
 
 
 def test_catalogo_busqueda_paginacion_filtros_ficha():
@@ -52,7 +56,9 @@ def test_retiradas_y_fallo_sql_sin_sustitucion():
     repo.carreras = [replace(repo.carreras[0], activa=False)]
     assert repo.listar(ConsultaCatalogo())[1] == 0
     assert repo.obtener("C01") is None
-    app = crear_aplicacion(Configuracion(modo_datos="demo"))
+    app = crear_aplicacion(
+        Configuracion(modo_datos="demo", ruta_catalogo_json=Path("data/catalogo.json"))
+    )
 
     def averiado():
         raise OperationalError("SECRET", {}, Exception("SECRET"))

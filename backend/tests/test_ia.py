@@ -55,7 +55,9 @@ def test_grupos_metricas_y_prediccion_simetrica():
 
 
 def test_analisis_http_y_fallo_conserva_comparacion(tmp_path):
-    app = crear_aplicacion(Configuracion(modo_datos="demo"))
+    app = crear_aplicacion(
+        Configuracion(modo_datos="demo", ruta_catalogo_json=Path("data/catalogo.json"))
+    )
     with TestClient(app) as cliente:
         respuesta = cliente.post("/api/comparaciones/analisis", json={"career_ids": ["C01", "C02"]})
         assert respuesta.status_code == 200, respuesta.text
@@ -93,7 +95,11 @@ def test_analisis_http_y_fallo_conserva_comparacion(tmp_path):
 
 
 def test_catalogo_ampliado_analizable_sin_afirmar_calidad():
-    with TestClient(crear_aplicacion(Configuracion(modo_datos="demo"))) as cliente:
+    with TestClient(
+        crear_aplicacion(
+            Configuracion(modo_datos="demo", ruta_catalogo_json=Path("data/catalogo.json"))
+        )
+    ) as cliente:
         for code in range(20, 36):
             respuesta = cliente.post(
                 "/api/comparaciones/analisis",

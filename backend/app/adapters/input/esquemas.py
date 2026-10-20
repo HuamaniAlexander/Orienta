@@ -38,6 +38,7 @@ class RespuestaCarrera(EsquemaContrato):
     campo_laboral: str | None
     fecha_revision: date | None
     fuentes: list[RespuestaFuente]
+    detalles: dict = Field(default_factory=dict, exclude_if=lambda valor: not valor)
 
 
 class RespuestaCatalogo(EsquemaContrato):

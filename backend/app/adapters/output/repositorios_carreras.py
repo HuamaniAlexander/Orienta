@@ -11,6 +11,12 @@ from app.adapters.output.modelos import FilaCarrera, FilaInstitucion
 from app.domain.carrera import Carrera, Fuente, normalizar
 from app.ports.repositorio_carreras import ConsultaCatalogo
 
+FACETAS_DETALLES = {
+    "gestion": "gestion",
+    "area": "area_conocimiento",
+    "institucion": "nombre_institucion",
+}
+
 FACETAS = {"tipo": "tipo_formacion", "modalidad": "modalidad", "ubicacion": "ubicacion"}
 
 
@@ -18,7 +24,13 @@ class RepositorioCarrerasJson:
     """Adaptador JSON explícito de solo lectura; no sustituye fallos de PostgreSQL."""
 
     def __init__(self, ruta: Path):
-        datos = internalizar_registro(json.loads(ruta.read_text(encoding="utf-8")))
+        contenido = json.loads(ruta.read_text(encoding="utf-8"))
+        if isinstance(contenido, dict) and "programas" in contenido:
+            from app.adapters.output.catalogo_completo import leer_catalogo_completo
+
+            self.carreras = leer_catalogo_completo(ruta)
+            return
+        datos = internalizar_registro(contenido)
         self.carreras = [
             Carrera(
                 **(
@@ -42,7 +54,19 @@ class RepositorioCarrerasJson:
             c
             for c in self.carreras
             if c.activa
-            and normalizar(consulta.q) in normalizar(c.nombre)
+            and normalizar(consulta.q)
+            in normalizar(
+                " ".join([c.nombre, c.institucion, c.detalles.get("area_conocimiento", "")])
+            )
+            and all(
+                not getattr(consulta, clave) or c.detalles.get(atributo) == getattr(consulta, clave)
+                for clave, atributo in FACETAS_DETALLES.items()
+            )
+            and (
+                consulta.costo_maximo is None
+                or c.costo_mensual_soles is not None
+                and c.costo_mensual_soles <= consulta.costo_maximo
+            )
             and all(
                 not getattr(consulta, clave) or getattr(c, atributo) == getattr(consulta, clave)
                 for clave, atributo in FACETAS.items()
@@ -61,6 +85,16 @@ class RepositorioCarrerasJson:
                 {getattr(c, atributo) for c in self.carreras if c.activa and getattr(c, atributo)}
             )
             for clave, atributo in FACETAS.items()
+        } | {
+            clave: sorted(
+                {
+                    c.detalles[atributo]
+                    for c in self.carreras
+                    if c.activa and c.detalles.get(atributo)
+                }
+            )
+            for clave, atributo in FACETAS_DETALLES.items()
+            if any(c.detalles.get(atributo) for c in self.carreras)
         }
 
 
@@ -78,6 +112,7 @@ def convertir_al_dominio(fila: FilaCarrera) -> Carrera:
         campo_laboral=fila.campo_laboral,
         fecha_revision=fila.fecha_revision,
         activa=fila.activa,
+        detalles=fila.detalles or {},
         fuentes=tuple(Fuente(s.campo, s.referencia, s.estado) for s in fila.fuentes),
     )
 
@@ -90,11 +125,18 @@ class RepositorioCarrerasSql:
         condiciones = [FilaCarrera.activa.is_(True)]
         if consulta.q.strip():
             condiciones.append(
-                FilaCarrera.nombre_busqueda.contains(normalizar(consulta.q), autoescape=True)
+                FilaCarrera.texto_busqueda.contains(normalizar(consulta.q), autoescape=True)
             )
         for clave, atributo in FACETAS.items():
             if getattr(consulta, clave):
                 condiciones.append(getattr(FilaCarrera, atributo) == getattr(consulta, clave))
+        for clave, atributo in FACETAS_DETALLES.items():
+            if getattr(consulta, clave):
+                condiciones.append(
+                    FilaCarrera.detalles[atributo].as_string() == getattr(consulta, clave)
+                )
+        if consulta.costo_maximo is not None:
+            condiciones.append(FilaCarrera.costo_mensual_soles <= consulta.costo_maximo)
         total = self.sesion.scalar(
             select(func.count()).select_from(FilaCarrera).where(*condiciones)
         )
@@ -115,6 +157,9 @@ class RepositorioCarrerasSql:
         return convertir_al_dominio(fila) if fila else None
 
     def facetas(self):
+        detalles = self.sesion.scalars(
+            select(FilaCarrera.detalles).where(FilaCarrera.activa.is_(True))
+        ).all()
         return {
             clave: list(
                 self.sesion.scalars(
@@ -127,4 +172,8 @@ class RepositorioCarrerasSql:
                 )
             )
             for clave, atributo in FACETAS.items()
+        } | {
+            clave: sorted({d[atributo] for d in detalles if d.get(atributo)})
+            for clave, atributo in FACETAS_DETALLES.items()
+            if any(d.get(atributo) for d in detalles)
         }
