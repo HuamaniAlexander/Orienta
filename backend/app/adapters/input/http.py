@@ -1,0 +1,44 @@
+from fastapi import APIRouter, Depends, Query, Request
+
+from app.adapters.input.schemas import CareerResponse, CatalogResponse
+from app.application.catalog import Catalog
+from app.infrastructure.dependencies import catalog_dependency
+from app.ports.careers import CatalogQuery
+
+router = APIRouter(prefix="/api")
+
+
+@router.get("/salud")
+def health(request: Request):
+    return {"status": "ok", "data_mode": request.app.state.settings.data_mode}
+
+
+@router.get("/filtros", response_model=dict[str, list[str]])
+def filters(catalog: Catalog = Depends(catalog_dependency)):
+    return catalog.filters()
+
+
+@router.get("/carreras", response_model=CatalogResponse)
+def careers(
+    request: Request,
+    q: str = Query("", max_length=150),
+    tipo: str = Query("", max_length=60),
+    modalidad: str = Query("", max_length=100),
+    ubicacion: str = Query("", max_length=200),
+    pagina: int = Query(1, ge=1, le=10000),
+    limite: int = Query(12, ge=1, le=100),
+    catalog: Catalog = Depends(catalog_dependency),
+):
+    items, total = catalog.search(CatalogQuery(q, tipo, modalidad, ubicacion, pagina, limite))
+    return CatalogResponse(
+        items=[CareerResponse.model_validate(c) for c in items],
+        total=total,
+        pagina=pagina,
+        limite=limite,
+        data_mode=request.app.state.settings.data_mode,
+    )
+
+
+@router.get("/carreras/{id}", response_model=CareerResponse)
+def detail(id: str, catalog: Catalog = Depends(catalog_dependency)):
+    return CareerResponse.model_validate(catalog.detail(id))

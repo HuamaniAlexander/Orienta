@@ -1,5 +1,6 @@
-from alembic import context
 from sqlalchemy import create_engine
+
+from alembic import context
 from app.adapters.output.models import Base
 from app.infrastructure.settings import Settings
 
