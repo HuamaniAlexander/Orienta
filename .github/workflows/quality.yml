@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [dev]
   push:
-    branches: [dev, feature/hu03-ficha-carrera]
+    branches: [dev, feature/hu03-ficha-carrera, feature/hu04-comparador, feature/hu05-vista-ligera, feature/hu-ia01-explicacion, feature/pruebas-pdca]
 permissions:
   contents: read
 jobs:
@@ -38,6 +38,7 @@ jobs:
           --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       TEST_DATABASE_URL: postgresql+psycopg://orienta:ephemeral-test-password@localhost:5432/orienta_test
+      DATABASE_URL: postgresql+psycopg://orienta:ephemeral-test-password@localhost:5432/orienta_test
     defaults:
       run:
         working-directory: backend
@@ -52,3 +53,8 @@ jobs:
       - run: python -m pip check
       - run: python -m ruff check app tests alembic
       - run: python -m pytest -q --basetemp=.pytest_tmp
+      - run: python -m alembic upgrade head
+      - run: python -m alembic check
+      - run: python -m app.infrastructure.seed_catalog
+      - run: python -m app.infrastructure.seed_catalog
+      - run: python -m app.infrastructure.train_models --output .local/retrained

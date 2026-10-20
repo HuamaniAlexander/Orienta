@@ -8,13 +8,25 @@ from sqlalchemy.orm import Session
 
 from app.adapters.output.excel import read_careers
 from app.adapters.output.models import CareerRow, ImportRow, InstitutionRow, SourceRow
-from app.domain.career import normalize
+from app.domain.career import Career, normalize
 
 
 def import_workbook(path: Path, session: Session) -> dict[str, int | bool]:
     # Validate every row before opening the write transaction.
     content_hash = sha256(path.read_bytes()).hexdigest()
     careers = read_careers(path)
+    return import_careers(careers, content_hash, path.name, session)
+
+
+def import_careers(
+    careers: list[Career], content_hash: str, filename: str, session: Session
+) -> dict[str, int | bool]:
+    if (
+        not careers
+        or len({c.id for c in careers}) != len(careers)
+        or len({c.identity for c in careers}) != len(careers)
+    ):
+        raise ValueError("El catálogo está vacío o contiene duplicados")
     with session.begin():
         # Serializes concurrent imports on PostgreSQL; unique constraints remain the final guard.
         if session.bind.dialect.name == "postgresql":
@@ -26,7 +38,7 @@ def import_workbook(path: Path, session: Session) -> dict[str, int | bool]:
             return {"rows": previous.row_count, "unchanged": True}
         batch = ImportRow(
             sha256=content_hash,
-            filename=path.name,
+            filename=filename,
             row_count=len(careers),
             imported_at=datetime.now(timezone.utc),
         )

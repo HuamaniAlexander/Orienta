@@ -13,7 +13,8 @@ function Layout() {
   const { ids } = useComparison()
   const main = useRef<HTMLElement>(null)
   useEffect(() => {
-    document.title = pathname.startsWith('/carreras/') ? 'Ficha académica | ORIENTA' : 'Explorar carreras | ORIENTA'
+    document.title = pathname.startsWith('/carreras/') ? 'Ficha académica | ORIENTA'
+      : pathname === '/comparar' ? 'Comparador | ORIENTA' : 'Explorar carreras | ORIENTA'
     main.current?.focus()
     window.scrollTo(0, 0)
   }, [pathname])

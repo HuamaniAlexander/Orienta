@@ -1,5 +1,8 @@
 # Primera mitad funcional de ORIENTA
 
+Este documento conserva el plan inicial. El pedido posterior amplió comparador e IA y
+autorizó fusionar los PR: consultar `ampliacion-alcance.md` y `modelo-ia.md` para la entrega actual.
+
 Alcance acordado por interpretación del pedido del 19/10/2026: HU01, HU02 y HU03,
 con persistencia e importación necesarias. Es aproximadamente la mitad del producto,
 no una certificación de 40 tarjetas completas ni de avance del tablero Trello.
