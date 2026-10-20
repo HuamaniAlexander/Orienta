@@ -1,4 +1,4 @@
-/* Local console fonts keep the interface legible without downloading web fonts. */
+/* Fuentes locales de consola para conservar la legibilidad sin descargas externas. */
 :root {
   font-family: "Cascadia Code", Consolas, "SFMono-Regular", "Liberation Mono", monospace;
   font-size: 16px;

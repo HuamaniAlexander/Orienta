@@ -1,24 +1,25 @@
-export class ApiError extends Error {
-  status: number
-  constructor(status: number, message: string) {
-    super(message)
-    this.status = status
+import { internalizarRespuesta, externalizarSolicitud } from './contratosApi'
+export class ErrorApi extends Error {
+  estado: number
+  constructor(estado: number, mensaje: string) {
+    super(mensaje)
+    this.estado = estado
   }
 }
 
 const base = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 
-export async function readApi<T>(path: string, signal: AbortSignal, body?: unknown): Promise<T> {
-  const response = await fetch(`${base}/api${path}`, {
-    signal: AbortSignal.any([signal, AbortSignal.timeout(12000)]),
-    method: body === undefined ? 'GET' : 'POST',
-    body: body === undefined ? undefined : JSON.stringify(body),
-    headers: { Accept: 'application/json', ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },
+export async function consultarApi<T>(ruta: string, senal: AbortSignal, cuerpo?: unknown): Promise<T> {
+  const respuesta = await fetch(`${base}/api${ruta}`, {
+    signal: AbortSignal.any([senal, AbortSignal.timeout(12000)]),
+    method: cuerpo === undefined ? 'GET' : 'POST',
+    body: cuerpo === undefined ? undefined : JSON.stringify(externalizarSolicitud(cuerpo)),
+    headers: { Accept: 'application/json', ...(cuerpo === undefined ? {} : { 'Content-Type': 'application/json' }) },
   })
-  if (!response.ok) {
-    throw new ApiError(response.status, response.status === 404
+  if (!respuesta.ok) {
+    throw new ErrorApi(respuesta.status, respuesta.status === 404
       ? 'Esta oferta no está disponible.'
       : 'No pudimos consultar la información. Inténtalo nuevamente.')
   }
-  return response.json() as Promise<T>
+  return internalizarRespuesta<T>(await respuesta.json())
 }

@@ -1,15 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import './catalog.css'
-import './detail.css'
-import './comparison.css'
-import './analysis.css'
-import './typography.css'
-import App from './App.tsx'
+import './catalogo.css'
+import './ficha.css'
+import './comparacion.css'
+import './analisis.css'
+import './tipografia.css'
+import Aplicacion from './Aplicacion'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <Aplicacion />
   </StrictMode>,
 )
