@@ -2,7 +2,7 @@
 
 Plataforma de orientación académica para jóvenes de Lima Norte. Permite explorar carreras, buscar y filtrar ofertas, consultar fichas con fuentes y comparar exactamente dos opciones sin crear una cuenta.
 
-El catálogo contiene **35 ofertas de cinco universidades**. Compara duración, modalidad, ubicación, costo mensual, requisitos y campo laboral, con logos, nombres completos y fuentes.
+El catálogo entregado contiene **405 ofertas académicas, 196 carreras distintas y 25 instituciones** (14 universidades y 11 institutos). Compara duración, modalidad, ubicación, costo mensual, requisitos y campo laboral, con nombres completos, fuentes y marcas institucionales disponibles. Incluye filtros por gestión, distrito, área e institución y la página de instituciones.
 
 ## Stack tecnológico
 
@@ -81,7 +81,9 @@ En este equipo preparado, `.\scripts\Iniciar-Orienta.ps1` inicia los servicios l
 
 ## Inteligencia artificial: estado real
 
-**Implementado:** entrenamiento Python de árbol de decisión, random forest y regresión logística con validación y prueba separadas. El modelo entrenado distingue «misma área / áreas distintas». Las ofertas relacionadas usan similitud de contenido; las orientaciones y sus motivos se construyen a partir de las fichas.
+**Catálogo ampliado:** se conserva íntegro en `backend/data/catalogo_lima_norte_2026.json`. La carga es idempotente y retira de la publicación las 35 ofertas históricas sin borrarlas. Los costos, ingresos y sedes modeladas conservan su procedencia; no son tarifas ni salarios certificados. Consulta la [integración del catálogo](docs/catalogo-completo.md).
+
+**Implementado:** entrenamiento Python de árbol de decisión, random forest y regresión logística con validación y prueba separadas. El modelo histórico, entrenado con 35 ofertas, distingue «misma área / áreas distintas»; no se aplica a las 405 ofertas nuevas sin reentrenamiento y evaluación. Las ofertas relacionadas usan similitud de contenido; las orientaciones y sus motivos se construyen a partir de las fichas.
 
 **Pendiente:** completar las etiquetas revisadas por dos personas y validar el recomendador por criterio según preferencias. Su entrenamiento e integración están preparados; requieren superar el 90% en las cuatro métricas de prueba de cada criterio. Actualmente no hay un recomendador aprendido aprobado. Las explicaciones también necesitan revisión humana.
 
@@ -91,7 +93,7 @@ Desde `backend`, `python -m app.infrastructure.entrenar_modelos` reproduce el cl
 
 - Frontend, desde `frontend`: `npm test`, `npm run lint`, `npm run build`.
 - Backend, desde `backend`: `python -m pytest -q --basetemp=.pytest_tmp` y `python -m ruff check app tests alembic`, usando el entorno virtual.
-- Para integración real con PostgreSQL, configura `TEST_DATABASE_URL` con una **base exclusiva de pruebas**: las pruebas modifican su esquema. Sin ella se utiliza SQLite temporal.
+- Para integración real con PostgreSQL, configura `TEST_DATABASE_URL` con una **base exclusiva de pruebas**: las pruebas modifican su esquema. Sin ella se utiliza SQLite temporal para comportamiento SQL; las pruebas de migraciones y contratos completos requieren PostgreSQL.
 - `feature/*` agrupa cambios concretos; los PR se dirigen a `dev`. `main` se reserva para entregas estables. Mantén commits pequeños y verificables.
 
 Se versionan catálogos curados, modelo de ejecución, métricas, migraciones, pruebas, configuración compartida, `.env.example` y dependencias/bloqueos. Se ignoran secretos, cachés y experimentos generados. Más contexto en [docs/](docs/).

@@ -1,3 +1,5 @@
+> Registro del catálogo histórico de 35 ofertas. El catálogo vigente contiene 405 ofertas: [integración completa](catalogo-completo.md).
+
 # Catálogo ampliado e identidad institucional
 
 Revisión del 20/10/2026. Se conservan las 19 ofertas originales y se incorporan 16: cuatro de la Pontificia Universidad Católica del Perú, ocho de la Universidad Nacional de Ingeniería y cuatro de la Universidad Peruana de Ciencias Aplicadas. Total: 35 ofertas y cinco universidades; dos públicas y tres privadas.

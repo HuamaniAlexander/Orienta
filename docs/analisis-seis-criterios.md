@@ -1,4 +1,4 @@
-> Registro histórico del catálogo de 19 ofertas (v1.1). Para el catálogo actual de 35 ofertas, consultar [evaluación ampliada](evaluacion-catalogo-ampliado.md).
+> Registro histórico del catálogo de 19 ofertas (v1.1). Para el catálogo vigente de 405 ofertas, consultar [integración completa](catalogo-completo.md).
 
 # Análisis de los seis criterios
 

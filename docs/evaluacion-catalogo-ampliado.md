@@ -1,3 +1,5 @@
+> Registro del catálogo histórico de 35 ofertas. El catálogo vigente contiene 405 ofertas: [integración completa](catalogo-completo.md).
+
 # Evaluación con catálogo ampliado
 
 Clasificador de áreas v1.2.0, 35 ofertas de cinco instituciones. Evaluación nueva con grupos de disciplinas separados y semilla 42. El conjunto de prueba cambió respecto a v1.1; las cifras no miden una mejora sobre un mismo benchmark.
