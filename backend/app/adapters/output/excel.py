@@ -68,7 +68,9 @@ def read_careers(path: Path) -> list[Career]:
                     Source(
                         field,
                         text(row.get(reference)),
-                        text(row.get(status)) if status else "Según PoC; sin verificar",
+                        (text(row.get(status)) or "Sin estado registrado")
+                        if status
+                        else "Según PoC; sin verificar",
                     )
                     for field, reference, status in [
                         ("Carrera", "fuente_carrera", None),
@@ -76,7 +78,7 @@ def read_careers(path: Path) -> list[Career]:
                         ("Modalidad", "fuente_carrera", "estado_modalidad"),
                         ("Costo", "fuente_costo", "estado_costo"),
                         ("Requisitos", "fuente_requisitos", None),
-                        ("Campo laboral", "fuente_carrera", None),
+                        ("Campo laboral", "fuente_campo_laboral", None),
                     ]
                 )
                 career = Career(

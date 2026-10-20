@@ -39,7 +39,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -85,7 +85,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -131,7 +131,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -177,7 +177,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -223,7 +223,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -269,7 +269,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -315,7 +315,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -361,7 +361,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -407,7 +407,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -453,7 +453,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://medicina.unmsm.edu.pe/escuelas-profesionales/medicina-humana/",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -499,7 +499,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -545,7 +545,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -591,7 +591,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -637,7 +637,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -683,7 +683,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -729,7 +729,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -775,7 +775,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -821,7 +821,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
@@ -867,7 +867,7 @@
       },
       {
         "field": "Campo laboral",
-        "reference": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+        "reference": null,
         "status": "Según PoC; sin verificar"
       }
     ],
