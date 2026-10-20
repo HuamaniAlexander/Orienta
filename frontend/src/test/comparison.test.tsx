@@ -22,9 +22,9 @@ describe('Comparación HU04', () => {
   it('selecciona dos, impide una tercera y conserva la selección en sesión', async () => {
     show()
     const user = userEvent.setup()
-    await user.click(screen.getAllByRole('button', { name: 'Comparar', exact: true })[0])
-    await user.click(screen.getAllByRole('button', { name: 'Comparar', exact: true })[0])
-    await user.click(screen.getByRole('button', { name: 'Comparar', exact: true }))
+    await user.click(screen.getAllByRole('button', { name: 'Comparar' })[0])
+    await user.click(screen.getAllByRole('button', { name: 'Comparar' })[0])
+    await user.click(screen.getByRole('button', { name: 'Comparar' }))
     expect(await screen.findByRole('alert')).toHaveTextContent('Ya elegiste dos')
     expect(JSON.parse(sessionStorage.getItem('orienta-comparison')!)).toEqual(['C01', 'C02'])
     await user.click(screen.getByRole('link', { name: /Comparar alternativas/ }))
