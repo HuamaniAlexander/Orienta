@@ -57,7 +57,7 @@ const camposExternos = Object.fromEntries(Object.entries(camposInternos).map(([e
 function traducirClaves(valor: unknown, campos: Record<string, string>): unknown {
   if (Array.isArray(valor)) return valor.map(elemento => traducirClaves(elemento, campos))
   if (valor !== null && typeof valor === 'object') return Object.fromEntries(
-    Object.entries(valor).map(([clave, contenido]) => [campos[clave] || clave, traducirClaves(contenido, campos)]))
+    Object.entries(valor).map(([clave, contenido]) => [campos[clave] || clave, clave === "detalles" ? contenido : traducirClaves(contenido, campos)]))
   return valor
 }
 export const internalizarRespuesta = <T,>(valor: unknown): T => traducirClaves(valor, camposInternos) as T

@@ -6,6 +6,7 @@ import './ficha.css'
 import './comparacion.css'
 import './analisis.css'
 import './tipografia.css'
+import './referencia.css'
 import Aplicacion from './Aplicacion'
 
 createRoot(document.getElementById('root')!).render(

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "upn",
+    "nombre": "Universidad Privada del Norte",
+    "archivo": "upn-oficial.svg",
+    "fuente": "https://www.upn.edu.pe/sites/default/files/logo-upn-nuevo.svg",
+    "sitio_web": "https://www.upn.edu.pe"
+  },
+  {
+    "id": "ucv",
+    "nombre": "Universidad César Vallejo",
+    "archivo": "ucv-marca.ico",
+    "fuente": "https://www.ucv.edu.pe/favicon.ico",
+    "sitio_web": "https://www.ucv.edu.pe"
+  },
+  {
+    "id": "continental",
+    "nombre": "Universidad Continental",
+    "archivo": "continental-oficial.svg",
+    "fuente": "https://ucontinental.edu.pe/site/wp-content/themes/salient-child/img/logo.svg",
+    "sitio_web": "https://ucontinental.edu.pe"
+  },
+  {
+    "id": "uch",
+    "nombre": "Universidad de Ciencias y Humanidades",
+    "archivo": "uch-oficial.webp",
+    "fuente": "https://www.uch.edu.pe/assets/img/logo.webp",
+    "sitio_web": "https://www.uch.edu.pe"
+  },
+  {
+    "id": "ucss",
+    "nombre": "Universidad Católica Sedes Sapientiae",
+    "archivo": "ucss-marca.png",
+    "fuente": "https://www.ucss.edu.pe/templates/gk_gamenews/images/logo.png",
+    "sitio_web": "https://www.ucss.edu.pe"
+  },
+  {
+    "id": "cientifica",
+    "nombre": "Universidad Científica del Sur",
+    "archivo": "cientifica-oficial.svg",
+    "fuente": "https://www.cientifica.edu.pe/wp-content/uploads/2023/08/logo-cientifica.svg",
+    "sitio_web": "https://www.cientifica.edu.pe"
+  },
+  {
+    "id": "usil",
+    "nombre": "Universidad San Ignacio de Loyola",
+    "archivo": "usil-marca.webp",
+    "fuente": "https://d31935m4eumln1.cloudfront.net/wp-content/uploads/2025/07/10202044/usil_favicon-300x300.webp",
+    "sitio_web": "https://usil.edu.pe"
+  },
+  {
+    "id": "wiener",
+    "nombre": "Universidad Privada Norbert Wiener",
+    "archivo": "wiener-oficial.svg",
+    "fuente": "https://www.uwiener.edu.pe/wp-content/themes/unw/upload/unw-logo.svg",
+    "sitio_web": "https://www.uwiener.edu.pe"
+  },
+  {
+    "id": "unac",
+    "nombre": "Universidad Nacional del Callao",
+    "archivo": "unac-marca.png",
+    "fuente": "https://unac.edu.pe/wp-content/uploads/2024/01/logo_web.png",
+    "sitio_web": "https://unac.edu.pe"
+  },
+  {
+    "id": "cueto",
+    "nombre": "IESTP Carlos Cueto Fernandini",
+    "archivo": "cueto-marca.png",
+    "fuente": "https://carloscueto.edu.pe/wp/wp-content/uploads/2025/12/cropped-ccf_logo_favicon-192x192.png",
+    "sitio_web": "https://carloscueto.edu.pe"
+  },
+  {
+    "id": "cibertec",
+    "nombre": "Cibertec",
+    "archivo": "cibertec-marca.svg",
+    "fuente": "https://cdn.cibertec.edu.pe/www/logo.svg",
+    "sitio_web": "https://www.cibertec.edu.pe"
+  },
+  {
+    "id": "idat",
+    "nombre": "IDAT",
+    "archivo": "idat-oficial.png",
+    "fuente": "https://www.idat.edu.pe/sites/default/files/favicon-idat.png",
+    "sitio_web": "https://www.idat.edu.pe"
+  },
+  {
+    "id": "certus",
+    "nombre": "CERTUS",
+    "archivo": "certus-oficial.png",
+    "fuente": "https://www.certus.edu.pe/wp-content/uploads/2021/10/logo-certus-1.png",
+    "sitio_web": "https://www.certus.edu.pe"
+  },
+  {
+    "id": "zegel",
+    "nombre": "Zegel",
+    "archivo": "zegel-marca.png",
+    "fuente": "https://www.zegel.edu.pe/sites/default/files/zegel-favicon.png",
+    "sitio_web": "https://www.zegel.edu.pe"
+  },
+  {
+    "id": "carrion",
+    "nombre": "Instituto Daniel Alcides Carrión",
+    "archivo": "carrion-oficial.svg",
+    "fuente": "https://www.acarrion.edu.pe/wp-content/uploads/2023/09/6391128afff062ba66ceb0f0_logo-carrion.svg",
+    "sitio_web": "https://www.acarrion.edu.pe"
+  },
+  {
+    "id": "inteci",
+    "nombre": "INTECI – Instituto de Profesiones Empresariales",
+    "archivo": "inteci-oficial.png",
+    "fuente": "https://static.wixstatic.com/media/d66edb_2523ab10eaf5402f8c79b7713efa2f54~mv2.png/v1/crop/x_0,y_62,w_877,h_332/fill/w_142,h_54,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/banner%20home%20page%20(1)_edited.png",
+    "sitio_web": "https://www.inteci.edu.pe"
+  }
+]

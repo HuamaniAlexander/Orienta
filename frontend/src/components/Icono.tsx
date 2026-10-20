@@ -1,4 +1,5 @@
 const trazados = {
+  institucion: 'M3 9h18L12 3 3 9 M5 10v9 M10 10v9 M14 10v9 M19 10v9 M3 21h18',
   sparkles: 'm12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2 M20 2v4 M18 4h4',
   compare: 'M4 4h6v16H4Z M14 4h6v16h-6Z M7 8v5 M17 8v8',
   compass: 'm12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z M9 15l6-6',

@@ -19,11 +19,12 @@ export function Filtros({ valores, facetas, alCambiar, limpiar, consultaFallida,
         const opciones = facetas?.[clave as keyof Facetas] || []
         return <div className="filter-field" key={clave}><label htmlFor={`filter-${clave}`}>{etiqueta}</label>
           <select id={`filter-${clave}`} value={seleccionado} disabled={!facetas} onChange={evento => alCambiar(clave, evento.target.value)}>
-            <option value="">{clave === 'tipo' ? 'Todos los tipos' : clave === 'modalidad' ? 'Todas las modalidades' : 'Todas las ubicaciones'}</option>
+            <option value="">{clave === 'tipo' ? 'Todos los tipos' : clave === 'modalidad' ? 'Todas las modalidades' : 'Todas las opciones'}</option>
             {seleccionado && !opciones.includes(seleccionado) && <option value={seleccionado}>{seleccionado}</option>}
-            {opciones.map(valor => <option key={valor} value={valor}>{valor}</option>)}
+            {opciones.map(valor => <option key={valor} value={valor}>{clave === "gestion" ? valor === "publica" ? "Pública" : "Privada" : valor}</option>)}
           </select></div>
       })}
+      <div className="filter-field"><label htmlFor="costo-maximo">Pensión máxima mensual (S/)</label><input id="costo-maximo" type="number" min="0" step="50" placeholder="Sin límite" value={valores.get("costo_maximo") || ""} onChange={evento => alCambiar("costo_maximo", evento.target.value)} /><small>Importes estimados del catálogo</small></div>
       {consultaFallida && <p className="filter-error" role="alert">No se cargaron los filtros. <button onClick={reintentar}>Reintentar</button></p>}
       <button className="clear-filters" onClick={limpiar}><Icono nombre="reset" /> Limpiar filtros</button>
       <div className="filter-tip"><Icono nombre="info" /><p><strong>Información para decidir</strong><span>Revisa las fuentes y las condiciones del dato en cada ficha.</span></p></div>

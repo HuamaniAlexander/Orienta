@@ -64,7 +64,7 @@ function ResultadoAnalisis({ identificadores, nombres, preferencias }: { identif
             <ul>{elemento.advertencias.map((texto, indice) => <li key={indice}>{texto}</li>)}</ul></details>}
         </article>)}</div>
     </section>
-    <details className="model-audit"><summary><Icono nombre="screen" />Evaluación de los modelos de contraste de áreas</summary>
+    {datos.evaluacionesModelos.length > 0 && <details className="model-audit"><summary><Icono nombre="screen" />Evaluación de los modelos de contraste de áreas</summary>
     <p className="model-limitation">Esta evaluación corresponde al clasificador de áreas, no mide la calidad de las explicaciones de los seis criterios.</p>
     <div className="analysis-outcomes"><article><p className="eyebrow">DATOS DEL CATÁLOGO</p>
       <h3>{datos.contrasteCatalogo}</h3><p>{datos.areas.join(' · ')}</p>
@@ -97,6 +97,7 @@ function ResultadoAnalisis({ identificadores, nombres, preferencias }: { identif
       </article>)}</div>
     </details>
     </details>
+    }
     {datos.recomendaciones.length > 0 && <section className="related-options"><h3>Amplía tus alternativas</h3>
       <p>Opciones relacionadas por similitud de su contenido académico, sin evaluar afinidad personal.</p>
       <div className="career-grid">{datos.recomendaciones.map(c => <TarjetaCarrera key={c.id} carrera={c} />)}</div></section>}

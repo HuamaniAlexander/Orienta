@@ -6,7 +6,7 @@ export function ProveedorComparacion({ children }: { children: ReactNode }) {
   const [identificadores, establecerIdentificadores] = useState<string[]>(() => {
     try {
       const guardada: unknown = JSON.parse(sessionStorage.getItem('orienta-comparison') || '[]')
-      return Array.isArray(guardada) && guardada.length <= 2 && guardada.every(id => typeof id === 'string' && /^[A-Za-z0-9_-]{1,30}$/.test(id))
+      return Array.isArray(guardada) && guardada.length <= 2 && guardada.every(id => typeof id === 'string' && /^[A-Za-z0-9_-]{1,150}$/.test(id))
         ? [...new Set(guardada)] : []
     } catch { return [] }
   })

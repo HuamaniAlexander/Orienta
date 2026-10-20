@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { useComparacionCarreras } from '../application/seleccion'
 import { useSearchParams } from 'react-router-dom'
 import { useRecurso } from '../hooks/useRecurso'
 import { TarjetaCarrera } from '../components/TarjetaCarrera'
@@ -9,11 +11,12 @@ import { FormularioBusqueda } from '../components/FormularioBusqueda'
 import type { ResultadoCatalogo, Facetas } from '../domain/carrera'
 
 export function PaginaExplorar() {
+  const { identificadores } = useComparacionCarreras()
   const [parametros, establecerParametros] = useSearchParams()
   const q = parametros.get('q') || ''
   const pagina = Math.max(1, Math.min(10000, Math.floor(Number(parametros.get('pagina')) || 1)))
   const consulta = new URLSearchParams({ pagina: String(pagina), limite: '12' })
-  for (const clave of ['q', 'tipo', 'modalidad', 'ubicacion']) {
+  for (const clave of ['q', 'tipo', 'modalidad', 'ubicacion', 'gestion', 'area', 'institucion', 'costo_maximo']) {
     if (parametros.get(clave)) consulta.set(clave, parametros.get(clave)!)
   }
   const { resultado, reintentar } = useRecurso<ResultadoCatalogo>(`/carreras?${consulta}`)
@@ -24,27 +27,27 @@ export function PaginaExplorar() {
     if (valor) siguiente.set(clave, valor); else siguiente.delete(clave)
     establecerParametros(siguiente)
   }
-  const activo = ['q', ...Object.keys(nombresFiltros)].filter(clave => parametros.get(clave))
+  const activo = ['q', ...Object.keys(nombresFiltros), 'costo_maximo'].filter(clave => parametros.get(clave))
   const limpiarFiltros = () => establecerParametros(parametros.has('sustituir') ? { sustituir: parametros.get('sustituir')! } : {})
   const busquedaRegreso = parametros.toString() ? `?${parametros}` : ''
   return <>
-    <div className="breadcrumb">Inicio <span>/</span> Explorar</div>
-    <section className="hero"><div><p className="eyebrow">EXPLORA TUS POSIBILIDADES</p>
-      <h1>Tu futuro empieza explorando.</h1>
-      <p>Conoce alternativas académicas y descubre lo que te importa.</p></div>
-      <div className="hero-note"><Icono nombre="compass" /><span>Una decisión informada<br /><strong>empieza con información clara.</strong></span></div>
-    </section>
-    <FormularioBusqueda key={q} valorInicial={q} alBuscar={valor => cambiar('q', valor)} />
+    <section className="hero hero-explorar"><div className="hero-contenido">
+      <h1>Explora carreras y compara <em>tu futuro</em></h1>
+      <p>Descubre carreras técnicas y universitarias de Lima Norte. Compara instituciones,<br className="salto-escritorio" /> conoce sus características y encuentra la opción que se adapte a ti.</p>
+      <FormularioBusqueda key={q} valorInicial={q} alBuscar={valor => cambiar('q', valor)} />
+    </div><div className="hero-fotografia" role="img" aria-label="Estudiantes en un campus universitario" /><span className="hero-lema">Tu futuro<br />también<br />empieza aquí ↗</span></section>
     <div className="catalog-layout">
     <Filtros valores={parametros} facetas={filtros.resultado.estado === 'success' ? filtros.resultado.datos : undefined}
       alCambiar={cambiar} limpiar={limpiarFiltros} consultaFallida={filtros.resultado.estado === 'error'} reintentar={filtros.reintentar} />
-    <section className="catalog-results" aria-labelledby="catalog-title"><div className="section-heading"><div>
-      <h2 id="catalog-title">Explora alternativas</h2><p>Encuentra una opción para tu próximo paso.</p>
-    </div>{resultado.estado === 'success' && <span className="count" role="status">{resultado.datos.total} {resultado.datos.total === 1 ? 'alternativa' : 'alternativas'}</span>}</div>
+    <section className="catalog-results" aria-labelledby="catalog-title">
+      <div className="barra-comparador"><span><Icono nombre="compare" /> Comparador: <strong>{identificadores.length}/2 seleccionadas</strong></span><Link className="button" to="/comparar">Comparar ahora <Icono nombre="arrow" /></Link></div>
+      <div className="section-heading"><div>
+      <h2 id="catalog-title">Explora alternativas</h2><p>Carreras, instituciones y sedes del catálogo completo.</p>
+    </div>{resultado.estado === 'success' && <span className="count" role="status">{resultado.datos.total} {resultado.datos.total === 1 ? 'oferta' : 'ofertas'}</span>}</div>
       {activo.length > 0 && <div className="active-filters" aria-label="Filtros activos">
         {activo.map(clave => <button key={clave} onClick={() => cambiar(clave, '')}
-          aria-label={`Quitar ${clave === 'q' ? 'búsqueda' : nombresFiltros[clave as keyof typeof nombresFiltros]}: ${parametros.get(clave)}`}>
-          {parametros.get(clave)} <span aria-hidden="true">×</span></button>)}
+          aria-label={`Quitar ${clave === 'q' ? 'búsqueda' : clave === 'costo_maximo' ? 'pensión máxima' : nombresFiltros[clave as keyof typeof nombresFiltros]}: ${parametros.get(clave)}`}>
+          {clave === 'costo_maximo' ? `Hasta S/ ${parametros.get(clave)}` : parametros.get(clave)} <span aria-hidden="true">×</span></button>)}
       </div>}
       {resultado.estado === 'loading' && <Cargando />}
       {resultado.estado === 'error' && <EstadoError reintentar={reintentar} />}

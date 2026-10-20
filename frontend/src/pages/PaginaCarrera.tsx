@@ -1,3 +1,4 @@
+import { PerfilAcademico } from '../components/PerfilAcademico'
 import { LogoInstitucion } from '../components/LogoInstitucion'
 import { nombreInstitucion } from '../domain/instituciones'
 import { Link, useLocation, useParams } from 'react-router-dom'
@@ -13,7 +14,7 @@ import { SeleccionarCarrera } from '../components/SeleccionarCarrera'
 function EstadoFuente({ fuente }: { fuente?: Fuente }) {
   const estado = fuente?.estado || 'Sin estado registrado'
   const verificado = /^verificado/i.test(estado)
-  const estimado = /^estimado/i.test(estado)
+  const estimado = /^estima/i.test(estado)
   return <span className={`data-status ${verificado ? 'verified' : estimado ? 'estimated' : ''}`}>
     <Icono nombre={verificado ? 'check' : 'info'} />{verificado ? 'Verificado según registro' : estimado ? 'Estimado' : 'Sin verificación registrada'}
   </span>
@@ -48,6 +49,7 @@ export function PaginaCarrera() {
       <h1>{c.nombre}</h1><div className="detail-subtitle"><LogoInstitucion codigo={c.institucion} /><span>{nombreInstitucion(c.institucion)}</span>
         <span className="tag">{c.tipoFormacion || 'Tipo no disponible'}</span></div></section>
     <div className="detail-layout"><div className="detail-main">
+      {c.detalles && <PerfilAcademico detalles={c.detalles} />}
       <section className="panel" aria-labelledby="academic-title"><h2 id="academic-title">Información académica</h2>
         <dl className="detail-facts">
           <DatoAcademico titulo="Duración" icono="clock" valor={c.duracionMeses === null ? 'Dato no disponible' : `${c.duracionMeses} meses`}

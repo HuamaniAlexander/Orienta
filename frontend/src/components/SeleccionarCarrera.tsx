@@ -14,6 +14,6 @@ export function SeleccionarCarrera({ id }: { id: string }) {
     disabled={bloqueado} onClick={() => {
       alternar(id, indice)
       if (indice !== undefined && !bloqueado) navegar('/comparar')
-    }}><span className="selection-box">{seleccionado && <Icono nombre="check" />}</span>
+    }}><span className="selection-box">{<Icono nombre={seleccionado ? "check" : "compare"} />}</span>
       {indice !== undefined ? 'Elegir alternativa' : seleccionado ? 'Seleccionada' : 'Comparar'}</button>
 }
