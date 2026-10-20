@@ -1,17 +1,30 @@
 from fastapi import APIRouter, Depends, Query, Request
 
 from app.adapters.input.schemas import (
+    AnalysisResponse,
     CareerResponse,
     CatalogResponse,
     ComparisonRequest,
     ComparisonResponse,
 )
+from app.application.analyze import AnalyzeComparison
 from app.application.catalog import Catalog
 from app.application.compare import CompareCareers
 from app.infrastructure.dependencies import catalog_dependency
 from app.ports.careers import CatalogQuery
 
 router = APIRouter(prefix="/api")
+
+
+@router.post("/comparaciones/analisis", response_model=AnalysisResponse)
+def analysis(
+    body: ComparisonRequest, request: Request, catalog: Catalog = Depends(catalog_dependency)
+):
+    result = AnalyzeComparison(catalog, request.app.state.analysis_service).execute(body.career_ids)
+    result["recommendations"] = [
+        CareerResponse.model_validate(c) for c in result["recommendations"]
+    ]
+    return AnalysisResponse(**result)
 
 
 @router.post("/comparaciones", response_model=ComparisonResponse)
