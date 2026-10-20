@@ -9,11 +9,11 @@ Etiquetas: `favor_left`, `favor_right`, `equivalent`, `needs_preference`, `insuf
 Desde backend:
 
 ```powershell
-.venv/Scripts/python.exe -m app.infrastructure.recommendation_training --prepare
-.venv/Scripts/python.exe -m app.infrastructure.recommendation_training
+.venv/Scripts/python.exe -m app.infrastructure.entrenar_recomendaciones --preparar
+.venv/Scripts/python.exe -m app.infrastructure.entrenar_recomendaciones
 ```
 
-El primer comando crea un piloto sin respuestas automáticas: hasta 100 comparaciones, seis etiquetas por comparación, particiones 60/20/20 y ofertas disjuntas. No volver a ejecutar sobre anotaciones revisadas: usar `--dataset` para otra salida.
+El primer comando crea un piloto sin respuestas automáticas: hasta 100 comparaciones, seis etiquetas por comparación, particiones 60/20/20 y ofertas disjuntas. No volver a ejecutar sobre anotaciones revisadas: usar `--conjunto-datos` para otra salida.
 
 Dos integrantes distintos deben revisar cada criterio, registrar sus etiquetas por separado, una justificación y las fuentes pertinentes. Las discrepancias requieren `adjudication`. Ninguna etiqueta se marca aprobada automáticamente. Registrar preferencias explícitas en `preferences`: presupuesto mensual, máximo de meses, modalidad, sede, requisitos que cumple y actividades laborales de interés. No adjudicar un ganador cuando falta una preferencia determinante o un dato necesario. Mantener los mismos perfiles de preferencia en las particiones sin copiar comparaciones.
 
@@ -29,4 +29,4 @@ Actualmente no hay etiquetas humanas revisadas. El comando rechaza el piloto vac
 
 ## Integración
 
-El endpoint `/api/comparaciones/analisis` admite `preferences` con claves `budget_pen`, `max_duration_months`, `modality`, `location`, `requirements_met` y `employment_interests`. La interfaz permite introducirlas. El adaptador carga `models/recommendations/report.json` y `recommendations.joblib` únicamente si todas las métricas de prueba superan 90% por criterio y la huella del artefacto coincide. Sin preferencias se abstiene; si falta un valor del criterio informa datos insuficientes. Las explicaciones permanecen ancladas a las fichas y no son texto generativo entrenado. Reiniciar API tras instalar un artefacto revisado. El piloto es local e ignorado por Git para no publicar anotaciones del equipo; se regenera con el comando y no se sobrescribe si existe.
+El endpoint `/api/comparaciones/analisis` admite `preferences` con claves `budget_pen`, `max_duration_months`, `modality`, `location`, `requirements_met` y `employment_interests`. La interfaz permite introducirlas. El adaptador carga `models/recomendaciones/informe.json` y `recomendaciones.joblib` únicamente si todas las métricas de prueba superan 90% por criterio y la huella del artefacto coincide. Sin preferencias se abstiene; si falta un valor del criterio informa datos insuficientes. Las explicaciones permanecen ancladas a las fichas y no son texto generativo entrenado. Reiniciar API tras instalar un artefacto revisado. El piloto es local e ignorado por Git para no publicar anotaciones del equipo; se regenera con el comando y no se sobrescribe si existe.

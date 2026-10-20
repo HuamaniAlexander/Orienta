@@ -2,14 +2,14 @@
 
 Este documento describe la versión inicial 1.0.0. La versión actual 1.1.0 y su nuevo
 criterio de selección se documentan en `analisis-seis-criterios.md`; sus métricas se
-obtienen de `backend/models/metrics.json`. Las cifras históricas siguientes no son
+obtienen de `backend/models/metricas.json`. Las cifras históricas siguientes no son
 la evaluación de la versión actual.
 
 Se entrenaron Árbol de decisión, Random Forest y Regresión logística usando las 19
 ofertas y sus áreas/grupos documentados en el Excel suministrado. La etiqueta indica
 misma área o áreas distintas. No mide afinidad vocacional ni empleabilidad.
 
-`python -m app.infrastructure.train_models` ejecuta el entrenamiento fuera de HTTP.
+`python -m app.infrastructure.entrenar_modelos` ejecuta el entrenamiento fuera de HTTP.
 Se usa semilla 42, se dividen grupos antes de construir pares y se descartan pares
 que cruzan conjuntos. Hay 8 ofertas/28 pares de entrenamiento y 11 ofertas/55 pares de
 prueba. La validación interna también separa grupos antes de construir sus pares.
@@ -31,7 +31,7 @@ Los predictores son diferencias/promedios de costo mensual y duración, instituc
 modalidad de ambos lados. Los nombres, áreas, grupos y códigos identificadores se
 excluyen de las entradas. El orden canónico del par garantiza simetría al intercambiarlo.
 El preprocesamiento se ajusta dentro de cada partición, con imputación, escalado y
-codificación categórica. `models/metrics.json` registra grupos, métricas de los tres
+codificación categórica. `models/metricas.json` registra grupos, métricas de los tres
 modelos, matrices, baseline, firmas de ofertas y hashes de catálogo/artefacto.
 
 Un segundo componente no supervisado ajusta TF-IDF sobre nombre, campo laboral y

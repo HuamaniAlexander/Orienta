@@ -1,132 +1,109 @@
-# ORIENTA Compara
+# ORIENTA — MVP 1
 
-Catálogo académico con búsqueda, filtros, fichas trazables, comparación de dos ofertas,
-clasificador de contraste académico entrenado y alternativas relacionadas por contenido.
-No requiere cuentas. React/TypeScript comunica con FastAPI mediante Fetch; PostgreSQL
-persiste las ofertas, sus fuentes y las importaciones. El núcleo aplica arquitectura hexagonal.
+Plataforma de orientación académica para jóvenes de Lima Norte. Permite explorar carreras, buscar y filtrar ofertas, consultar fichas con fuentes y comparar exactamente dos opciones sin crear una cuenta.
 
-## Inicio en este equipo Windows
+El catálogo contiene **35 ofertas de cinco universidades**. Compara duración, modalidad, ubicación, costo mensual, requisitos y campo laboral, con logos, nombres completos y fuentes.
 
-Las dependencias y PostgreSQL local ya se prepararon en este espacio. Desde la raíz:
+## Stack tecnológico
 
-```powershell
-.\scripts\Start-Orienta.ps1
+| Capa | Tecnologías |
+| --- | --- |
+| Interfaz | React, TypeScript, Vite, Tailwind CSS, React Router |
+| API | Python 3.12, FastAPI, Pydantic |
+| Persistencia | PostgreSQL, SQLAlchemy, Alembic |
+| Alojamiento de base de datos | InsForge, exclusivamente para PostgreSQL |
+| Machine Learning | scikit-learn, pandas, NumPy, joblib |
+| Pruebas | pytest, Vitest, Testing Library; GitHub Actions |
+
+## Arquitectura y estructura
+
+Arquitectura hexagonal: **dominio**, reglas puras; **aplicación**, casos de uso; **puertos**, contratos; **adaptadores**, HTTP, persistencia e inferencia; **infraestructura**, configuración y composición. React consume FastAPI mediante Fetch; SQLAlchemy conecta con PostgreSQL.
+
+```text
+backend/
+  app/
+    domain/           # Entidades y reglas de comparación/recomendación
+    application/      # Catálogo, comparación y análisis
+    ports/            # Contratos de repositorios y servicios
+    adapters/         # Entrada HTTP; salida SQL, Excel y ML
+    infrastructure/   # Configuración, importación y entrenamiento Python
+  alembic/            # Migraciones de base de datos
+  data/               # Catálogo y etiquetas de áreas versionados
+  models/             # Modelo de áreas y reporte necesarios para la API
+  tests/              # Pruebas unitarias y de integración
+frontend/
+  src/                # Dominio, aplicación, adaptadores, componentes y páginas
+    tests/            # Pruebas de interfaz
+  public/             # Logos y recursos estáticos
+scripts/              # Inicio local en PowerShell
+docs/                 # Arquitectura, fuentes, alcance y evaluaciones
+.github/workflows/    # Integración continua
 ```
 
-Abre http://127.0.0.1:5173. El script inicia servicios ocultos si están detenidos, aplica
-migraciones e importa de forma repetible el catálogo versionado. No instala software.
-Los logs quedan en `.local/`. El PostgreSQL descargado y sus credenciales son locales,
-no se versionan. No se configura un servicio de Windows ni inicio automático.
+## Base de datos e InsForge
 
-Para iniciar solo la API y la interfaz manualmente, en dos terminales:
+InsForge se reserva **exclusivamente para alojar PostgreSQL**. FastAPI y SQLAlchemy conservan el acceso a datos mediante `DATABASE_URL` en `backend/.env`, usando `postgresql+psycopg` y las opciones TLS del proveedor.
+
+El proyecto cloud está preparado; la aplicación conserva su conexión local hasta configurar y migrar la base remota. `.insforge/` contiene la vinculación privada de la CLI y está ignorado. `npx -y @insforge/cli db connection-string` obtiene la conexión del proyecto vinculado: contiene una contraseña y debe permanecer en el backend. No se requiere el SDK en React.
+
+PostgreSQL local sigue disponible para desarrollo. Desde la raíz, configura `.env` a partir de `.env.example` y ejecuta `docker compose up -d postgres` si utilizas Docker.
+
+## Instalación y ejecución
+
+Requisitos: Node.js 24, Python 3.12 y acceso a PostgreSQL. Comandos para PowerShell, desde la raíz de un clon:
 
 ```powershell
 cd backend
-$env:DATA_MODE="postgres"
-.\.venv\Scripts\python.exe -m uvicorn app.infrastructure.main:app --reload
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
+
+Configura `DATABASE_URL`, `DATA_MODE=postgres` y `CORS_ORIGINS` en `backend/.env`. Después, desde `backend`:
+
+```powershell
+.\.venv\Scripts\python.exe -m alembic upgrade head
+.\.venv\Scripts\python.exe -m app.infrastructure.cargar_catalogo
+.\.venv\Scripts\python.exe -m uvicorn app.infrastructure.principal:app --reload
+```
+
+En otra terminal, desde la raíz:
 
 ```powershell
 cd frontend
+npm ci
 npm run dev
 ```
 
-## Instalación desde otro clon
+Interfaz: http://localhost:5173 · OpenAPI: http://127.0.0.1:8000/docs. Vite redirige `/api` al backend local. `frontend/.env.example` documenta `VITE_API_URL`, opcional para otra API.
 
-Requiere Node.js 24, Python 3.12 y PostgreSQL 17 (directo o con Docker Compose).
+En este equipo preparado, `.\scripts\Iniciar-Orienta.ps1` inicia los servicios locales, aplica migraciones y carga el catálogo. Requiere dependencias y configuración previas.
 
-1. Copia `.env.example` a `.env`, configura credenciales y ejecuta `docker compose up -d postgres`.
-2. Desde `backend`: crea un entorno con `python -m venv .venv`, actívalo e instala
-   `python -m pip install -r requirements-dev.txt`.
-3. Copia `backend/.env.example` a `backend/.env`; configura `DATABASE_URL` para tu PostgreSQL.
-   No publiques contraseñas. `DATA_MODE=postgres` es el modo normal.
-4. Desde `backend`: `python -m alembic upgrade head` y `python -m app.infrastructure.seed_catalog`.
-5. Desde `backend`: `python -m uvicorn app.infrastructure.main:app --reload`.
-6. Desde `frontend`: `npm ci` y `npm run dev`. El proxy `/api` apunta a 127.0.0.1:8000.
-   `VITE_API_URL` puede configurar una API diferente; CORS se configura en el backend.
+## Inteligencia artificial: estado real
 
-En Windows puedes usar directamente `.venv\Scripts\python.exe` sin activar el entorno.
-OpenAPI: http://127.0.0.1:8000/docs. pgAdmin es opcional: `docker compose up -d pgadmin`.
-Los contenedores Compose originales solo cubren PostgreSQL/pgAdmin; API y frontend se
-ejecutan con los comandos anteriores.
+**Implementado:** entrenamiento Python de árbol de decisión, random forest y regresión logística con validación y prueba separadas. El modelo entrenado distingue «misma área / áreas distintas». Las ofertas relacionadas usan similitud de contenido; las orientaciones y sus motivos se construyen a partir de las fichas.
 
-## Datos y ampliación del catálogo
+**Pendiente:** completar las etiquetas revisadas por dos personas y validar el recomendador por criterio según preferencias. Su entrenamiento e integración están preparados; requieren superar el 90% en las cuatro métricas de prueba de cada criterio. Actualmente no hay un recomendador aprendido aprobado. Las explicaciones también necesitan revisión humana.
 
-Hay 19 ofertas de UTP y UNMSM extraídas del Excel suministrado. Se preservan sedes,
-modalidades, duración en meses, enseñanza mensual en soles, fuentes y fechas. Un cero
-explícito es diferente de un dato faltante. Los costos estimados no son tarifas oficiales;
-enseñanza gratuita no significa ausencia de otros gastos.
+Desde `backend`, `python -m app.infrastructure.entrenar_modelos` reproduce el clasificador de áreas. El [protocolo de recomendaciones](docs/entrenamiento-recomendaciones.md) describe los comandos del nuevo objetivo; la [evaluación actual](docs/evaluacion-catalogo-ampliado.md) documenta sus límites.
 
-Importa nuevos registros documentados desde un Excel con el mismo esquema:
+## Verificación y GitFlow
 
-```powershell
-cd backend
-python -m app.infrastructure.import_excel "C:\ruta\ORIENTA_Datos_PoC.xlsx"
-```
+- Frontend, desde `frontend`: `npm test`, `npm run lint`, `npm run build`.
+- Backend, desde `backend`: `python -m pytest -q --basetemp=.pytest_tmp` y `python -m ruff check app tests alembic`, usando el entorno virtual.
+- Para integración real con PostgreSQL, configura `TEST_DATABASE_URL` con una **base exclusiva de pruebas**: las pruebas modifican su esquema. Sin ella se utiliza SQLite temporal.
+- `feature/*` agrupa cambios concretos; los PR se dirigen a `dev`. `main` se reserva para entregas estables. Mantén commits pequeños y verificables.
 
-Valida todo el libro antes de escribir, evita duplicados por código e identidad académica
-y confirma una sola transacción. Repetir un archivo sin cambios no duplica registros.
-Las ofertas ausentes en una importación no se retiran automáticamente. `active=false`
-retira una oferta del catálogo y del comparador; la administración editorial no tiene
-un endpoint público de escritura.
+Se versionan catálogos curados, modelo de ejecución, métricas, migraciones, pruebas, configuración compartida, `.env.example` y dependencias/bloqueos. Se ignoran secretos, cachés y experimentos generados. Más contexto en [docs/](docs/).
 
-El adaptador JSON de solo lectura permanece para pruebas aisladas (`DATA_MODE=demo`);
-no reemplaza automáticamente a PostgreSQL cuando este falla. La página normal utiliza
-PostgreSQL. Los datos de entrenamiento no se amplían con carreras inventadas.
+## Equipo
 
-## Entrenamiento y análisis IA
+Proyecto del curso Diseño de Productos y Servicios — Universidad Tecnológica del Perú.
 
-El modelo ya está versionado. Para repetir el entrenamiento desde `backend`:
+- Joan Amado Pelayo Soto
+- Alexander Huamani Champe
+- Martín Rojas Díaz
+- Aner Joram Barrenachea Tapia
+- Daniel Alexander Benites Villavicencio
 
-```powershell
-python -m app.infrastructure.train_models
-```
-
-Entrena tres algoritmos, selecciona por validación con grupos de carreras separados y
-evalúa en grupos externos. Guarda `models/model.joblib` y `models/metrics.json`.
-No entrena durante solicitudes HTTP. Para nuevas ofertas, actualiza también
-`data/catalog.json` y `data/areas.json` con áreas, grupos y fuentes documentados.
-Reinicia la API después de versionar un nuevo modelo.
-
-El clasificador distingue áreas académicas, no aptitudes ni carrera ideal. La evaluación
-actual no alcanza el objetivo del 90%; métricas y limitaciones se muestran en
-la interfaz. Las alternativas relacionadas usan TF-IDF y similitud de contenido.
-El resumen y los siguientes pasos son deterministas; no se simula un LLM generativo.
-No se usan servicios IA externos ni claves. Consulta [el informe del modelo](docs/modelo-ia.md).
-
-## Pruebas
-
-Frontend, desde `frontend`: `npm run build`, `npm run lint`, `npm run test`.
-
-Backend, desde `backend`: `python -m pip check`, `python -m ruff check app tests alembic`,
-`python -m pytest -q --basetemp=.pytest_tmp`, `python -m alembic check`.
-
-Para integración con PostgreSQL configura `TEST_DATABASE_URL` con una base exclusiva
-de pruebas: la suite aplica y revierte migraciones en esa base. Nunca uses una base
-con datos que quieras conservar. Si falta esa variable, las pruebas SQL locales usan
-SQLite temporal y no certifican PostgreSQL. GitHub Actions siempre suministra un
-PostgreSQL 17 dedicado.
-
-## API y estructura
-
-- `GET /api/carreras`: búsqueda, filtros combinados y paginación; solo ofertas activas.
-- `GET /api/filtros`, `GET /api/carreras/{id}`, `GET /api/salud`.
-- `POST /api/comparaciones`: `{ "career_ids": ["C01", "C02"] }`.
-- `POST /api/comparaciones/analisis`: mismo cuerpo; predicción, contraste documentado,
-  métricas y alternativas relacionadas. Fallos IA no eliminan la comparación.
-
-`backend/app/domain` contiene reglas puras; `application`, casos de uso; `ports`,
-contratos; `adapters/input`, HTTP; `adapters/output`, SQL/Excel/ML; `infrastructure`,
-composición y comandos. Los modelos ORM y esquemas HTTP no son entidades del dominio.
-Frontend separa tipos/reglas, acceso HTTP, estado de aplicación, componentes y páginas.
-
-`dev` es integración; las ramas feature se incorporan por PR. `main` se reserva para
-una entrega futura. No hay despliegue de producción ni release. La trazabilidad y
-las limitaciones académicas se documentan en `docs/`; las pruebas de usabilidad reales,
-matrices ponderadas y revisión institucional siguen pendientes del equipo.
-# Actualización del catálogo y recomendaciones
-
-El catálogo contiene 35 ofertas de cinco universidades. Los logos y nombres completos aparecen en catálogo, fichas y comparación. La comparación acepta preferencias y explica sus seis criterios con motivos y fuentes.
-
-El entrenamiento supervisado por criterio y su protocolo están en [docs/entrenamiento-recomendaciones.md](docs/entrenamiento-recomendaciones.md). El piloto requiere revisión humana; no se han generado etiquetas ni porcentajes ficticios. La evaluación actual del clasificador de áreas está en [docs/evaluacion-catalogo-ampliado.md](docs/evaluacion-catalogo-ampliado.md). Las cifras de 19 ofertas que siguen en este documento corresponden al alcance histórico inicial.
-
+Convenciones y compatibilidad: [nomenclatura del proyecto](docs/nomenclatura.md).

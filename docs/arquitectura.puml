@@ -4,7 +4,7 @@ component "React / Fetch" as React
 component "HTTP FastAPI\nadapters/input" as HTTP
 component "Casos de uso\napplication" as UC
 component "Entidades y reglas\ndomain" as Domain
-interface "CareerRepository\nports" as Port
+interface "RepositorioCarreras\nports" as Port
 component "SQLAlchemy\nadapters/output" as SQL
 component "Excel\nadapters/output" as Excel
 database PostgreSQL
