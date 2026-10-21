@@ -131,7 +131,7 @@ export function PanelRecomendacionIA({ identificadores, nombres = [] }: { identi
         <label>Requisitos que cumples<input name="requirements_met" maxLength={500} /></label>
         <label>Actividades laborales de interés<input name="employment_interests" maxLength={500} /></label>
       </div>
-      <button className="button primary" type="submit">{activo ? 'Actualizar análisis' : 'Analizar con IA'} <Icono nombre="arrow" /></button>
+      <button className="button primary" type="submit">{activo ? 'Actualizar contraste' : 'Contrastar los seis criterios'} <Icono nombre="arrow" /></button>
     </form>
     {activo && <ResultadoAnalisis key={JSON.stringify(preferencias)} identificadores={identificadores} nombres={nombres} preferencias={preferencias} />}
   </section>

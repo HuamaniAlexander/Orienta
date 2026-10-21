@@ -1,0 +1,8 @@
+:root {
+  --vichy-gris-claro:#BBBFBF; --vichy-gris:#878787; --acento:#05AD98;
+  --superficie:#FFFFFF; --texto:#172B2C; --texto-secundario:#526263;
+  --fondo:#F6F8F8; --borde:#D9DEDE; --accion:#087568;
+  --sombra:rgba(23,43,44,.08); --error:#9B2525; --advertencia:#765619;
+  --blue:var(--accion); --muted:var(--texto-secundario); --border:var(--borde); --wash:var(--fondo);
+  --espacio:8px; --radio:12px;
+}

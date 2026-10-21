@@ -10,7 +10,7 @@ function CarreraSeleccionada({ id }: { id: string }) {
   const { alternar } = useComparacionCarreras()
   const { resultado } = useRecurso<Carrera>(`/carreras/${encodeURIComponent(id)}`)
   return <div className="tray-item">{resultado.estado === 'success' && <LogoInstitucion codigo={resultado.datos.institucion} />}<div>
-    <strong>{resultado.estado === 'success' ? resultado.datos.nombre : `Alternativa ${id}`}</strong>
+    <strong>{resultado.estado === 'success' ? resultado.datos.nombre : resultado.estado === 'error' ? 'Carrera no disponible' : 'Cargando carrera…'}</strong>
     <small>{resultado.estado === 'success' ? nombreInstitucion(resultado.datos.institucion) : resultado.estado === 'error' ? 'Revisa la disponibilidad' : 'Cargando…'}</small>
   </div><button onClick={() => alternar(id)} aria-label={`Quitar ${resultado.estado === 'success' ? etiquetaCarrera(resultado.datos) : id}`}>×</button></div>
 }

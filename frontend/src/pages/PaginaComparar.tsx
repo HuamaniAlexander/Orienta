@@ -1,8 +1,9 @@
+import { CuestionarioVocacional } from '../components/CuestionarioVocacional'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LogoInstitucion } from '../components/LogoInstitucion'
 import { nombreInstitucion, etiquetaCarrera } from '../domain/instituciones'
-import { portadaCarrera } from '../domain/portadas'
+import { ImagenCarrera } from '../components/ImagenCarrera'
 import { useComparacionCarreras } from '../application/seleccion'
 import { useRecurso } from '../hooks/useRecurso'
 import { EstadoError, Cargando } from '../components/EstadosConsulta'
@@ -23,7 +24,7 @@ const pestanas: { nombre: string; icono: NombreIcono }[] = [
 ]
 function TarjetaComparacion({ carrera: c, indice }: { carrera: Carrera; indice: number }) {
   return <article className="opcion-comparacion">
-    <div className={`portada-carrera portada-${portadaCarrera(c)}`} aria-hidden="true" />
+    <ImagenCarrera carrera={c} />
     <div className="identidad-comparacion"><LogoInstitucion codigo={c.institucion} /><div><h2>{c.nombre}</h2>
       <p>{nombreInstitucion(c.institucion)}</p><p><Icono nombre="pin" /> {c.ubicacion}</p>
       <div className="etiquetas-tarjeta"><span className="tag">{c.tipoFormacion}</span><span className="tag modalidad">{c.modalidad}</span></div></div></div>
@@ -77,7 +78,7 @@ function ContenidoComparacion({ identificadores }: { identificadores: string[] }
     <section id="detalle-comparacion" role="tabpanel" aria-labelledby={`pestana-${pestana}`}>
       {pestana !== 4 && <section className="tabla-comparacion" aria-label="Comparación de los seis criterios"><h2><Icono nombre="book" /> Comparación detallada</h2><div className="contenedor-tabla"><table><thead><tr><th>Característica</th>{carreras.map(c => <th key={c.id}>{c.nombre}<small>{nombreInstitucion(c.institucion)}</small></th>)}</tr></thead><tbody>{filas.map(([etiqueta, a, b]) => <tr key={etiqueta}><th scope="row">{etiqueta}</th><td>{a || 'Dato no disponible'}</td><td>{b || 'Dato no disponible'}</td></tr>)}</tbody></table></div>
       <p className="nota-procedencia">Cursos y actividades: síntesis académica. Consulta la malla oficial en las fuentes de cada ficha.</p></section>}
-    <div id="orientacion-detallada"><PanelRecomendacionIA identificadores={identificadores} nombres={carreras.map(etiquetaCarrera)} /></div>
+    <div id="orientacion-detallada"><CuestionarioVocacional identificadores={identificadores} /><PanelRecomendacionIA identificadores={identificadores} nombres={carreras.map(etiquetaCarrera)} /></div>
     </section>
   </>
 }

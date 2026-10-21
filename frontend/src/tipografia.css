@@ -4,7 +4,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 1.7;
-  --muted: #566180;
+  --muted: var(--texto-secundario);
 }
 button, input, select, summary { font-family: inherit; }
 h1, h2, h3, h4, h5 { font-family: inherit; letter-spacing: -.045em; overflow-wrap: anywhere; }
@@ -132,16 +132,16 @@ nav a, .button, .visitor, .hero-note, .section-heading p,
   .site-footer { font-size: 13px; }
 }
 
-.university-logo { width: 128px; height: 54px; object-fit: contain; flex-shrink: 0; background: #fff; padding: 6px; border-radius: 8px; }
-.university-uni, .university-unmsm { background: #782437; }
+.university-logo { width: 128px; height: 54px; object-fit: contain; flex-shrink: 0; background: var(--superficie); padding: 6px; border-radius: 8px; }
+.university-uni, .university-unmsm { background: var(--accion); }
 .tray-item .university-logo { width: 56px; height: 40px; }
 .criterion-values dt { overflow-wrap: anywhere; }
 .card-top { flex-wrap: wrap; }
 .comparison-option { min-width: 0; overflow-wrap: anywhere; }
-.analysis-preferences { padding: 20px; border-bottom: 1px solid #dce2e0; }
+.analysis-preferences { padding: 20px; border-bottom: 1px solid var(--borde); }
 .preferences-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
 .preferences-grid label { display: grid; gap: 8px; font-size: 14px; min-width: 0; }
-.preferences-grid input, .preferences-grid select { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid #bacac3; border-radius: 8px; background: white; font: inherit; font-size: 16px; }
+.preferences-grid input, .preferences-grid select { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid var(--texto-secundario); border-radius: 8px; background: white; font: inherit; font-size: 16px; }
 @media (max-width: 600px) { .preferences-grid { grid-template-columns: 1fr; } }
 @media (max-width: 600px) {
   .tray-item small { display: none; }
