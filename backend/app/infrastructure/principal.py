@@ -9,8 +9,11 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.adapters.input.http import enrutador
+from app.adapters.input.vocacional import enrutador_vocacional
 from app.adapters.output.analisis_entrenado import AnalisisEntrenado
+from app.adapters.output.motor_preferencias import MotorPreferenciasLocal
 from app.adapters.output.recomendaciones_criterios import RecomendacionesRevisadas
+from app.adapters.output.registro_preferencias import RegistroPreferenciasSql
 from app.application.catalogo import CarreraNoEncontrada
 from app.domain.comparacion import ComparacionInvalida
 from app.infrastructure.base_datos import crear_sesiones
@@ -37,6 +40,12 @@ def crear_aplicacion(configuracion: Configuracion | None = None):
     )
     app.state.sesiones = (
         crear_sesiones(configuracion) if configuracion.modo_datos == "postgres" else None
+    )
+    app.state.motor_preferencias = MotorPreferenciasLocal(
+        configuracion.directorio_modelos / "preferencias"
+    )
+    app.state.registro_preferencias = (
+        RegistroPreferenciasSql(app.state.sesiones) if app.state.sesiones else None
     )
     app.add_middleware(
         CORSMiddleware,
@@ -67,6 +76,7 @@ def crear_aplicacion(configuracion: Configuracion | None = None):
         )
 
     app.include_router(enrutador)
+    app.include_router(enrutador_vocacional)
     return app
 
 

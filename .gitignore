@@ -82,3 +82,7 @@ wandb/
 
 # Configuración local de agentes; conservar instrucciones compartidas
 .claude/settings.local.json
+
+# Capturas reales, exportaciones y modelos vocacionales privados
+backend/data/preferencias/
+*.jsonl

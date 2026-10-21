@@ -5,6 +5,7 @@ from pathlib import Path
 
 from app.adapters.output.catalogo_completo import leer_catalogo_completo
 from app.adapters.output.importador import importar_carreras
+from app.adapters.output.registro_preferencias import registrar_definicion
 from app.infrastructure.base_datos import crear_sesiones
 from app.infrastructure.configuracion import Configuracion
 
@@ -23,6 +24,9 @@ def principal():
                 sustituir_catalogo=True,
             )
         )
+
+    with crear_sesiones(configuracion)() as sesion, sesion.begin():
+        registrar_definicion(sesion)
 
 
 if __name__ == "__main__":

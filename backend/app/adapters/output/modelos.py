@@ -76,3 +76,21 @@ class FilaFuente(Base):
     campo: Mapped[str] = mapped_column(String(80))
     referencia: Mapped[str | None] = mapped_column(Text)
     estado: Mapped[str] = mapped_column(Text)
+
+
+class FilaDefinicionCuestionario(Base):
+    __tablename__ = "definiciones_cuestionario"
+    version: Mapped[str] = mapped_column(String(60), primary_key=True)
+    contenido: Mapped[dict] = mapped_column(JSON)
+
+
+class FilaRegistroPreferencia(Base):
+    __tablename__ = "registros_preferencias"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    id_participante: Mapped[str] = mapped_column(String(36), index=True)
+    version_cuestionario: Mapped[str] = mapped_column(
+        ForeignKey("definiciones_cuestionario.version")
+    )
+    fecha_captura: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    estado_revision: Mapped[str] = mapped_column(String(20), default="pendiente")
+    datos: Mapped[dict] = mapped_column(JSON)
