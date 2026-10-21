@@ -1,0 +1,34 @@
+@startuml
+entity instituciones {
+  * id : integer <<PK>>
+  * nombre : varchar <<unique>>
+}
+entity ofertas_academicas {
+  * id : varchar <<PK>>
+  * id_institucion : integer <<FK>>
+  * id_importacion : integer <<FK>>
+  * clave_identidad : text <<unique>>
+  nombre : varchar
+  modalidad : varchar
+  ubicacion : varchar
+  duracion_meses : integer <<nullable, positive>>
+  costo_mensual_soles : numeric <<nullable, nonnegative>>
+  activa : boolean
+}
+entity fuentes {
+  * id : integer <<PK>>
+  * id_oferta : varchar <<FK>>
+  campo : varchar
+  referencia : text <<nullable>>
+  estado : text
+}
+entity importaciones {
+  * id : integer <<PK>>
+  * sha256 : varchar <<unique>>
+  fecha_importacion : timestamp
+  cantidad_filas : integer
+}
+instituciones ||--o{ ofertas_academicas
+importaciones ||--o{ ofertas_academicas
+ofertas_academicas ||--o{ fuentes
+@enduml

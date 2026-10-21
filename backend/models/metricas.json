@@ -1,0 +1,525 @@
+{
+  "version": "1.2.0",
+  "seed": 42,
+  "sklearn_version": "1.9.1",
+  "catalog_sha256": "a5f5152faa16c1cdec53f26dfda9a846f0c11ae0d1ab25495946d2b1ef9f6de1",
+  "artifact_sha256": "8f858bfec366a1847bdd1fa0238458713561ae8e143f56c0d97cd5ea84613513",
+  "selected_model": "Árbol de decisión",
+  "selection_criterion": "minimum_validation_distance_to_ideal",
+  "quality_target": 0.9,
+  "quality_approved": false,
+  "training_offers": 24,
+  "test_offers": 11,
+  "training_pairs": 276,
+  "test_pairs": 55,
+  "train_groups": [
+    "civil",
+    "contabilidad",
+    "economia",
+    "enfermeria",
+    "hoteleria",
+    "industrial",
+    "matematica",
+    "medicina",
+    "psicologia_organizacional",
+    "quimica",
+    "sistemas",
+    "software"
+  ],
+  "test_groups": [
+    "administracion",
+    "arquitectura",
+    "computacion",
+    "derecho",
+    "fisica",
+    "psicologia"
+  ],
+  "validation_splits": [
+    {
+      "train_groups": [
+        "civil",
+        "contabilidad",
+        "economia",
+        "enfermeria",
+        "hoteleria",
+        "industrial",
+        "sistemas"
+      ],
+      "validation_groups": [
+        "matematica",
+        "medicina",
+        "psicologia_organizacional",
+        "quimica",
+        "software"
+      ]
+    },
+    {
+      "train_groups": [
+        "civil",
+        "contabilidad",
+        "economia",
+        "enfermeria",
+        "medicina",
+        "quimica",
+        "software"
+      ],
+      "validation_groups": [
+        "hoteleria",
+        "industrial",
+        "matematica",
+        "psicologia_organizacional",
+        "sistemas"
+      ]
+    },
+    {
+      "train_groups": [
+        "civil",
+        "economia",
+        "enfermeria",
+        "hoteleria",
+        "industrial",
+        "psicologia_organizacional",
+        "quimica"
+      ],
+      "validation_groups": [
+        "contabilidad",
+        "matematica",
+        "medicina",
+        "sistemas",
+        "software"
+      ]
+    },
+    {
+      "train_groups": [
+        "civil",
+        "economia",
+        "hoteleria",
+        "matematica",
+        "quimica",
+        "sistemas",
+        "software"
+      ],
+      "validation_groups": [
+        "contabilidad",
+        "enfermeria",
+        "industrial",
+        "medicina",
+        "psicologia_organizacional"
+      ]
+    }
+  ],
+  "models": {
+    "Árbol de decisión": {
+      "accuracy": 0.16363636363636364,
+      "precision_macro": 0.08181818181818182,
+      "recall_macro": 0.5,
+      "f1_macro": 0.140625,
+      "confusion_matrix": [
+        [
+          9,
+          0
+        ],
+        [
+          46,
+          0
+        ]
+      ],
+      "validation_scores": {
+        "accuracy": 0.4751984126984127,
+        "precision_macro": 0.42053353776505187,
+        "recall_macro": 0.4432471987350036,
+        "f1_macro": 0.39786737760270363
+      },
+      "validation_distance_to_ideal": 0.5665102522375076,
+      "validation_f1_macro": 0.39786737760270363,
+      "selected_parameters": {
+        "ccp_alpha": 0.0,
+        "class_weight": "balanced",
+        "criterion": "gini",
+        "max_depth": 2,
+        "max_features": null,
+        "max_leaf_nodes": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "random_state": 42,
+        "splitter": "best"
+      },
+      "candidates_evaluated": 6
+    },
+    "Random Forest": {
+      "accuracy": 0.5818181818181818,
+      "precision_macro": 0.4892857142857143,
+      "recall_macro": 0.4818840579710145,
+      "f1_macro": 0.4614729672200936,
+      "confusion_matrix": [
+        [
+          3,
+          6
+        ],
+        [
+          17,
+          29
+        ]
+      ],
+      "validation_scores": {
+        "accuracy": 0.41086691086691085,
+        "precision_macro": 0.4381573498964803,
+        "recall_macro": 0.46984870521455885,
+        "f1_macro": 0.3541360762828154
+      },
+      "validation_distance_to_ideal": 0.583297857768413,
+      "validation_f1_macro": 0.3541360762828154,
+      "selected_parameters": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "class_weight": null,
+        "criterion": "gini",
+        "max_depth": 4,
+        "max_features": "sqrt",
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 100,
+        "n_jobs": 1,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "candidates_evaluated": 6
+    },
+    "Regresión logística": {
+      "accuracy": 0.38181818181818183,
+      "precision_macro": 0.6046511627906976,
+      "recall_macro": 0.6304347826086957,
+      "f1_macro": 0.37997347480106103,
+      "confusion_matrix": [
+        [
+          9,
+          0
+        ],
+        [
+          34,
+          12
+        ]
+      ],
+      "validation_scores": {
+        "accuracy": 0.4185744810744811,
+        "precision_macro": 0.4248347445038621,
+        "recall_macro": 0.42125104198274926,
+        "f1_macro": 0.3927787315620094
+      },
+      "validation_distance_to_ideal": 0.5857769905085984,
+      "validation_f1_macro": 0.3927787315620094,
+      "selected_parameters": {
+        "C": 1,
+        "class_weight": "balanced",
+        "dual": false,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "l1_ratio": 0.0,
+        "max_iter": 2000,
+        "n_jobs": null,
+        "penalty": "deprecated",
+        "random_state": 42,
+        "solver": "lbfgs",
+        "tol": 0.0001,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "candidates_evaluated": 6
+    }
+  },
+  "baseline": {
+    "accuracy": 0.8363636363636363,
+    "precision_macro": 0.41818181818181815,
+    "recall_macro": 0.5,
+    "f1_macro": 0.45544554455445546,
+    "confusion_matrix": [
+      [
+        0,
+        9
+      ],
+      [
+        0,
+        46
+      ]
+    ]
+  },
+  "metadata": {
+    "C01": {
+      "area": "Ingeniería",
+      "group": "sistemas",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+      "reviewed_on": "2026-10-13",
+      "signature": "e8c38809742102a23df98a3888a919b1e578f8e584a25733b4a746f76dbd1b7e"
+    },
+    "C02": {
+      "area": "Negocios",
+      "group": "administracion",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+      "reviewed_on": "2026-10-13",
+      "signature": "8b4d340fa4c5dc17c29954fb7cf1cc234268725427e9d22d71763e8b16a27bea"
+    },
+    "C03": {
+      "area": "Ingeniería",
+      "group": "industrial",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+      "reviewed_on": "2026-10-13",
+      "signature": "aedae162c08d23bcad8aa91a5e0ae13336fe2d627dd779e9a0f7f0d9937a6a8b"
+    },
+    "C04": {
+      "area": "Ingeniería",
+      "group": "software",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+      "reviewed_on": "2026-10-13",
+      "signature": "9b8b4c134b29f26bd50fae94b2ccd96f93a8635c51bf50d26fa899d0d3e5c2b1"
+    },
+    "C05": {
+      "area": "Ingeniería",
+      "group": "sistemas",
+      "source": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+      "reviewed_on": "2026-10-13",
+      "signature": "394a4926f3ff6d3bb4100c6a83e44e370772fba96bc4990e2bf5013e9f1aff5a"
+    },
+    "C06": {
+      "area": "Ingeniería",
+      "group": "software",
+      "source": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+      "reviewed_on": "2026-10-13",
+      "signature": "2a3925de9c555511797854b9a18b96063054cbbfb52c8cbb24bdb81df0f30000"
+    },
+    "C07": {
+      "area": "Negocios",
+      "group": "administracion",
+      "source": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+      "reviewed_on": "2026-10-13",
+      "signature": "a1603dff3981d1eb3a740f433e3fa6a3b601e31cf573d5a01726924396b5819b"
+    },
+    "C08": {
+      "area": "Psicología",
+      "group": "psicologia",
+      "source": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+      "reviewed_on": "2026-10-13",
+      "signature": "84fb21d9b6b06f4b649b9e11ebc33cfbe1fc210a39f2857d048c1c81ba98f60c"
+    },
+    "C09": {
+      "area": "Psicología",
+      "group": "psicologia_organizacional",
+      "source": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+      "reviewed_on": "2026-10-13",
+      "signature": "accdc8535a2ddf2dff84faf763681afb9dfee58a107056a1ea80ad1ec26db90e"
+    },
+    "C10": {
+      "area": "Salud",
+      "group": "medicina",
+      "source": "https://medicina.unmsm.edu.pe/escuelas-profesionales/medicina-humana/",
+      "reviewed_on": "2026-10-13",
+      "signature": "179c2d2466a45189c4fb4ef5bb42a6fb99849df1a407698f74687b6527a74fbd"
+    },
+    "C11": {
+      "area": "Negocios",
+      "group": "contabilidad",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+      "reviewed_on": "2026-10-13",
+      "signature": "9ba7f0464772e0cbcebb9465da702c7f05c2152bbeab18626422336a26c1f112"
+    },
+    "C12": {
+      "area": "Psicología",
+      "group": "psicologia",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+      "reviewed_on": "2026-10-13",
+      "signature": "d28305077aa5527f147e50cec68b4aaa119b3d681ddd334d6e06a172d5cabc3b"
+    },
+    "C13": {
+      "area": "Derecho",
+      "group": "derecho",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+      "reviewed_on": "2026-10-13",
+      "signature": "02760f6cbf9c69a384f10eb1f5fea11754af05937365a680b906c93cefbceb60"
+    },
+    "C14": {
+      "area": "Arquitectura",
+      "group": "arquitectura",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+      "reviewed_on": "2026-10-13",
+      "signature": "536188d4803dfad0e4dabbe684619d4ec5effa1c8b529fddafc026998b768d9c"
+    },
+    "C15": {
+      "area": "Salud",
+      "group": "enfermeria",
+      "source": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+      "reviewed_on": "2026-10-13",
+      "signature": "ecdc14b39da323d2348e947f5cccf435b4daae64bf0ea20433efa63f9e7771af"
+    },
+    "C16": {
+      "area": "Ingeniería",
+      "group": "sistemas",
+      "source": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+      "reviewed_on": "2026-10-13",
+      "signature": "cc7ebc825314f48e90be1a7a3915cb92cbf8156d6987db07c800b3683ff9d39a"
+    },
+    "C17": {
+      "area": "Ingeniería",
+      "group": "sistemas",
+      "source": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+      "reviewed_on": "2026-10-13",
+      "signature": "7d10065b7a700dea328b194cc8d6ad41e111dbbb5d5eacd978f6587c9611a786"
+    },
+    "C18": {
+      "area": "Negocios",
+      "group": "administracion",
+      "source": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+      "reviewed_on": "2026-10-13",
+      "signature": "73953942c31c7038e26c70d0e5f995f8707119353cbf1dbb4e8ab20a646270d5"
+    },
+    "C19": {
+      "area": "Negocios",
+      "group": "administracion",
+      "source": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+      "reviewed_on": "2026-10-13",
+      "signature": "5dfa584d52774264ae897c49fe5ced39050b8775448798e9348666c837ba0146"
+    },
+    "C20": {
+      "area": "Ingeniería",
+      "group": "sistemas",
+      "source": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "d0ae45a6dc515d1ee5e94d35847ed727137329441ebf9d8405346806b7866dde"
+    },
+    "C21": {
+      "area": "Ingeniería",
+      "group": "civil",
+      "source": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "feaccf7621be707df25f6db8cfcbb5b89352330827633e29a8ae4595ad142be7"
+    },
+    "C22": {
+      "area": "Ingeniería",
+      "group": "industrial",
+      "source": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "b1de714ba98081a6e3d891b85ef80eef92820b387a892220f3a4c25b859097ff"
+    },
+    "C23": {
+      "area": "Negocios",
+      "group": "economia",
+      "source": "https://www.pucp.edu.pe/carrera/economia/",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "9d230e5f64157cc9800a7ab425801f2c58cceac9bb7a1cf500e4527a5cdd780a"
+    },
+    "C24": {
+      "area": "Ingeniería",
+      "group": "civil",
+      "source": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "922f526fbba1856e6c16bf520223f42fdac2022579b63550d6d35ab0ff5e233e"
+    },
+    "C25": {
+      "area": "Ingeniería",
+      "group": "industrial",
+      "source": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "06e700b4b0cce15f6e2631805c78973a40223d995a08d087fceb446c239b1d47"
+    },
+    "C26": {
+      "area": "Ingeniería",
+      "group": "sistemas",
+      "source": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "a55c7d4e64bf06622944aee4a3a1c92287119b23f15304112ad22d9f0e861f2f"
+    },
+    "C27": {
+      "area": "Arquitectura",
+      "group": "arquitectura",
+      "source": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "11b04f02ea84e79bd0848ebd1f6bf5037f93fd0929d88e923b8b3ee20f98d595"
+    },
+    "C28": {
+      "area": "Ingeniería",
+      "group": "quimica",
+      "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "63c5c3c9067ff60106eabed109e267199c3ec65a241a8dae6ac012ee34674d05"
+    },
+    "C29": {
+      "area": "Ciencias",
+      "group": "fisica",
+      "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "961633ef77fd78c65be0813a5e6d14e12fb74e6d5ccb9ea084850b49c5141779"
+    },
+    "C30": {
+      "area": "Ciencias",
+      "group": "matematica",
+      "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "fbd724eed975f3e513706f9443b938c93a82b4e12677fd0fd1c4b4396b7cecd8"
+    },
+    "C31": {
+      "area": "Ciencias",
+      "group": "computacion",
+      "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "fbcda62287001e44355952fc8b801b7dc379347269243261f6a2061679052ff6"
+    },
+    "C32": {
+      "area": "Salud",
+      "group": "medicina",
+      "source": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "68183cf2bd4230a4d9ae2e65c732aeca881703d11423fb521a4a122be5243132"
+    },
+    "C33": {
+      "area": "Ingeniería",
+      "group": "industrial",
+      "source": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "2d540a9b19719f369246899f6dc2515061a076a9d98c321569d1b750ebbc06ec"
+    },
+    "C34": {
+      "area": "Ingeniería",
+      "group": "software",
+      "source": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "66e252d95ba247537d4d14604309fb436846a42d8c59373ab70b121cef3f892e"
+    },
+    "C35": {
+      "area": "Negocios",
+      "group": "hoteleria",
+      "source": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+      "reviewed_on": "2026-10-20",
+      "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área",
+      "signature": "43b936f5a6d56a47761818ef71a6879a8c92c7cb6b090333a76450ac52f320a5"
+    }
+  },
+  "limitations": [
+    "35 ofertas de 5 instituciones; muestra pequeña y sin validación vocacional.",
+    "Costo, duración y modalidad no describen suficientemente el área académica.",
+    "Los costos estimados no son tarifas oficiales ni costos totales.",
+    "La similitud de contenido no mide aptitudes, preferencias ni empleabilidad."
+  ]
+}

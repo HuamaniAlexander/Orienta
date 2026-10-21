@@ -1,0 +1,228 @@
+{
+  "C01": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+    "reviewed_on": "2026-10-13"
+  },
+  "C02": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/administracion-de-empresas",
+    "reviewed_on": "2026-10-13"
+  },
+  "C03": {
+    "area": "Ingeniería",
+    "group": "industrial",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-industrial",
+    "reviewed_on": "2026-10-13"
+  },
+  "C04": {
+    "area": "Ingeniería",
+    "group": "software",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-ingenieria/ingenieria-de-software",
+    "reviewed_on": "2026-10-13"
+  },
+  "C05": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-sistemas",
+    "reviewed_on": "2026-10-13"
+  },
+  "C06": {
+    "area": "Ingeniería",
+    "group": "software",
+    "source": "https://sistemas.unmsm.edu.pe/site/pregrado/ingenieria-de-software",
+    "reviewed_on": "2026-10-13"
+  },
+  "C07": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://administracion.unmsm.edu.pe/e-p-de-administracion/",
+    "reviewed_on": "2026-10-13"
+  },
+  "C08": {
+    "area": "Psicología",
+    "group": "psicologia",
+    "source": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic.php",
+    "reviewed_on": "2026-10-13"
+  },
+  "C09": {
+    "area": "Psicología",
+    "group": "psicologia_organizacional",
+    "source": "https://psicologia.unmsm.edu.pe/paginas/escuelas/ep-psic-organizacional.php",
+    "reviewed_on": "2026-10-13"
+  },
+  "C10": {
+    "area": "Salud",
+    "group": "medicina",
+    "source": "https://medicina.unmsm.edu.pe/escuelas-profesionales/medicina-humana/",
+    "reviewed_on": "2026-10-13"
+  },
+  "C11": {
+    "area": "Negocios",
+    "group": "contabilidad",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-negocios/contabilidad",
+    "reviewed_on": "2026-10-13"
+  },
+  "C12": {
+    "area": "Psicología",
+    "group": "psicologia",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-psicologia/psicologia",
+    "reviewed_on": "2026-10-13"
+  },
+  "C13": {
+    "area": "Derecho",
+    "group": "derecho",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-derecho/derecho",
+    "reviewed_on": "2026-10-13"
+  },
+  "C14": {
+    "area": "Arquitectura",
+    "group": "arquitectura",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-arquitectura/arquitectura",
+    "reviewed_on": "2026-10-13"
+  },
+  "C15": {
+    "area": "Salud",
+    "group": "enfermeria",
+    "source": "https://www.utp.edu.pe/pregrado/facultad-de-salud/enfermeria",
+    "reviewed_on": "2026-10-13"
+  },
+  "C16": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+    "reviewed_on": "2026-10-13"
+  },
+  "C17": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://www.utp.edu.pe/cgt/facultad-de-ingenieria/ingenieria-de-sistemas-e-informatica",
+    "reviewed_on": "2026-10-13"
+  },
+  "C18": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://www.utp.edu.pe/carreras-a-distancia/facultad-de-negocios/administracion-de-empresas",
+    "reviewed_on": "2026-10-13"
+  },
+  "C19": {
+    "area": "Negocios",
+    "group": "administracion",
+    "source": "https://www.utp.edu.pe/cgt/facultad-de-negocios/administracion-de-empresas",
+    "reviewed_on": "2026-10-13"
+  },
+  "C20": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://www.pucp.edu.pe/carrera/ingenieria-informatica/",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C21": {
+    "area": "Ingeniería",
+    "group": "civil",
+    "source": "https://www.pucp.edu.pe/carrera/ingenieria-civil/",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C22": {
+    "area": "Ingeniería",
+    "group": "industrial",
+    "source": "https://www.pucp.edu.pe/carrera/ingenieria-industrial/",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C23": {
+    "area": "Negocios",
+    "group": "economia",
+    "source": "https://www.pucp.edu.pe/carrera/economia/",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C24": {
+    "area": "Ingeniería",
+    "group": "civil",
+    "source": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-civil/ingenieria-civil",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C25": {
+    "area": "Ingeniería",
+    "group": "industrial",
+    "source": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-industrial",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C26": {
+    "area": "Ingeniería",
+    "group": "sistemas",
+    "source": "https://portal.uni.edu.pe/index.php/facultades/ingenieria-industrial-y-de-sistemas/ingenieria-de-sistemas",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C27": {
+    "area": "Arquitectura",
+    "group": "arquitectura",
+    "source": "https://portal.uni.edu.pe/index.php/facultades/arquitectura-urbanismo-y-artes/arquitectura",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C28": {
+    "area": "Ingeniería",
+    "group": "quimica",
+    "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C29": {
+    "area": "Ciencias",
+    "group": "fisica",
+    "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C30": {
+    "area": "Ciencias",
+    "group": "matematica",
+    "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C31": {
+    "area": "Ciencias",
+    "group": "computacion",
+    "source": "https://portal.uni.edu.pe/index.php/45-pregrado/carreras",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C32": {
+    "area": "Salud",
+    "group": "medicina",
+    "source": "https://pregrado.upc.edu.pe/landings/carreras/medicina/index.html",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C33": {
+    "area": "Ingeniería",
+    "group": "industrial",
+    "source": "https://pregrado.upc.edu.pe/landings/carreras/ingenieria-industrial/",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C34": {
+    "area": "Ingeniería",
+    "group": "software",
+    "source": "https://www.upc.edu.pe/epe/carreras/ingenieria-de-software",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  },
+  "C35": {
+    "area": "Negocios",
+    "group": "hoteleria",
+    "source": "https://pregrado.upc.edu.pe/facultad-de-administracion-en-hoteleria-y-turismo/hoteleria-y-administracion/",
+    "reviewed_on": "2026-10-20",
+    "label_basis": "Clasificación del equipo según disciplina; no etiqueta institucional de área"
+  }
+}
