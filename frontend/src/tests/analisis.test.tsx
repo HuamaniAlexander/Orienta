@@ -34,7 +34,7 @@ describe('Análisis HU-IA01', () => {
     const presupuesto = await screen.findByLabelText('Presupuesto mensual (S/)')
     await userEvent.type(presupuesto, '950')
     await userEvent.selectOptions(screen.getByLabelText('Modalidad preferida'), 'Virtual')
-    await userEvent.click(screen.getByRole('button', { name: /Analizar con IA/ }))
+    await userEvent.click(screen.getByRole('button', { name: /Contrastar los seis criterios/ }))
     await screen.findByRole('heading', { name: 'Seis criterios para tomar una decisión informada' })
     const llamada = vi.mocked(fetch).mock.calls.find(([direccion]) => String(direccion).endsWith('/analisis'))
     expect(JSON.parse(String(llamada?.[1]?.body))).toEqual({ career_ids: ['C01', 'C02'],
@@ -43,7 +43,7 @@ describe('Análisis HU-IA01', () => {
   })
   it('explica seis criterios y separa la evaluación del modelo no habilitado', async () => {
     mostrar()
-    await userEvent.click(await screen.findByRole('button', { name: /Analizar con IA/ }))
+    await userEvent.click(await screen.findByRole('button', { name: /Contrastar los seis criterios/ }))
     expect(await screen.findByRole('heading', { name: 'Seis criterios para tomar una decisión informada' })).toBeInTheDocument()
     expect(screen.getAllByText('Para decidir')).toHaveLength(6)
     expect(screen.getByText('Diferencia documentada employment')).toBeInTheDocument()
@@ -57,7 +57,7 @@ describe('Análisis HU-IA01', () => {
   })
   it('conserva la comparación cuando falla IA y permite reintentar', async () => {
     mostrar(true)
-    await userEvent.click(await screen.findByRole('button', { name: /Analizar con IA/ }))
+    await userEvent.click(await screen.findByRole('button', { name: /Contrastar los seis criterios/ }))
     expect(await screen.findByText('El análisis IA no está disponible')).toBeInTheDocument()
     expect(screen.getByRole('region', { name: /seis criterios/ })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Reintentar análisis/ })).toBeInTheDocument()

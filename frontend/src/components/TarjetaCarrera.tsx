@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import type { Carrera } from '../domain/carrera'
 import { Icono } from './Icono'
 import { SeleccionarCarrera } from './SeleccionarCarrera'
-import { portadaCarrera } from '../domain/portadas'
+import { ImagenCarrera } from './ImagenCarrera'
 
 export function TarjetaCarrera({ carrera, busqueda = '' }: { carrera: Carrera; busqueda?: string }) {
   return <article className="career-card">
-    <div className={`portada-carrera portada-${portadaCarrera(carrera)}`} aria-hidden="true" />
+    <ImagenCarrera carrera={carrera} />
     <div className="contenido-tarjeta">
     <h3>{carrera.nombre}</h3>
     <div className="institucion-tarjeta"><LogoInstitucion codigo={carrera.institucion} /><p className="institution-name">{nombreInstitucion(carrera.institucion)}</p></div>
