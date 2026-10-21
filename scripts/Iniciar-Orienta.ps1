@@ -14,16 +14,21 @@ function Probar-PuertoLocal([int]$Puerto) {
     catch { return $false }
     finally { $conexionPuerto.Dispose() }
 }
+if (!(Test-Path -LiteralPath (Join-Path $raizProyecto 'backend\.env'))) { throw 'Configura backend/.env siguiendo el README.' }
+Push-Location (Join-Path $raizProyecto 'backend')
+try {
+    $usaPostgresLocal = & $ejecutablePython -c "from sqlalchemy.engine import make_url; from app.infrastructure.configuracion import Configuracion; print(str(make_url(Configuracion().url_base_datos).host in ('localhost', '127.0.0.1', '::1')).lower())"
+    if ($LASTEXITCODE -ne 0) { throw 'No se pudo leer la configuración de PostgreSQL.' }
+} finally { Pop-Location }
 $controlPostgres = Join-Path $directorioLocal 'postgresql\pgsql\bin\pg_ctl.exe'
 $datosPostgres = Join-Path $directorioLocal 'pgdata'
-if (!(Probar-PuertoLocal 5432) -and (Test-Path -LiteralPath $controlPostgres) -and
+if ($usaPostgresLocal -eq 'true' -and !(Probar-PuertoLocal 5432) -and (Test-Path -LiteralPath $controlPostgres) -and
     (Test-Path -LiteralPath (Join-Path $datosPostgres 'PG_VERSION'))) {
     Start-Process -FilePath $controlPostgres -ArgumentList @('-D', ('"' + $datosPostgres + '"'),
         '-l', ('"' + (Join-Path $directorioLocal 'postgresql.log') + '"'),
         '-o', '"-h 127.0.0.1 -p 5432"', '-w', 'start') -WindowStyle Hidden -Wait
 }
-if (!(Probar-PuertoLocal 5432)) { throw 'Inicia PostgreSQL (docker compose up -d postgres) y configura backend/.env.' }
-if (!(Test-Path -LiteralPath (Join-Path $raizProyecto 'backend\.env'))) { throw 'Configura backend/.env siguiendo el README.' }
+if ($usaPostgresLocal -eq 'true' -and !(Probar-PuertoLocal 5432)) { throw 'Inicia PostgreSQL (docker compose up -d postgres) y configura backend/.env.' }
 Push-Location (Join-Path $raizProyecto 'backend')
 try {
     & $ejecutablePython -m alembic upgrade head
