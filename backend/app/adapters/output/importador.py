@@ -53,23 +53,21 @@ def importar_carreras(
         sesion.flush()
         if sustituir_catalogo:
             sesion.execute(update(FilaCarrera).values(activa=False))
+        instituciones = {f.nombre: f for f in sesion.scalars(select(FilaInstitucion)).all()}
+        for nombre in sorted({c.institucion for c in carreras} - instituciones.keys()):
+            institucion = FilaInstitucion(nombre=nombre)
+            sesion.add(institucion)
+            instituciones[nombre] = institucion
+        sesion.flush()
+        existentes = {f.id: f for f in sesion.scalars(select(FilaCarrera)).all()}
+        identidades = {f.clave_identidad: f.id for f in existentes.values()}
         for carrera in carreras:
-            institucion = sesion.scalar(
-                select(FilaInstitucion).where(FilaInstitucion.nombre == carrera.institucion)
-            )
-            if institucion is None:
-                institucion = FilaInstitucion(nombre=carrera.institucion)
-                sesion.add(institucion)
-                sesion.flush()
-            fila = sesion.get(FilaCarrera, carrera.id)
+            institucion = instituciones[carrera.institucion]
+            fila = existentes.get(carrera.id)
             clave_identidad = json.dumps(carrera.identidad, ensure_ascii=False)
-            conflicto = sesion.scalar(
-                select(FilaCarrera).where(
-                    FilaCarrera.clave_identidad == clave_identidad, FilaCarrera.id != carrera.id
-                )
-            )
-            if conflicto:
-                raise ValueError(f"Identidad ya asociada al código {conflicto.id}")
+            conflicto = identidades.get(clave_identidad)
+            if conflicto and conflicto != carrera.id:
+                raise ValueError(f"Identidad ya asociada al código {conflicto}")
             if fila is None:
                 fila = FilaCarrera(id=carrera.id)
                 sesion.add(fila)
@@ -108,5 +106,5 @@ def importar_carreras(
                 )
                 for s in carrera.fuentes
             ]
-            sesion.flush()
+        sesion.flush()
     return {"rows": len(carreras), "unchanged": False}
