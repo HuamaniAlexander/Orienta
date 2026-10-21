@@ -44,7 +44,7 @@ docs/                 # Arquitectura, fuentes, alcance y evaluaciones
 
 InsForge se reserva **exclusivamente para alojar PostgreSQL**. FastAPI y SQLAlchemy conservan el acceso a datos mediante `DATABASE_URL` en `backend/.env`, usando `postgresql+psycopg` y las opciones TLS del proveedor.
 
-El proyecto cloud está preparado; la aplicación conserva su conexión local hasta configurar y migrar la base remota. `.insforge/` contiene la vinculación privada de la CLI y está ignorado. `npx -y @insforge/cli db connection-string` obtiene la conexión del proyecto vinculado: contiene una contraseña y debe permanecer en el backend. No se requiere el SDK en React.
+La aplicación de este entorno utiliza ahora PostgreSQL de InsForge mediante conexión de servidor con TLS. Las migraciones y las 405 ofertas están cargadas. `.insforge/` y `backend/.env` permanecen privados; no se requiere el SDK en React. Para configurar otro equipo, obtén privadamente la conexión con `npx -y @insforge/cli db connection-string` y configura `DATABASE_URL` con el controlador `postgresql+psycopg` y `sslmode=require`.
 
 PostgreSQL local sigue disponible para desarrollo. Desde la raíz, configura `.env` a partir de `.env.example` y ejecuta `docker compose up -d postgres` si utilizas Docker.
 
@@ -83,11 +83,15 @@ En este equipo preparado, `.\scripts\Iniciar-Orienta.ps1` inicia los servicios l
 
 **Catálogo ampliado:** se conserva íntegro en `backend/data/catalogo_lima_norte_2026.json`. La carga es idempotente y retira de la publicación las 35 ofertas históricas sin borrarlas. Los costos, ingresos y sedes modeladas conservan su procedencia; no son tarifas ni salarios certificados. Consulta la [integración del catálogo](docs/catalogo-completo.md).
 
-**Implementado:** entrenamiento Python de árbol de decisión, random forest y regresión logística con validación y prueba separadas. El modelo histórico, entrenado con 35 ofertas, distingue «misma área / áreas distintas»; no se aplica a las 405 ofertas nuevas sin reentrenamiento y evaluación. Las ofertas relacionadas usan similitud de contenido; las orientaciones y sus motivos se construyen a partir de las fichas.
+**Implementado:** cuestionario de diez preguntas (seis generales, tres adaptadas a las dos ofertas y una de prioridad), preferencias opcionales, captura voluntaria para mayores de edad y pipeline de regresión logística de preferencias entre pares. FastAPI consulta PostgreSQL, valida respuestas y puede explicar cada resultado mediante contribuciones exactas del modelo local. No usa APIs externas de IA.
 
-**Pendiente:** completar las etiquetas revisadas por dos personas y validar el recomendador por criterio según preferencias. Su entrenamiento e integración están preparados; requieren superar el 90% en las cuatro métricas de prueba de cada criterio. Actualmente no hay un recomendador aprendido aprobado. Las explicaciones también necesitan revisión humana.
+**Estado real:** todavía no existen elecciones reales revisadas para entrenar este recomendador. La interfaz informa «Modelo de preferencias pendiente»; no simula una recomendación ni inventa métricas. El clasificador histórico de áreas y el contraste estructurado de seis criterios se conservan separados.
 
-Desde `backend`, `python -m app.infrastructure.entrenar_modelos` reproduce el clasificador de áreas. El [protocolo de recomendaciones](docs/entrenamiento-recomendaciones.md) describe los comandos del nuevo objetivo; la [evaluación actual](docs/evaluacion-catalogo-ampliado.md) documenta sus límites.
+El [protocolo vocacional](docs/orientacion-vocacional.md) describe captura, revisión, exportación privada, entrenamiento, evaluación por participante y activación de versiones. El objetivo de calidad sigue siendo superar el 90% en las cuatro métricas independientes y mejorar la referencia; aún no se ha medido con participantes reales.
+
+## Diseño
+
+Paleta Vichy centralizada en tokens CSS, texto general legible y títulos monoespaciados. Incluye Inicio, Explorar, Comparar, Instituciones y Mi orientación; fotografías ilustrativas optimizadas y componentes adaptables. Ver [sistema visual](docs/diseno-vichy.md).
 
 ## Verificación y GitFlow
 

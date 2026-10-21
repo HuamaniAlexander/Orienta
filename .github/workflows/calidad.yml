@@ -1,9 +1,9 @@
-name: Calidad primera mitad
+name: Calidad ORIENTA
 on:
   pull_request:
-    branches: [dev]
+    branches: [dev, main]
   push:
-    branches: [dev, 'feature/**']
+    branches: [dev, main, 'feature/**']
 permissions:
   contents: read
 jobs:
