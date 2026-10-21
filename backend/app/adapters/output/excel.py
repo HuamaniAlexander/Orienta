@@ -1,4 +1,4 @@
-"""Validated reader for the supplied PoC workbook. Never interprets ML codes."""
+"""Lector validado del libro de datos; no interpreta códigos de aprendizaje automático."""
 
 from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
@@ -6,9 +6,9 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
-from app.domain.career import Career, Source
+from app.domain.carrera import Carrera, Fuente
 
-REQUIRED = {
+OBLIGATORIOS = {
     "id_carrera",
     "carrera",
     "institucion",
@@ -26,53 +26,53 @@ REQUIRED = {
     "fecha_revision",
     "fuente_duracion",
 }
-UNIVERSITIES = {"UTP", "UNMSM", "UNI", "UPCH"}
+UNIVERSIDADES = {"UTP", "UNMSM", "UNI", "UPCH"}
 
 
-def text(value):
-    return str(value).strip() if value is not None and str(value).strip() else None
+def texto(valor):
+    return str(valor).strip() if valor is not None and str(valor).strip() else None
 
 
-def read_careers(path: Path) -> list[Career]:
-    wb = load_workbook(path, read_only=True, data_only=True)
+def leer_carreras(ruta: Path) -> list[Carrera]:
+    libro = load_workbook(ruta, read_only=True, data_only=True)
     try:
-        if "Carreras" not in wb.sheetnames:
+        if "Carreras" not in libro.sheetnames:
             raise ValueError("Falta la hoja Carreras")
-        rows = iter(wb["Carreras"].values)
-        headers = next(rows, ())
-        if not REQUIRED.issubset(headers) or len(headers) != len(set(headers)):
+        filas = iter(libro["Carreras"].values)
+        encabezados = next(filas, ())
+        if not OBLIGATORIOS.issubset(encabezados) or len(encabezados) != len(set(encabezados)):
             raise ValueError("Columnas obligatorias ausentes o duplicadas")
-        result, ids, identities = [], set(), set()
-        for number, values in enumerate(rows, 2):
-            if all(v is None for v in values):
+        resultado, identificadores, identidades = [], set(), set()
+        for numero_fila, valores in enumerate(filas, 2):
+            if all(v is None for v in valores):
                 continue
-            row = dict(zip(headers, values))
+            fila = dict(zip(encabezados, valores))
             try:
 
-                def numeric(key):
-                    value = text(row[key])
-                    return Decimal(value) if value is not None else None
+                def numerico(clave):
+                    valor = texto(fila[clave])
+                    return Decimal(valor) if valor is not None else None
 
-                duration = numeric("duracion_meses")
-                if duration is not None and (
-                    not duration.is_finite() or duration != duration.to_integral_value()
+                duracion = numerico("duracion_meses")
+                if duracion is not None and (
+                    not duracion.is_finite() or duracion != duracion.to_integral_value()
                 ):
                     raise ValueError("Duración en meses enteros requerida")
-                reviewed = row["fecha_revision"]
-                if isinstance(reviewed, datetime):
-                    reviewed = reviewed.date()
-                elif reviewed is not None and not isinstance(reviewed, date):
-                    reviewed = date.fromisoformat(str(reviewed))
-                institution = text(row["institucion"]) or ""
-                sources = tuple(
-                    Source(
-                        field,
-                        text(row.get(reference)),
-                        (text(row.get(status)) or "Sin estado registrado")
-                        if status
+                fecha_revisada = fila["fecha_revision"]
+                if isinstance(fecha_revisada, datetime):
+                    fecha_revisada = fecha_revisada.date()
+                elif fecha_revisada is not None and not isinstance(fecha_revisada, date):
+                    fecha_revisada = date.fromisoformat(str(fecha_revisada))
+                institucion = texto(fila["institucion"]) or ""
+                fuentes = tuple(
+                    Fuente(
+                        campo,
+                        texto(fila.get(referencia)),
+                        (texto(fila.get(estado)) or "Sin estado registrado")
+                        if estado
                         else "Según PoC; sin verificar",
                     )
-                    for field, reference, status in [
+                    for campo, referencia, estado in [
                         ("Carrera", "fuente_carrera", None),
                         ("Duración", "fuente_duracion", None),
                         ("Modalidad", "fuente_carrera", "estado_modalidad"),
@@ -81,31 +81,31 @@ def read_careers(path: Path) -> list[Career]:
                         ("Campo laboral", "fuente_campo_laboral", None),
                     ]
                 )
-                career = Career(
-                    id=text(row["id_carrera"]) or "",
-                    name=text(row["carrera"]) or "",
-                    institution=institution,
-                    training_type="Universitaria" if institution in UNIVERSITIES else None,
-                    modality=text(row["modalidad"]),
-                    location=text(row["ubicacion"]),
-                    duration_months=int(duration) if duration is not None else None,
-                    monthly_cost_pen=numeric("costo_mensual_soles"),
-                    requirements=text(row["requisitos"]),
-                    employment=text(row["campo_laboral"]),
-                    reviewed_on=reviewed,
-                    sources=sources,
+                carrera = Carrera(
+                    id=texto(fila["id_carrera"]) or "",
+                    nombre=texto(fila["carrera"]) or "",
+                    institucion=institucion,
+                    tipo_formacion="Universitaria" if institucion in UNIVERSIDADES else None,
+                    modalidad=texto(fila["modalidad"]),
+                    ubicacion=texto(fila["ubicacion"]),
+                    duracion_meses=int(duracion) if duracion is not None else None,
+                    costo_mensual_soles=numerico("costo_mensual_soles"),
+                    requisitos=texto(fila["requisitos"]),
+                    campo_laboral=texto(fila["campo_laboral"]),
+                    fecha_revision=fecha_revisada,
+                    fuentes=fuentes,
                 )
-                if career.id in ids or career.identity in identities:
+                if carrera.id in identificadores or carrera.identidad in identidades:
                     raise ValueError(
                         "Oferta duplicada por código o carrera/institución/sede/modalidad"
                     )
-                ids.add(career.id)
-                identities.add(career.identity)
-                result.append(career)
+                identificadores.add(carrera.id)
+                identidades.add(carrera.identidad)
+                resultado.append(carrera)
             except (ValueError, InvalidOperation, TypeError) as error:
-                raise ValueError(f"Fila {number}: {error}") from error
-        if not result:
+                raise ValueError(f"Fila {numero_fila}: {error}") from error
+        if not resultado:
             raise ValueError("El libro no contiene ofertas")
-        return result
+        return resultado
     finally:
-        wb.close()
+        libro.close()

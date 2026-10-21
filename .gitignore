@@ -1,19 +1,84 @@
+# Secretos y configuración local; conservar plantillas compartidas
 .env
 .env.*
 !.env.example
+.envrc
+.insforge/
+credentials.json
+credentials.local.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencias, compilación, cobertura y cachés de frontend
 node_modules/
 dist/
+dist-ssr/
+coverage/
+.vite/
+.vite-temp/
+.npm/
+.eslintcache
+*.tsbuildinfo
+test-results/
+playwright-report/
+
+# Entornos, bytecode, empaquetado y cachés de Python
 .venv/
+venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
-coverage/
+.mypy_cache/
+.hypothesis/
 .coverage
+.coverage.*
+htmlcov/
 *.egg-info/
-.references/
-*.tsbuildinfo
-test-results/
+.tox/
+.nox/
 .pytest_tmp/
 .pytest_tmp_external/
+.pytest_tmp*/
+
+# Editores: conservar las recomendaciones compartidas de extensiones
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.swp
+*.swo
+*~
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Servicios, referencias, registros y exportaciones temporales locales
 .local/
+.references/
+*.log
+*.log.*
+*.tmp
+*.temp
+*.bak
+*.dump
+*.sql.gz
+
+# Datos de trabajo y experimentos de IA; conservar artefactos de ejecución
+backend/data/tmp/
+backend/data/interim/
+backend/data/recomendaciones/piloto.json
+backend/models/*
+!backend/models/modelo.joblib
+!backend/models/metricas.json
+!backend/models/README.md
+.ipynb_checkpoints/
+mlruns/
+wandb/
+
+# Configuración local de agentes; conservar instrucciones compartidas
+.claude/settings.local.json

@@ -1,68 +1,108 @@
 from fastapi import APIRouter, Depends, Query, Request
 
-from app.adapters.input.schemas import (
-    AnalysisResponse,
-    CareerResponse,
-    CatalogResponse,
-    ComparisonRequest,
-    ComparisonResponse,
+from app.adapters.input.esquemas import (
+    RespuestaAnalisis,
+    RespuestaCarrera,
+    RespuestaCatalogo,
+    RespuestaComparacion,
+    SolicitudAnalisis,
+    SolicitudComparacion,
 )
-from app.application.analyze import AnalyzeComparison
-from app.application.catalog import Catalog
-from app.application.compare import CompareCareers
-from app.infrastructure.dependencies import catalog_dependency
-from app.ports.careers import CatalogQuery
+from app.application.analizar_comparacion import AnalizarComparacion
+from app.application.catalogo import Catalogo
+from app.application.comparar_carreras import CompararCarreras
+from app.infrastructure.dependencias import obtener_catalogo
+from app.ports.repositorio_carreras import ConsultaCatalogo
 
-router = APIRouter(prefix="/api")
+enrutador = APIRouter(prefix="/api")
 
 
-@router.post("/comparaciones/analisis", response_model=AnalysisResponse)
-def analysis(
-    body: ComparisonRequest, request: Request, catalog: Catalog = Depends(catalog_dependency)
+@enrutador.post(
+    "/comparaciones/analisis",
+    operation_id="analysis_api_comparaciones_analisis_post",
+    response_model=RespuestaAnalisis,
+)
+def analisis(
+    cuerpo: SolicitudAnalisis, solicitud: Request, catalogo: Catalogo = Depends(obtener_catalogo)
 ):
-    result = AnalyzeComparison(catalog, request.app.state.analysis_service).execute(body.career_ids)
-    result["recommendations"] = [
-        CareerResponse.model_validate(c) for c in result["recommendations"]
+    resultado = AnalizarComparacion(
+        catalogo,
+        solicitud.app.state.servicio_analisis,
+        solicitud.app.state.servicio_recomendaciones,
+    ).ejecutar(
+        cuerpo.ids_carreras, cuerpo.preferencias.model_dump(exclude_none=True, by_alias=True)
+    )
+    resultado["recommendations"] = [
+        RespuestaCarrera.model_validate(c) for c in resultado["recommendations"]
     ]
-    return AnalysisResponse(**result)
+    return RespuestaAnalisis(**resultado)
 
 
-@router.post("/comparaciones", response_model=ComparisonResponse)
-def comparison(body: ComparisonRequest, catalog: Catalog = Depends(catalog_dependency)):
-    return ComparisonResponse.model_validate(CompareCareers(catalog).execute(body.career_ids))
+@enrutador.post(
+    "/comparaciones",
+    operation_id="comparison_api_comparaciones_post",
+    response_model=RespuestaComparacion,
+)
+def comparacion(cuerpo: SolicitudComparacion, catalogo: Catalogo = Depends(obtener_catalogo)):
+    return RespuestaComparacion.model_validate(
+        CompararCarreras(catalogo).ejecutar(cuerpo.ids_carreras)
+    )
 
 
-@router.get("/salud")
-def health(request: Request):
-    return {"status": "ok", "data_mode": request.app.state.settings.data_mode}
+@enrutador.get("/salud", operation_id="health_api_salud_get")
+def salud(solicitud: Request):
+    return {"status": "ok", "data_mode": solicitud.app.state.configuracion.modo_datos}
 
 
-@router.get("/filtros", response_model=dict[str, list[str]])
-def filters(catalog: Catalog = Depends(catalog_dependency)):
-    return catalog.filters()
+@enrutador.get(
+    "/filtros", operation_id="filters_api_filtros_get", response_model=dict[str, list[str]]
+)
+def filtros(catalogo: Catalogo = Depends(obtener_catalogo)):
+    return catalogo.filtros()
 
 
-@router.get("/carreras", response_model=CatalogResponse)
-def careers(
-    request: Request,
+@enrutador.get(
+    "/carreras",
+    operation_id="careers_api_carreras_get",
+    response_model=RespuestaCatalogo,
+)
+def carreras(
+    solicitud: Request,
     q: str = Query("", max_length=150),
     tipo: str = Query("", max_length=60),
     modalidad: str = Query("", max_length=100),
     ubicacion: str = Query("", max_length=200),
+    gestion: str = Query("", max_length=30),
+    area: str = Query("", max_length=200),
+    institucion: str = Query("", max_length=200),
+    costo_maximo: float | None = Query(None, ge=0, le=100000),
     pagina: int = Query(1, ge=1, le=10000),
     limite: int = Query(12, ge=1, le=100),
-    catalog: Catalog = Depends(catalog_dependency),
+    catalogo: Catalogo = Depends(obtener_catalogo),
 ):
-    items, total = catalog.search(CatalogQuery(q, tipo, modalidad, ubicacion, pagina, limite))
-    return CatalogResponse(
-        items=[CareerResponse.model_validate(c) for c in items],
+    elementos, total = catalogo.buscar(
+        ConsultaCatalogo(
+            q, tipo, modalidad, ubicacion, pagina, limite, gestion, area, institucion, costo_maximo
+        )
+    )
+    return RespuestaCatalogo(
+        elementos=[RespuestaCarrera.model_validate(c) for c in elementos],
         total=total,
         pagina=pagina,
         limite=limite,
-        data_mode=request.app.state.settings.data_mode,
+        modo_datos=solicitud.app.state.configuracion.modo_datos,
     )
 
 
-@router.get("/carreras/{id}", response_model=CareerResponse)
-def detail(id: str, catalog: Catalog = Depends(catalog_dependency)):
-    return CareerResponse.model_validate(catalog.detail(id))
+@enrutador.get(
+    "/carreras/{id}",
+    operation_id="detail_api_carreras__id__get",
+    response_model=RespuestaCarrera,
+)
+def detalle(id: str, catalogo: Catalogo = Depends(obtener_catalogo)):
+    return RespuestaCarrera.model_validate(catalogo.detalle(id))
+
+
+@enrutador.get("/instituciones")
+def instituciones(catalogo: Catalogo = Depends(obtener_catalogo)):
+    return catalogo.instituciones()

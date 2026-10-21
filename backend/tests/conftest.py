@@ -1,15 +1,20 @@
+import os
 from pathlib import Path
 
 import pytest
+from alembic.config import Config
 from openpyxl import Workbook
+from sqlalchemy import create_engine
 
-from app.adapters.output.excel import REQUIRED
+from alembic import command
+from app.adapters.output.excel import OBLIGATORIOS
+from app.adapters.output.modelos import Base
 
 
 @pytest.fixture
-def workbook(tmp_path: Path):
-    def make(rows=None):
-        default = dict(
+def libro_datos(tmp_path: Path):
+    def crear(filas=None):
+        predeterminado = dict(
             id_carrera="C01",
             carrera="Ingeniería de Software",
             institucion="UTP",
@@ -27,17 +32,36 @@ def workbook(tmp_path: Path):
             fecha_revision="2026-10-13",
             fuente_duracion="https://www.utp.edu.pe",
         )
-        wb = Workbook()
-        ws = wb.active
-        ws.title = "Carreras"
-        headers = sorted(REQUIRED)
-        ws.append(headers)
-        for changes in rows if rows is not None else [{}]:
-            row = default | changes
-            ws.append([row[k] for k in headers])
-        path = tmp_path / "catalog.xlsx"
-        wb.save(path)
-        wb.close()
-        return path
+        libro = Workbook()
+        hoja = libro.active
+        hoja.title = "Carreras"
+        encabezados = sorted(OBLIGATORIOS)
+        hoja.append(encabezados)
+        for cambios in filas if filas is not None else [{}]:
+            fila = predeterminado | cambios
+            hoja.append([fila[k] for k in encabezados])
+        ruta = tmp_path / "catalog.xlsx"
+        libro.save(ruta)
+        libro.close()
+        return ruta
 
-    return make
+    return crear
+
+
+@pytest.fixture
+def base_datos(tmp_path, monkeypatch):
+    # CI usa PostgreSQL exclusivo; SQLite local solo comprueba el comportamiento SQL.
+    url = os.getenv("TEST_DATABASE_URL", f"sqlite:///{tmp_path / 'test.db'}")
+    monkeypatch.setenv("DATABASE_URL", url)
+    config = Config("alembic.ini")
+    motor = create_engine(url)
+    if motor.dialect.name == "sqlite":
+        Base.metadata.create_all(motor)
+    else:
+        command.upgrade(config, "head")
+    yield motor
+    if motor.dialect.name == "sqlite":
+        Base.metadata.drop_all(motor)
+    else:
+        command.downgrade(config, "base")
+    motor.dispose()

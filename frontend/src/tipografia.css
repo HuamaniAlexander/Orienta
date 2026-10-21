@@ -1,0 +1,150 @@
+/* Fuentes locales de consola para conservar la legibilidad sin descargas externas. */
+:root {
+  font-family: "Cascadia Code", Consolas, "SFMono-Regular", "Liberation Mono", monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  --muted: #566180;
+}
+button, input, select, summary { font-family: inherit; }
+h1, h2, h3, h4, h5 { font-family: inherit; letter-spacing: -.045em; overflow-wrap: anywhere; }
+h1 { font-size: clamp(29px, 3.25vw, 43px); line-height: 1.3; }
+h2 { font-size: 25px; line-height: 1.45; }
+h3 { font-size: 22px; line-height: 1.5; }
+.brand { font-size: 28px; letter-spacing: -.07em; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; line-height: 1.7; }
+.breadcrumb, .tag, .count, .data-status, .card-facts small,
+.visitor small, .review-date small, .source-list li > .source-condition,
+.footer-brand, .site-footer { font-size: 13px; }
+.hero > div > p:last-child, .compare-hero p:last-child { font-size: 16px; line-height: 1.9; }
+nav a, .button, .visitor, .hero-note, .section-heading p,
+.search-input input, .filter-field label, .filter-field select,
+.clear-filters, .filter-tip p, .card-link, .institution-name,
+.card-facts > div, .empty-state p, .back-link, .pagination > span,
+.detail-fact dt, .detail-fact p, .text-panel p, .text-panel .secondary-note,
+.detail-disclaimer, .source-intro, .source-list li > p, .source-list li > strong,
+.source-list li > a, .review-date strong, .next-step p, .next-step a,
+.comparison-option > p, .comparison-option a, .comparison-row h3,
+.comparison-row p, .comparison-notes p, .comparison-notes strong, .cost-conditions,
+.analysis-header p, .analysis-outcomes article > p:not(.eyebrow),
+.analysis-sources, .model-disagreement, .model-limitation, .model-details,
+.related-options > p, .analysis-loading p, .analysis-error p { font-size: 14px; line-height: 1.9; }
+.filter-tip strong, .card-facts small { margin-bottom: 6px; }
+.filter-tip { padding: 16px 12px; }
+.filter-field select, .search-input input { min-height: 48px; }
+.button, nav a { min-height: 46px; }
+.header-inner { gap: 18px; }
+.visitor-icon { padding: 9px; }
+.career-card > .select-career {
+  position: static;
+  align-self: flex-end;
+  font-size: 14px;
+  min-height: 44px;
+  margin: -8px 0 9px;
+}
+.card-top { margin-bottom: 10px; }
+.card-facts { gap: 12px; }
+.card-facts > div { gap: 8px; min-width: 0; }
+.card-facts > div > span { min-width: 0; overflow-wrap: anywhere; }
+.card-facts > div + div { padding-left: 10px; }
+.career-card h3 { min-height: 65px; }
+.selection-box { width: 21px; height: 21px; }
+.detail-fact dd { font-size: 18px; line-height: 1.7; }
+.detail-subtitle .tag { font-size: 13px; }
+.data-status { padding: 5px 8px; }
+.comparison-option .tag { font-size: 12px; margin-left: 0; }
+.comparison-option h2 { font-size: clamp(18px, 1.8vw, 23px); }
+.comparison-option > div { flex-wrap: wrap; }
+.comparison-row p { line-height: 1.95; }
+.comparison-row p small { font-size: 13px; }
+.comparison-notes strong { font-size: 15px; }
+.tray-title { font-size: 15px; }
+.tray-title small, .tray-item small { font-size: 13px; }
+.tray-item strong { font-size: 14px; }
+.tray-item button { min-width: 36px; min-height: 44px; }
+.comparison-tray > .button { font-size: 14px; }
+.tray-action-short { display: none; }
+.metric-grid span { font-size: 13px; }
+.metric-grid strong { font-size: 27px; }
+.analysis-introduction > p:last-child, .criterion-explanation,
+.criterion-advice p, .criterion-values dd { font-size: 15px; }
+.criterion-values dt, .criterion-status, .criterion-caveats { font-size: 13px; }
+.criterion-analysis h4 { font-size: 19px; }
+.algorithm-grid h5, .algorithm-grid dl > div { font-size: 14px; }
+.analysis-outcomes h3 { font-size: 23px; }
+.model-details h4 { font-size: 17px; margin-top: 20px; }
+@media (max-width: 1100px) {
+  .header-inner { flex-wrap: wrap; padding-top: 17px; padding-bottom: 17px; }
+  .header-inner > nav { order: 3; width: 100%; justify-content: center; }
+  .visitor { margin-left: auto; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 16px; }
+  .header-inner { padding: 17px 18px; }
+  .page-shell { padding-left: 18px; padding-right: 18px; }
+  .brand { font-size: 25px; }
+  .header-inner nav a { font-size: 13px; line-height: 1.6; gap: 7px; }
+  .header-inner nav a .icon { width: 19px; height: 19px; }
+  .visitor, .visitor small { font-size: 12px; }
+  .hero > div > p:last-child, .compare-hero p:last-child { font-size: 15px; }
+  .eyebrow { font-size: 11px; }
+  .search-input input { font-size: 16px; }
+  .search-form > .button { font-size: 14px; min-width: 80px; }
+  .filter-toggle { font-size: 15px; min-height: 54px; }
+  .section-heading { flex-wrap: wrap; gap: 12px; }
+  .count { font-size: 13px; }
+  .active-filters button { font-size: 13px; min-height: 44px; }
+  .card-facts > div { font-size: 14px; }
+  .card-facts small { font-size: 13px; }
+  .career-card h3 { font-size: 22px; min-height: 0; }
+  .card-link { font-size: 14px; min-height: 44px; }
+  .detail-heading h1, .compare-hero h1 { font-size: 29px; }
+  .detail-fact dt, .detail-fact p, .text-panel p,
+  .text-panel .secondary-note { font-size: 14px; }
+  .source-list li > p, .source-list li > .source-condition { font-size: 14px; }
+  .comparison-option { padding: 15px 12px; }
+  .comparison-option h2 { font-size: 18px; }
+  .comparison-row p { padding: 14px 12px; }
+  .comparison-tray { padding: 10px; gap: 8px; }
+  .tray-title { min-width: 0; font-size: 14px; gap: 6px; }
+  .tray-title > .icon { display: none; }
+  .tray-title small { font-size: 13px; }
+  .tray-item .option-letter { display: none; }
+  .tray-item strong { font-size: 13px; }
+  .tray-item small { font-size: 12px; }
+  .comparison-tray > .button { font-size: 14px; min-height: 46px; }
+  .tray-action-long { display: none; }
+  .tray-action-short { display: inline; }
+  .analysis-header h2 { font-size: 22px; }
+  .analysis-header p { font-size: 14px; }
+  .analysis-header > .fact-icon { display: none; }
+  .model-disagreement { font-size: 14px; }
+  .criterion-analysis-grid { gap: 17px; }
+  .criterion-analysis { padding: 15px; }
+  .criterion-status { margin-left: 0; }
+  .criterion-analysis > header .fact-icon { padding: 8px; width: 38px; height: 38px; }
+  .criterion-analysis > header { gap: 9px; }
+  .criterion-analysis h4 { font-size: 18px; }
+  .metric-grid { gap: 10px; }
+  .metric-grid > div { padding: 12px 9px; }
+  .metric-grid span { font-size: 13px; }
+  .analysis-result, .analysis-header { padding-left: 15px; padding-right: 15px; }
+  .site-footer { font-size: 13px; }
+}
+
+.university-logo { width: 128px; height: 54px; object-fit: contain; flex-shrink: 0; background: #fff; padding: 6px; border-radius: 8px; }
+.university-uni, .university-unmsm { background: #782437; }
+.tray-item .university-logo { width: 56px; height: 40px; }
+.criterion-values dt { overflow-wrap: anywhere; }
+.card-top { flex-wrap: wrap; }
+.comparison-option { min-width: 0; overflow-wrap: anywhere; }
+.analysis-preferences { padding: 20px; border-bottom: 1px solid #dce2e0; }
+.preferences-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.preferences-grid label { display: grid; gap: 8px; font-size: 14px; min-width: 0; }
+.preferences-grid input, .preferences-grid select { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid #bacac3; border-radius: 8px; background: white; font: inherit; font-size: 16px; }
+@media (max-width: 600px) { .preferences-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .tray-item small { display: none; }
+  .tray-item .university-logo { width: 40px; height: 32px; padding: 4px; }
+  .tray-item strong { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+}

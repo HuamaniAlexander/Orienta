@@ -9,7 +9,7 @@ Fecha local de cierre de pruebas: 20/10/2026, America/Lima.
   lint aprobados. Incluye catálogo/ficha/comparación, filtros, sustitución y fallos IA.
 - `ruff check app tests alembic`: aprobado. `pip check`: sin dependencias incompatibles.
 - `alembic check`: sin operaciones nuevas; el esquema de PostgreSQL coincide con el ORM.
-- `scripts/Start-Orienta.ps1 -NoBrowser`: ejecutado; segunda carga de 19 ofertas sin cambios.
+- `scripts/Iniciar-Orienta.ps1 -NoBrowser`: ejecutado; segunda carga de 19 ofertas sin cambios.
 - Navegador: recorrido real selección de dos ofertas → comparación → análisis del modelo
   y alternativas relacionadas, conectado a PostgreSQL. Se revisaron vistas estrecha y
   de escritorio. En escritorio se midieron 1265 px de viewport y 1265 px de contenido,
